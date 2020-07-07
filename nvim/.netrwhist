@@ -1,0 +1,12 @@
+let g:netrw_dirhistmax  =10
+let g:netrw_dirhistcnt =3
+let g:netrw_dirhist_3='scp://artur@acropolis.uchicago.edu:22//home/artur/BondPricing/Julia/Batch/plot_scripts/_contour/'
+let g:netrw_dirhist_2='scp://artur@acropolis.uchicago.edu:22//home/artur/BondPricing/Julia/Batch/plot_scripts/'
+let g:netrw_dirhist_1='scp://artur@acropolis.uchicago.edu:22//home/artur/BondPricing/Julia/Batch/'
+let g:netrw_dirhist_0='scp://artur@acropolis.uchicago.edu:22//home/artur/BondPricing/Julia/modules/'
+let g:netrw_dirhist_9='scp://artur@acropolis.uchicago.edu:22//home/artur/BondPricing/Julia/'
+let g:netrw_dirhist_8='scp://artur@acropolis.uchicago.edu:22//home/artur/BondPricing/Julia/modules/'
+let g:netrw_dirhist_7='scp://artur@acropolis.uchicago.edu:22//home/artur/BondPricing/Julia/'
+let g:netrw_dirhist_6='scp://artur@acropolis.uchicago.edu:22//home/artur/BondPricing/Julia/modules/'
+let g:netrw_dirhist_5='scp://artur@acropolis.uchicago.edu:22//home/artur/BondPricing/Julia/Batch/plot_scripts/_contour/'
+let g:netrw_dirhist_4='scp://artur@acropolis.uchicago.edu:22//home/artur/BondPricing/Julia/Batch/plot_scripts/'
