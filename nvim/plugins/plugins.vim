@@ -10,58 +10,55 @@ if empty(glob('$HOME/.config/nvim/autoload/plug.vim'))
 endif
 
 call plug#begin('$HOME/.config/nvim/plugged')
-	" Shorthand notation; fetches https://github.com/junegunn/vim-easy-align
-	Plug 'junegunn/vim-easy-align'
+    " Languages: Julia
+    Plug 'JuliaEditorSupport/julia-vim'
+   
+   	" Language: Python
+   	" Plug 'python-mode/python-mode', { 'branch': 'develop' }
+   
+    " Language: Markdown
+    Plug 'vim-pandoc/vim-pandoc'
+    Plug 'vim-pandoc/vim-pandoc-syntax'
+    Plug 'dhruvasagar/vim-table-mode'
+   
+    " Languages: LaTeX
+    Plug 'lervag/vimtex'
+   
+   	" Code Editing:
+    Plug 'easymotion/vim-easymotion'
+    Plug 'tpope/vim-commentary'
+    Plug 'junegunn/vim-easy-align'
+   
+    " Note Taking Task Management:
+    Plug 'dkarter/bullets.vim'
+    Plug 'lervag/wiki.vim'
+   
+   	" Files Folders: 
+   	Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+   	Plug 'junegunn/fzf.vim'
+   	Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
+   
+   	" Coc Extensions: Autocompletion, File Explorer, Snippets
+    Plug 'neoclide/coc.nvim', {'branch': 'release'}
+   
+    " Snippets: are separated from the engine. Add this if you want them:
+   	Plug 'honza/vim-snippets'
+   
+    " Writing Experience: LaTeX
+    Plug 'KeitaNakamura/tex-conceal.vim', {'for': 'tex'}
+    Plug 'junegunn/goyo.vim'
+    " Plug 'junegunn/limelight.vim'
+   
+   	" Appearance: Themes
+   	Plug 'dracula/vim',{ 'as': 'dracula' }
+    Plug 'haishanh/night-owl.vim'
+    Plug 'fenetikm/falcon'
+    " Plug 'wadackel/vim-dogrun'
+   
+    " Appearance: Airline
+    Plug 'itchyny/lightline.vim'
 
-	" Files and Folders: NERDTree
-	Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
-
-	" Files and Folders: Fuzzy Finder
-	Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
-	Plug 'junegunn/fzf.vim'
-
-	" Languages: Julia
-	Plug 'JuliaEditorSupport/julia-vim'
-
-	" Languages: LaTeX
-  Plug 'lervag/vimtex'
-
-	" Language: Python
-	" Plug 'python-mode/python-mode', { 'branch': 'develop' }
-
-  " Language: Markdown
-	Plug 'plasticboy/vim-markdown'
-  Plug 'vim-pandoc/vim-pandoc-syntax'
-
-	" Languages: Autocompletion
-  Plug 'neoclide/coc.nvim', {'branch': 'release'}
-
-	" Code Editing: Commenting
-  Plug 'tpope/vim-commentary'
-
-	" Task Management:
-	Plug 'jceb/vim-orgmode'
-
-	" Appearance: Airline
-	Plug 'vim-airline/vim-airline'
-	Plug 'vim-airline/vim-airline-themes'
-
-	" Appearance: Themes
-	Plug 'dracula/vim',{ 'as': 'dracula' }
-	" Plug 'skreek/skeletor.vim'
-	Plug 'altercation/vim-colors-solarized'
-  Plug 'kjssad/quantum.vim'
-
-  " Tex Conceal
-  Plug 'KeitaNakamura/tex-conceal.vim', {'for': 'tex'}
-
-	" Track the engine.
-	Plug 'SirVer/ultisnips'
-
-	" Snippets are separated from the engine. Add this if you want them:
-	Plug 'honza/vim-snippets'
-
-  " Initialize plugin system
+    " Initialize plugin system
 call plug#end()
 
 " Automatically install missing plugins on startup
@@ -92,22 +89,26 @@ augroup PlugGx
 augroup END
 
 
-source $HOME/.config/nvim/plugins/coc.vim
-
-" Themes {{{1
-source $HOME/.config/nvim/plugins/airline.vim
-source $HOME/.config/nvim/plugins/themes.vim
+source $HOME/.mars/.config/nvim/plugins/vimtex.vim
 
 " File Explorer {{{1 
-source $HOME/.config/nvim/plugins/netrw.vim
-source $HOME/.config/nvim/plugins/nerdtree.vim
+source $HOME/.mars/.config/nvim/plugins/netrw.vim
+source $HOME/.mars/.config/nvim/plugins/nerdtree.vim
+
+" " Note Taking {{{1
+source $HOME/.mars/.config/nvim/plugins/bullets.vim
+source $HOME/.mars/.config/nvim/plugins/wikivim.vim
+
+" Coc Autocompletion and Explorer {{{1
+source $HOME/.mars/.config/nvim/plugins/coc.vim
 
 " Languages {{{1
-source $HOME/.config/nvim/plugins/markdown.vim
-source $HOME/.config/nvim/plugins/julia.vim
-source $HOME/.config/nvim/plugins/vimtex.vim
-" Tex Conceal
-let g:tex_conceal='abdmg'
+source $HOME/.mars/.config/nvim/plugins/markdown.vim
+source $HOME/.mars/.config/nvim/plugins/easy-align.vim
+source $HOME/.mars/.config/nvim/plugins/julia.vim
 
-" Snippets {{{1
-source $HOME/.config/nvim/plugins/ultisnips.vim
+" Appearance: Themes & Airline/Lightline {{{1
+source $HOME/.mars/.config/nvim/plugins/themes.vim
+
+" Writing {{{1
+source $HOME/.mars/.config/nvim/plugins/goyo.vim

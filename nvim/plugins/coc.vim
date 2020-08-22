@@ -1,6 +1,5 @@
 " coc-nvim {{{1
 
-
 " Don't pass messages to |ins-completion-menu|.
 set shortmess+=c
 
@@ -89,11 +88,12 @@ xmap af <Plug>(coc-funcobj-a)
 omap if <Plug>(coc-funcobj-i)
 omap af <Plug>(coc-funcobj-a)
 
+" MY CHANGE: <leader><tab>
 " Use <TAB> for selections ranges.
 " NOTE: Requires 'textDocument/selectionRange' support from the language server.
 " coc-tsserver, coc-python are the examples of servers that support it.
-nmap <silent> <TAB> <Plug>(coc-range-select)
-xmap <silent> <TAB> <Plug>(coc-range-select)
+nmap <silent> <leader><TAB> <Plug>(coc-range-select)
+xmap <silent> <leader><TAB> <Plug>(coc-range-select)
 
 " Add `:Format` command to format current buffer.
 command! -nargs=0 Format :call CocAction('format')
@@ -107,7 +107,7 @@ command! -nargs=0 OR   :call     CocAction('runCommand', 'editor.action.organize
 " Add (Neo)Vim's native statusline support.
 " NOTE: Please see `:h coc-status` for integrations with external plugins that
 " provide custom statusline: lightline.vim, vim-airline.
-set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
+" set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
 
 " Mappings using CoCList:
 " Show all diagnostics.
@@ -155,3 +155,6 @@ nmap <space>ef :CocCommand explorer --preset floatingLeftSide<CR>
 " List all presets
 nmap <space>el :CocList explPresets
 
+" My CONFIG
+" enable/disable coc integration with airline:
+" let g:airline#extensions#coc#enabled = 1

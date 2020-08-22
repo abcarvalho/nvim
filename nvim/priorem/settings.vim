@@ -228,3 +228,6 @@ autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
 " PLUGINS {{{1
 source $HOME/.config/nvim/plugins/plugins.vim
 
+	" Track the engine.
+	Plug 'SirVer/ultisnips'
+

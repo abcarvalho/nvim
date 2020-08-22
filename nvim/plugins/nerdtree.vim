@@ -19,5 +19,6 @@ autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isT
 let NERDTreeChDirMode=2                        " make sure the working directory is set correctly.
 
 " Toggle
-nnoremap <silent> <leader>n :NERDTreeToggle<CR>
+" nnoremap <silent> <leader>n :NERDTreeToggle<CR>
+nnoremap <silent> <leader><CR> :NERDTreeToggle<CR>
 

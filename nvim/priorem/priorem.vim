@@ -33,6 +33,11 @@
 
   " Note Taking: VimWiki
 	Plug 'vimwiki/vimwiki'
+  Plug 'lervag/wiki.vim'
+  Plug 'jceb/vim-orgmode'
+
+  " Language: 
+  Plug 'dkarter/bullets.vim'
 
   " Task Management
   Plug 'tbabej/taskwiki'
@@ -42,7 +47,18 @@
 	"Plug 'valloric/youcompleteme'
 
   " Appearance: Themes
-  " Plug 'ayu-theme/ayu-vim'
+  Plug 'ayu-theme/ayu-vim'
+	Plug 'skreek/skeletor.vim'
+  Plug 'Rigellute/shades-of-purple.vim'
+  " Plug 'cocopon/iceberg.vim'
+  " Plug 'koirand/tokyo-metro.vim'
+  Plug 'desmap/slick'
+  " Plug 'challenger-deep-theme/vim', { 'as': 'challenger-deep' }
+  " Plug 'yuttie/hydrangea-vim'
+ 
+
+	Plug 'vim-airline/vim-airline'
+	Plug 'vim-airline/vim-airline-themes'
 
   " Appearance: Line Indentation
 	" Plug 'Yggdroot/indentLine'
@@ -54,8 +70,6 @@
 
   " Moving Text Around
   " Plug 'matze/vim-move'
-
-
 
 
 "  MAPPINGS  {{{1
@@ -128,6 +142,19 @@ let g:NERDTrimTrailingWhitespace = 1
 
 " Enable NERDCommenterToggle to check all selected lines is commented or not
 let g:NERDToggleCheckAllLines = 1
+
+
+" Load Plugin Config {{{1
+
+" Text Editing {{{1
+source $HOME/.config/nvim/plugins/bullets.vim
+
+
+" Languages {{{1
+
+" Notes
+" after loading pandoc markdown
+source $HOME/.config/nvim/plugins/wiki.vim
 
 
 "  ETC  {{{1
@@ -267,6 +294,28 @@ au FileType vimwiki set filetype=vimwiki.wiki
 
 " prevent Vimwiki from considering every markdown-file as a wiki file
 " let g:vimwiki_global_ext = 0
+
+
+" " Ensure files are read as what I want:
+" " let g:vimwiki_ext2syntax = {'.Rmd': 'markdown', '.rmd': 'markdown','.md': 'markdown', '.markdown': 'markdown', '.mdown': 'markdown'}
+
+" " Vim Wiki
+" let g:vimwiki_list = [{'path': '/Users/acarvalho/Library/Mobile Documents/com~apple~CloudDocs/Work/wiki/vw',
+"       \ 'syntax': 'markdown', 'ext': '.md'}]
+" " let g:vimwiki_hl_headers = 1
+
+" " enable global highlighting
+" " let g:vimwiki_folding='expr'
+
+" " prevent Vimwiki from considering every markdown-file as a wiki file
+" let g:vimwiki_global_ext = 0
+
+" " Set filetype to markdown in VimWiki:
+" let g:vimwiki_folding = 'custom'
+
+" " au FileType vimwiki set filetype=pandoc
+" au FileType vimwiki set syntax=markdown.pandoc
+
 
 " Appearance {{{1
 
