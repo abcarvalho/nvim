@@ -12,6 +12,9 @@ endif
 call plug#begin('$HOME/.config/nvim/plugged')
     " Languages: Julia
     Plug 'JuliaEditorSupport/julia-vim'
+
+    " Git
+    Plug 'tpope/vim-fugitive'
    
    	" Language: Python
    	" Plug 'python-mode/python-mode', { 'branch': 'develop' }
@@ -54,6 +57,8 @@ call plug#begin('$HOME/.config/nvim/plugged')
     Plug 'haishanh/night-owl.vim'
     Plug 'fenetikm/falcon'
     " Plug 'wadackel/vim-dogrun'
+    " Plug 'bluz71/vim-nightfly-guicolors'
+    " Plug 'Zabanaa/neuromancer.vim'
    
     " Appearance: Airline
     Plug 'itchyny/lightline.vim'

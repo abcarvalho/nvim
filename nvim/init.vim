@@ -9,6 +9,9 @@ set nocompatible
 
 filetype plugin on
 
+" Automatically change the current directory
+set autochdir
+
 " Clear highlighting on escape in normal mode
 nnoremap <esc> :noh<return><esc>
 nnoremap <esc>^[ <esc>^[
