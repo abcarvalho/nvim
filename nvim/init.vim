@@ -20,10 +20,10 @@ inoremap <expr><TAB> pumvisible() ? "\<C-n>" : "\<TAB>"
 
 
 " MAPPINGS {{{1
-source $HOME/.mars/.config/nvim/mappings.vim
+source $ARES_CONFIG_DIR/nvim/mappings.vim
 
 " PLUGINS {{{1
-source $HOME/.mars/.config/nvim/plugins/plugins.vim
+source $ARES_CONFIG_DIR/nvim/plugins/plugins.vim
 
 " SETTINGS {{{1 
 syntax enable                          " Enables syntax highlighing
@@ -111,6 +111,4 @@ map <F2> :echo 'Current time is ' . strftime('%c')<CR>
 
 " Block-wise movements and block text-objects {{{1
 " runtime macros/matchit.vim
-
-
 

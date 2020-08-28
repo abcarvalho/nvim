@@ -58,6 +58,8 @@ call plug#begin('$HOME/.config/nvim/plugged')
     " Appearance: Airline
     Plug 'itchyny/lightline.vim'
 
+    " Plug 'ctrlpvim/ctrlp.vim'
+
     " Initialize plugin system
 call plug#end()
 
@@ -88,27 +90,28 @@ augroup PlugGx
   autocmd FileType vim-plug nnoremap <buffer> <silent> gx :call <sid>plug_gx()<cr>
 augroup END
 
-
-source $HOME/.mars/.config/nvim/plugins/vimtex.vim
+source $ARES_CONFIG_DIR/nvim/plugins/vimtex.vim
+source $ARES_CONFIG_DIR/nvim/plugins/fzf.vim
 
 " File Explorer {{{1 
-source $HOME/.mars/.config/nvim/plugins/netrw.vim
-source $HOME/.mars/.config/nvim/plugins/nerdtree.vim
+source $ARES_CONFIG_DIR/nvim/plugins/netrw.vim
+source $ARES_CONFIG_DIR/nvim/plugins/nerdtree.vim
 
 " " Note Taking {{{1
-source $HOME/.mars/.config/nvim/plugins/bullets.vim
-source $HOME/.mars/.config/nvim/plugins/wikivim.vim
+source $ARES_CONFIG_DIR/nvim/plugins/bullets.vim
+source $ARES_CONFIG_DIR/nvim/plugins/wikivim.vim
 
 " Coc Autocompletion and Explorer {{{1
-source $HOME/.mars/.config/nvim/plugins/coc.vim
+source $ARES_CONFIG_DIR/nvim/plugins/coc.vim
 
 " Languages {{{1
-source $HOME/.mars/.config/nvim/plugins/markdown.vim
-source $HOME/.mars/.config/nvim/plugins/easy-align.vim
-source $HOME/.mars/.config/nvim/plugins/julia.vim
+source $ARES_CONFIG_DIR/nvim/plugins/markdown.vim
+source $ARES_CONFIG_DIR/nvim/plugins/easy-align.vim
+source $ARES_CONFIG_DIR/nvim/plugins/julia.vim
 
 " Appearance: Themes & Airline/Lightline {{{1
-source $HOME/.mars/.config/nvim/plugins/themes.vim
+source $ARES_CONFIG_DIR/nvim/plugins/themes.vim
 
 " Writing {{{1
-source $HOME/.mars/.config/nvim/plugins/goyo.vim
+source $ARES_CONFIG_DIR/nvim/plugins/goyo.vim
+

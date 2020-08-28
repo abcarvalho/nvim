@@ -145,7 +145,7 @@ map <F4> :e scp://artur@acropolis.uchicago.edu:22//home/artur/BondPricing/bond-m
 map <F5> :e scp://artur@acropolis.uchicago.edu:22//home/artur/BondPricing/Python/<CR>
 
 " Switch Directory to Work Directory (SHELL)
-nnoremap <leader>gw :cd $work_dir<CR>
+nnoremap <leader>gw :cd $ARES_WORK_DIR<CR>
 " }}}
 " Netrw {{{1
 nnoremap <leader><leader><CR> :Vex<CR>
