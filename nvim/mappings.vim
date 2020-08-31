@@ -15,7 +15,7 @@ nnoremap <S-tab> <c-w>W
 
 " Better window navigation
 " Shortcutting split navigation, saving a keypress:
-nnoremap <leader>ww <C-w>w
+" nnoremap <leader>ww <C-w>w
 " nnoremap <leader>wh <C-w>h
 " nnoremap <leader>wj <C-w>j
 " nnoremap <leader>wk <C-w>k
