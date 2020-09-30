@@ -1,15 +1,22 @@
 
+au ColorScheme * hi Normal ctermbg=none guibg=none
+au ColorScheme * hi NonText ctermbg=none guibg=none
 if (has("termguicolors"))
- set termguicolors
+    set termguicolors
 endif
 
-" For Neovim 0.1.3 and 0.1.4
-let $NVIM_TUI_ENABLE_TRUE_COLOR=1
+" Theme
+colorscheme dracula
+" colorscheme OceanicNext
+" colorscheme challenger_deep
+" autocmd vimenter * colorscheme gruvbox
 
-" colorscheme dracula
-colorscheme night-owl
-" transparent background:
-" hi Normal guibg=NONE ctermbg=NONE
 
-" let g:lightline = {'colorscheme': 'dogrun'}
-let g:lightline = { 'colorscheme': 'nightowl' }
+" let g:gruvbox_contrast_dark = 'hard'
+" colorscheme gruvbox
+" let g:lightline = { 'colorscheme': 'gruvbox'}
+
+
+
+" let g:one_allow_italics = 1 " I love italic for comments
+" colorscheme one

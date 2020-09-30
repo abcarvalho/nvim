@@ -1,5 +1,5 @@
 
-" PLUGINS {{{1 
+" PLUGINS {{{2
 " Automatically Install Vim-Plug
 if empty(glob('$HOME/.config/nvim/autoload/plug.vim'))
     echo "Downloading junegunn/vim-plug to manage plugins..."
@@ -54,12 +54,10 @@ call plug#begin('$HOME/.config/nvim/plugged')
    
    	" Appearance: Themes
    	Plug 'dracula/vim',{ 'as': 'dracula' }
-    Plug 'haishanh/night-owl.vim'
-    Plug 'fenetikm/falcon'
-    " Plug 'wadackel/vim-dogrun'
-    " Plug 'bluz71/vim-nightfly-guicolors'
-    " Plug 'Zabanaa/neuromancer.vim'
-   
+    Plug 'mhartington/oceanic-next'
+    Plug 'challenger-deep-theme/vim', { 'as': 'challenger-deep' }
+    Plug 'gruvbox-community/gruvbox'
+  
     " Appearance: Airline
     Plug 'itchyny/lightline.vim'
 
@@ -94,29 +92,30 @@ augroup PlugGx
   autocmd!
   autocmd FileType vim-plug nnoremap <buffer> <silent> gx :call <sid>plug_gx()<cr>
 augroup END
+" }}}
+" Load Plugin Files {{{2
+source $AMDG_CONFIG_DIR/nvim/plugins/vimtex.vim
+source $AMDG_CONFIG_DIR/nvim/plugins/fzf.vim
 
-source $ARES_CONFIG_DIR/nvim/plugins/vimtex.vim
-source $ARES_CONFIG_DIR/nvim/plugins/fzf.vim
+" File Explorer
+source $AMDG_CONFIG_DIR/nvim/plugins/netrw.vim
+source $AMDG_CONFIG_DIR/nvim/plugins/nerdtree.vim
 
-" File Explorer {{{1 
-source $ARES_CONFIG_DIR/nvim/plugins/netrw.vim
-source $ARES_CONFIG_DIR/nvim/plugins/nerdtree.vim
+" " Note Taking
+source $AMDG_CONFIG_DIR/nvim/plugins/bullets.vim
+source $AMDG_CONFIG_DIR/nvim/plugins/wikivim.vim
 
-" " Note Taking {{{1
-source $ARES_CONFIG_DIR/nvim/plugins/bullets.vim
-source $ARES_CONFIG_DIR/nvim/plugins/wikivim.vim
+" Coc Autocompletion and Explorer
+source $AMDG_CONFIG_DIR/nvim/plugins/coc.vim
 
-" Coc Autocompletion and Explorer {{{1
-source $ARES_CONFIG_DIR/nvim/plugins/coc.vim
+" Languages
+source $AMDG_CONFIG_DIR/nvim/plugins/markdown.vim
+source $AMDG_CONFIG_DIR/nvim/plugins/easy-align.vim
+source $AMDG_CONFIG_DIR/nvim/plugins/julia.vim
 
-" Languages {{{1
-source $ARES_CONFIG_DIR/nvim/plugins/markdown.vim
-source $ARES_CONFIG_DIR/nvim/plugins/easy-align.vim
-source $ARES_CONFIG_DIR/nvim/plugins/julia.vim
+" Appearance: Themes & Airline/Lightline
+source $AMDG_CONFIG_DIR/nvim/plugins/themes.vim
 
-" Appearance: Themes & Airline/Lightline {{{1
-source $ARES_CONFIG_DIR/nvim/plugins/themes.vim
-
-" Writing {{{1
-source $ARES_CONFIG_DIR/nvim/plugins/goyo.vim
-
+" Writing
+source $AMDG_CONFIG_DIR/nvim/plugins/goyo.vim
+" }}}

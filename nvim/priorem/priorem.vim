@@ -50,13 +50,16 @@
   Plug 'ayu-theme/ayu-vim'
 	Plug 'skreek/skeletor.vim'
   Plug 'Rigellute/shades-of-purple.vim'
-  " Plug 'cocopon/iceberg.vim'
-  " Plug 'koirand/tokyo-metro.vim'
+  Plug 'haishanh/night-owl.vim'
+  Plug 'fenetikm/falcon'
   Plug 'desmap/slick'
-  " Plug 'challenger-deep-theme/vim', { 'as': 'challenger-deep' }
-  " Plug 'yuttie/hydrangea-vim'
- 
-
+  Plug 'cocopon/iceberg.vim'
+  Plug 'koirand/tokyo-metro.vim'
+  Plug 'yuttie/hydrangea-vim'
+  Plug 'wadackel/vim-dogrun'
+  Plug 'bluz71/vim-nightfly-guicolors'
+  Plug 'Zabanaa/neuromancer.vim'
+  Plug 'morhetz/gruvbox'
 	Plug 'vim-airline/vim-airline'
 	Plug 'vim-airline/vim-airline-themes'
 

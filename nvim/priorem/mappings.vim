@@ -8,7 +8,7 @@ let maplocalleader = ' '
 
 " open nerdtree pane with bookmarks: <SPC><CR> : see nerdtree.vim file
 
-" Windows {{{1
+" Windows {{{2
 " <tab> / <s-tab> | Circular windows navigation
 nnoremap <tab>   <c-w>w
 nnoremap <S-tab> <c-w>W
@@ -31,28 +31,28 @@ nnoremap <C-l> <C-w>l
 " nnoremap <M-h>    :vertical resize -2<CR>
 " nnoremap <M-l>    :vertical resize +2<CR>
 " }}}
-" Save {{{1
+" Save {{{2
 " Quick save file 
 nnoremap zz :update<CR>
 
 inoremap <C-s>     <C-O>:update<cr>
 nnoremap <C-s>     :update<cr>
 " }}}
-" Quit {{{1
+" Quit {{{2
 inoremap <C-Q>     <esc>:q<cr>
 nnoremap <C-Q>     :q<cr>
 vnoremap <C-Q>     <esc>
 " nnoremap <Leader>q :q<cr>
 " nnoremap <Leader>Q :qa!<cr>
 " }}}
-" Buffers {{{1
+" Buffers {{{2
 nnoremap ]b :bnext<cr>
 nnoremap [b :bprev<cr>
 
 " List Buffers
 nmap <leader>bb :Buffers<CR>
 " }}}
-" TABS {{{1
+" TABS {{{2
 " New TAB
 nnoremap <leader>tn :tabnew<CR>
 
@@ -75,25 +75,25 @@ noremap <leader>t8 8gt
 noremap <leader>t9 9gt
 noremap <leader>t0 :tablast<cr>
 " }}}
-" TABS v.s. WORKSPACES  {{{1
+" TABS v.s. WORKSPACES  {{{2
 " }}}
-" Enable folding with the spacebar {{{1
+" Enable folding with the spacebar {{{2
 " nnoremap <space> za
 nnoremap <SPACE> za
 "nnoremap <TAB> za
 " }}}
-" INDENTATION {{{1
+" INDENTATION {{{2
 " Better tabbing 
 vnoremap < <gv
 vnoremap > >gv
 " }}}
-" Reordering lines  {{{1
+" Reordering lines  {{{2
 " :nnoremap <M-k> <Up>"add"ap<p>
 " :nnoremap <M-j> "add"ap
 :nnoremap <silent><M-k> :let save_a=@a<Cr><Up>"add"ap<Up>:let @a=save_a<Cr>
 :nnoremap <silent><M-j> :let save_a=@a<Cr>"add"ap:let @a=save_a<Cr>
 " }}}
-" FZF Plugin Maps {{{1
+" FZF Plugin Maps {{{2
 
 " Files
 nmap <leader>gf :GFiles<CR>
@@ -112,17 +112,17 @@ nmap <leader>l :BLines<CR>
 nmap <leader>L :Lines<CR>
 nmap <leader>' :Marks<CR>
 " }}}
-" List default and user-defined commands  {{{1
+" List default and user-defined commands  {{{2
 nmap <Leader>C :Commands<CR>
 " }}}
-" Alias replace all to R {{{1
+" Alias replace all to R {{{2
 nnoremap R :%s//gc<Left><Left><Left>
 " }}}
-" Sessions {{{1
+" Sessions {{{2
 nnoremap <leader>sw :mksession! .quicksave.vim<CR>:echo "Session saved."<CR>
 nnoremap <leader>sr :source .quicksave.vim<CR>:echo "Session loaded."<CR>
 " }}}
-" Soft Wrap Mode {{{1
+" Soft Wrap Mode {{{2
 " ******* Remapping keys for Soft Wrap Mode *******
 " Move normally between wrapped lines
 :map j gj
@@ -130,7 +130,7 @@ nnoremap <leader>sr :source .quicksave.vim<CR>:echo "Session loaded."<CR>
 :map 0 g0
 :map $ g$
 " }}}
-" ESCAPE Key  {{{1
+" ESCAPE Key  {{{2
 " Use control-c instead of escape
 " nnoremap <C-c> <Esc>
 
@@ -138,20 +138,20 @@ nnoremap <leader>sr :source .quicksave.vim<CR>:echo "Session loaded."<CR>
 " inoremap jk <Esc>
 " inoremap kj <Esc>
 " }}}
-" Folders {{{1
+" Folders {{{2
 " Remote Folders
 map <F3> :e scp://artur@acropolis.uchicago.edu:22//home/artur/BondPricing/bond-data/<CR>
 map <F4> :e scp://artur@acropolis.uchicago.edu:22//home/artur/BondPricing/bond-model/<CR>
 map <F5> :e scp://artur@acropolis.uchicago.edu:22//home/artur/BondPricing/Python/<CR>
 
 " Switch Directory to Work Directory (SHELL)
-nnoremap <leader>gw :cd $ARES_WORK_DIR<CR>
+nnoremap <leader>gw :cd $AMDG_WORK_DIR<CR>
 " }}}
-" Netrw {{{1
+" Netrw {{{2
 nnoremap <leader><leader><CR> :Vex<CR>
 " }}}
-" INSERT COMMANDS {{{1
-" Dates {{{2
+" INSERT COMMANDS {{{2
+" Dates {{{3
 " Dates
 nmap <leader>id i[<C-R>=strftime("%Y-%m-%d")<CR>]<Esc>
 imap <leader>id [<C-R>=strftime("%Y-%m-%d")<CR>]
@@ -160,7 +160,7 @@ imap <leader>id [<C-R>=strftime("%Y-%m-%d")<CR>]
 nmap <leader>idt i<C-R>=strftime("%Y-%m-%d %a %I:%M %p")<CR><Esc>
 imap <leader>idt <C-R>=strftime("%Y-%m-%d %a %I:%M %p")<CR>
 " }}}
-" markdown {{{2
+" markdown {{{3
 " autocmd FileType markdown inoremap ,i ![](<++>){#fig:<++>}<Space><CR><CR><++><Esc>kkF]i
 autocmd FileType markdown inoremap ,a [](<++>)<Space><++><Esc>F]i
 autocmd FileType markdown inoremap ,1 #<Space><CR><CR><++><Esc>2k<S-a>
@@ -172,7 +172,7 @@ autocmd FileType markdown inoremap ,u +<Space><CR><++><Esc>1k<S-a>
 autocmd FileType markdown inoremap ,o 1.<Space><CR><++><Esc>1k<S-a>
 autocmd FileType markdown inoremap ,f +@fig:
 " }}}
-" latex {{{2
+" latex {{{3
 autocmd FileType tex,latex noremap <leader>d :w<CR>:!texify<Space>-cp<Space>%<CR>
 autocmd FileType tex,latex inoremap ,c \{<++>}<CR><++><Esc>?{<CR>i
 autocmd FileType tex,latex inoremap ,dc \documentclass{}<CR><CR><++><Esc>?}<CR>i
@@ -196,7 +196,7 @@ autocmd FileType tex,latex inoremap ,sm \small
 autocmd FileType tex,latex inoremap ,l \large
 autocmd FileType tex,latex inoremap ,h \huge
 " }}}
-" my commands   {{{2}
+" my commands {{{3
 " emphasize
 autocmd FileType tex,latex inoremap ,em \emph{}<CR><CR><++><Esc>?}<CR>i
 
