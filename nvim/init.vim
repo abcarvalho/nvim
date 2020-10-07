@@ -346,17 +346,53 @@ augroup PlugGx
 augroup END
 " }}}
 " Load Plugin Files {{{2
-source $AMDG_CONFIG_DIR/nvim/plugins/vimtex.vim
-source $AMDG_CONFIG_DIR/nvim/plugins/fzf.vim
+" Vimtex {{{3
+"LaTeX Setup
+let g:vimtex_enabled=1
+let g:tex_flavor='latex'
+let g:vimtex_complete_recursive_bib=1
+let g:vimtex_compiler_progname='nvr'  " required in neovim 
+let g:vimtex_view_method='zathura'
+let g:vimtex_quickfix_mode=0
+let g:vimtex_complete_img_use_tail = 1
+let g:vimtex_fold_enabled = 1
+let g:vimtex_format_enabled = 1
 
+let g:vimtex_compiler_latexmk = {
+\ 'options' : [
+    \   '-shell-escape',
+    \   '-verbose',
+    \   '-file-line-error',
+    \   '-synctex=1',
+    \   '-interaction=nonstopmode',
+    \ ],
+\}
+
+" Tex Conceal
+" set conceallevel=2     " defined in  init.vim already.
+let g:tex_conceal='abdmg'
+"}}}
+" fzf {{{3
+nnoremap <leader>fp :call fzf#run({'options': '--reverse --prompt "AMDG PRIVATUS: "', 'down': 20, 'dir': '$AMDG_PRIVATUS_DIR', 'sink': 'e' })<CR>
+nnoremap <leader>fw :call fzf#run({'options': '--reverse --prompt "AMDG WORK: "', 'down': 20, 'dir': '$AMDG_WORK_DIR', 'sink': 'e' })<CR>
+
+" Include option to search for hidden files in the dotfiles directory:
+nnoremap <leader>fc :call fzf#run({'source': 'find .', 'options': '--reverse --prompt "AMDG CONFIG: "', 'down': 20, 'dir': '$AMDG_CONFIG_DIR', 'sink': 'e' })<CR>
+"}}}
 " File Explorer
 source $AMDG_CONFIG_DIR/nvim/plugins/netrw.vim
 source $AMDG_CONFIG_DIR/nvim/plugins/nerdtree.vim
 
 " " Note Taking
 source $AMDG_CONFIG_DIR/nvim/plugins/bullets.vim
-source $AMDG_CONFIG_DIR/nvim/plugins/wikivim.vim
-
+" WikiVim {{{3
+let g:wiki_root="$AMDG_WORK_DIR/wiki"
+let g:wiki_filetypes = ['md']
+let g:wiki_mappings_use_default=0
+let g:wiki_mappings_global = {
+        \ '<plug>(wiki-index)' : '<leader>ww',
+        \}
+" }}}
 " Coc Autocompletion and Explorer
 source $AMDG_CONFIG_DIR/nvim/plugins/coc.vim
 
