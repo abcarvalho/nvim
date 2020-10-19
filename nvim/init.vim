@@ -304,11 +304,13 @@ call plug#begin('$HOME/.config/nvim/plugged')
     Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug']}
    
    	" Appearance: Themes
-   	Plug 'dracula/vim',{ 'as': 'dracula' }
     Plug 'mhartington/oceanic-next'
     Plug 'challenger-deep-theme/vim', { 'as': 'challenger-deep' }
     Plug 'gruvbox-community/gruvbox'
     Plug 'rakr/vim-one'  
+    Plug 'lifepillar/vim-solarized8'
+    Plug 'wadackel/vim-dogrun'
+   	Plug 'dracula/vim',{ 'as': 'dracula' }
   
     " Appearance: Airline
     Plug 'itchyny/lightline.vim'
@@ -401,9 +403,35 @@ source $AMDG_CONFIG_DIR/nvim/plugins/markdown.vim
 source $AMDG_CONFIG_DIR/nvim/plugins/easy-align.vim
 source $AMDG_CONFIG_DIR/nvim/plugins/julia.vim
 
-" Appearance: Themes & Airline/Lightline
+" Appearance: Themes & Airline/Lightline {{{3
 " source $AMDG_CONFIG_DIR/nvim/plugins/themes.vim
+au ColorScheme * hi Normal ctermbg=none guibg=none
+au ColorScheme * hi NonText ctermbg=none guibg=none
+if (has("termguicolors"))
+    set termguicolors
+endif
 
+" Themes
+" colorscheme dracula
+" colorscheme OceanicNext
+" colorscheme challenger_deep
+
+" Dogrun
+colorscheme dogrun
+let g:lightline = {
+  \ 'colorscheme': 'dogrun',
+  \ }
+
+" Gruvbox
+" autocmd vimenter * colorscheme gruvbox
+" let g:gruvbox_contrast_dark = 'hard'
+" colorscheme gruvbox
+" let g:lightline = { 'colorscheme': 'gruvbox'}
+
+" One 
+" let g:one_allow_italics = 1 " I love italic for comments
+" colorscheme one
+" }}}3
 " Writing
 source $AMDG_CONFIG_DIR/nvim/plugins/goyo.vim
 " }}}
@@ -498,5 +526,5 @@ map <F2> :echo 'Current time is ' . strftime('%c')<CR>
 " }}}
 
 " Transparency
- source $AMDG_CONFIG_DIR/nvim/plugins/themes.vim
+" source $AMDG_CONFIG_DIR/nvim/plugins/themes.vim
 
