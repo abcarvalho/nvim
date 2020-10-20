@@ -373,20 +373,21 @@ let g:vimtex_compiler_latexmk = {
 " Tex Conceal
 " set conceallevel=2     " defined in  init.vim already.
 let g:tex_conceal='abdmg'
-"}}}
+"}}}3
 " fzf {{{3
 nnoremap <leader>fp :call fzf#run({'options': '--reverse --prompt "AMDG PRIVATUS: "', 'down': 20, 'dir': '$AMDG_PRIVATUS_DIR', 'sink': 'e' })<CR>
 nnoremap <leader>fw :call fzf#run({'options': '--reverse --prompt "AMDG WORK: "', 'down': 20, 'dir': '$AMDG_WORK_DIR', 'sink': 'e' })<CR>
 
 " Include option to search for hidden files in the dotfiles directory:
 nnoremap <leader>fc :call fzf#run({'source': 'find .', 'options': '--reverse --prompt "AMDG CONFIG: "', 'down': 20, 'dir': '$AMDG_CONFIG_DIR', 'sink': 'e' })<CR>
-"}}}
-" File Explorer
+"}}}3
+" File Explorer {{{3
 source $AMDG_CONFIG_DIR/nvim/plugins/netrw.vim
 source $AMDG_CONFIG_DIR/nvim/plugins/nerdtree.vim
-
-" " Note Taking
+" }}}
+" " Note Taking {{{3
 source $AMDG_CONFIG_DIR/nvim/plugins/bullets.vim
+" }}}3
 " WikiVim {{{3
 let g:wiki_root="~/amdg/work/wiki"
 let g:wiki_filetypes = ['md']
@@ -394,15 +395,15 @@ let g:wiki_mappings_use_default=0
 let g:wiki_mappings_global = {
         \ '<plug>(wiki-index)' : '<leader>ww',
         \}
-" }}}
-" Coc Autocompletion and Explorer
+" }}}3
+" Coc Autocompletion and Explorer{{{3
 source $AMDG_CONFIG_DIR/nvim/plugins/coc.vim
-
-" Languages
+"}}}
+" Languages {{{3
 source $AMDG_CONFIG_DIR/nvim/plugins/markdown.vim
 source $AMDG_CONFIG_DIR/nvim/plugins/easy-align.vim
 source $AMDG_CONFIG_DIR/nvim/plugins/julia.vim
-
+" }}}3
 " Appearance: Themes & Airline/Lightline {{{3
 " source $AMDG_CONFIG_DIR/nvim/plugins/themes.vim
 au ColorScheme * hi Normal ctermbg=none guibg=none
@@ -432,10 +433,11 @@ let g:lightline = {
 " let g:one_allow_italics = 1 " I love italic for comments
 " colorscheme one
 " }}}3
-" Writing
+" Writing {{{3
 source $AMDG_CONFIG_DIR/nvim/plugins/goyo.vim
-" }}}
-" }}}
+" }}}3
+" }}}2
+" }}}1
 " SETTINGS {{{1 
 syntax enable                          " Enables syntax highlighing
 set hidden                             " Required to keep multiple buffers open multiple buffers
