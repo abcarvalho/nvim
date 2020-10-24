@@ -415,7 +415,7 @@ let g:bullets_enabled_file_types = [
 let g:bullets_enable_in_empty_buffers = 0 " default = 1
 " }}}4
 " WikiVim {{{4
-let g:wiki_root="~/amdg/work/wiki"
+let g:wiki_root="~/amdg/wiki"
 let g:wiki_filetypes = ['md']
 let g:wiki_mappings_use_default=0
 let g:wiki_mappings_global = {
