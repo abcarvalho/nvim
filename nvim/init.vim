@@ -756,6 +756,24 @@ autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
 " }}}1
 " MY COMMANDS {{{1
 map <F2> :echo 'Current time is ' . strftime('%c')<CR>
+
+" Switch NVim and iTerm2 Themes {{{2
+function! Theme_Swapper()
+    if &background ==? 'dark'
+        set background=light
+        colorscheme solarized8
+    else
+        set background=dark
+        colorscheme nightfly
+    endif
+    silent !osascript -e 'tell app "System Events" to keystroke "s" using {shift down, option down, control down}'
+endfunction 
+
+command! SwapThemes call Theme_Swapper()
+
+" Define Shortcut:
+nnoremap <leader>st :SwapThemes<CR>
+" }}}2
 " }}}1
 " Block-wise movements and block text-objects {{{1
 " runtime macros/matchit.vim
