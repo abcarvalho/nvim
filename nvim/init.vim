@@ -220,10 +220,10 @@ autocmd FileType tex,latex inoremap ,h \huge
 " }}}3
 " my commands {{{3
 " emphasize
-autocmd FileType tex,latex inoremap ,em \emph{}<CR><CR><++><Esc>?}<CR>i
+autocmd FileType tex,latex inoremap ,em \emph{}<Esc>?{<CR>:noh<CR>a 
 
 " insert braces
-autocmd FileType tex,latex inoremap ,i( \left(\right)<Esc>?(<CR>a  
+autocmd FileType tex,latex inoremap ,i( \left(\right)<Esc>?(<CR>:noh<CR>a  
 
 " insert brackets
 autocmd FileType tex,latex inoremap ,i[ \left[\right]<Esc>?[<CR>a
