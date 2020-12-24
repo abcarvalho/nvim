@@ -308,7 +308,6 @@ call plug#begin('$HOME/.config/nvim/plugged')
     " Writing Experience: LaTeX
     Plug 'KeitaNakamura/tex-conceal.vim', {'for': 'tex'}
     Plug 'junegunn/goyo.vim'
-    " Plug 'junegunn/limelight.vim'
 
     " Markdown Preview:
     Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug']}
@@ -316,13 +315,8 @@ call plug#begin('$HOME/.config/nvim/plugged')
    	" Appearance: Themes
     Plug 'mhartington/oceanic-next'
     Plug 'challenger-deep-theme/vim', { 'as': 'challenger-deep' }
-    Plug 'gruvbox-community/gruvbox'
-    Plug 'rakr/vim-one'  
     Plug 'lifepillar/vim-solarized8'
-    Plug 'wadackel/vim-dogrun'
    	Plug 'dracula/vim',{ 'as': 'dracula' }
-    " Plug 'ghifarit53/daycula-vim' , {'branch' : 'main'}
-    Plug 'drewtempelmeyer/palenight.vim'
     Plug 'bluz71/vim-nightfly-guicolors'
   
     " Appearance: Airline
@@ -802,6 +796,20 @@ let g:UltiSnipsEditSplit="vertical"
 " set runtimepath+=$AMDG_DOTFILES_DIR/nvim/UltiSnips
 " let g:UltiSnipsSnippetDirectories=["UltiSnips", "tex.snippets"]
 " }}}
+" Plugins {{{2
+    " Plug 'https://github.com/alok/notational-fzf-vim'
+   	" Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
+ 
+    " Plug 'junegunn/limelight.vim'
+    " Plug 'ghifarit53/daycula-vim' , {'branch' : 'main'}
+    " Plug 'ctrlpvim/ctrlp.vim'
+
+    "Appearance: Themes
+    " Plug 'wadackel/vim-dogrun'
+    " Plug 'drewtempelmeyer/palenight.vim'
+    " Plug 'rakr/vim-one'  
+    " Plug 'gruvbox-community/gruvbox'
+" }}}2
 " NERDTree {{{3
 " let NERDTreeShowBookmarks=1
 
