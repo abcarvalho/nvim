@@ -296,9 +296,9 @@ call plug#begin('$HOME/.config/nvim/plugged')
    
    	" Files Folders: 
    	Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
-   	Plug 'junegunn/fzf.vim'
-   	Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
-   
+  	Plug 'junegunn/fzf.vim'
+    Plug 'https://github.com/alok/notational-fzf-vim'
+  
    	" Coc Extensions: Autocompletion, File Explorer, Snippets
     Plug 'neoclide/coc.nvim', {'branch': 'release'}
    
@@ -323,7 +323,6 @@ call plug#begin('$HOME/.config/nvim/plugged')
     " Appearance: Airline
     Plug 'itchyny/lightline.vim'
 
-    " Plug 'ctrlpvim/ctrlp.vim'
 
     " Initialize plugin system
 call plug#end()
