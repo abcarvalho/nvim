@@ -793,6 +793,7 @@ let g:UltiSnipsEditSplit="vertical"
 " set runtimepath+=$AMDG_DOTFILES_DIR/nvim/UltiSnips
 " let g:UltiSnipsSnippetDirectories=["UltiSnips", "tex.snippets"]
 " }}}
+" Disabled {{{1
 " Plugins {{{2
     " Plug 'https://github.com/alok/notational-fzf-vim'
    	" Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
@@ -851,3 +852,8 @@ let g:UltiSnipsEditSplit="vertical"
 " " nnoremap <silent> <leader>n :NERDTreeToggle<CR>
 " nnoremap <silent> <leader><CR> :NERDTreeToggle<CR>
 " }}}3
+" }}}2
+" Block-wise movements and block text-objects {{{2
+" runtime macros/matchit.vim
+" }}}2
+" }}}1 
