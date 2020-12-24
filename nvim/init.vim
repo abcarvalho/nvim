@@ -301,8 +301,9 @@ call plug#begin('$HOME/.config/nvim/plugged')
    	" Coc Extensions: Autocompletion, File Explorer, Snippets
     Plug 'neoclide/coc.nvim', {'branch': 'release'}
    
-    " Snippets: are separated from the engine. Add this if you want them:
-   	Plug 'honza/vim-snippets'
+    " Snippets:     
+    Plug 'sirver/ultisnips' " snippets engine
+    Plug 'honza/vim-snippets' " snippet files
    
     " Writing Experience: LaTeX
     Plug 'KeitaNakamura/tex-conceal.vim', {'for': 'tex'}
@@ -790,6 +791,17 @@ nnoremap <leader>st :SwapThemes<CR>
 " Transparency
 " source $AMDG_CONFIG_DIR/nvim/plugins/themes.vim
 
+" UltiSnippets {{{1
+let g:UltiSnipsExpandTrigger="<tab>"
+let g:UltiSnipsJumpForwardTrigger="<tab>"
+let g:UltiSnipsJumpBackwardTrigger="<S-tab>"
+
+" If you want :UltiSnipsEdit to split your window.
+let g:UltiSnipsEditSplit="vertical"
+
+" set runtimepath+=$AMDG_DOTFILES_DIR/nvim/UltiSnips
+" let g:UltiSnipsSnippetDirectories=["UltiSnips", "tex.snippets"]
+" }}}
 " NERDTree {{{3
 " let NERDTreeShowBookmarks=1
 
