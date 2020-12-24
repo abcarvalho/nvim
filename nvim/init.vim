@@ -291,6 +291,8 @@ call plug#begin('$HOME/.config/nvim/plugged')
     " Note Taking Task Management:
     Plug 'dkarter/bullets.vim'
     Plug 'lervag/wiki.vim'
+    Plug 'vimwiki/vimwiki', { 'branch': 'dev' }
+    Plug 'tools-life/taskwiki'
    
    	" Files Folders: 
    	Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
@@ -427,8 +429,30 @@ let g:wiki_root=$AMDG_WIKI_DIR
 let g:wiki_filetypes = ['md']
 let g:wiki_mappings_use_default=0
 let g:wiki_mappings_global = {
-        \ '<plug>(wiki-index)' : '<leader>ww',
+        \ '<plug>(wiki-index)' : '<leader>wv',
         \}
+" }}}4
+" VimWiki {{{4
+let g:vimwiki_list = [{'path': '$AMDG_WIKI_DIR/vwk', 
+            \ 'nested_syntaxes': {'python': 'python', 'latex': 'tex'}}]
+
+                       " \ 'syntax': 'markdown', 'ext': '.md'}]
+" nnoremap <leader>vv :VimwikiIndex<CR>
+
+" let g:vimwiki_hl_headers = 1
+
+" enable global highlighting
+let g:vimwiki_folding='expr'
+
+" prevent Vimwiki from considering every markdown-file as a wiki file
+let g:vimwiki_global_ext = 0
+" }}}4
+" TaskWiki {{{4
+set wildcharm=<tab>
+autocmd FileType vimwiki nnoremap <leader>tw :TaskWiki<tab>
+autocmd FileType vimwiki nnoremap <leader>tm :TaskWikiMod
+
+ 
 " }}}4
 " }}}3
 " Coc Autocompletion and Explorer{{{3
