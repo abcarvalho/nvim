@@ -774,12 +774,7 @@ command! SwapThemes call Theme_Swapper()
 nnoremap <leader>st :SwapThemes<CR>
 " }}}2
 " }}}1
-" Block-wise movements and block text-objects {{{1
-" runtime macros/matchit.vim
-" }}}1
 
-" Transparency
-" source $AMDG_CONFIG_DIR/nvim/plugins/themes.vim
 
 " UltiSnippets {{{1
 let g:UltiSnipsExpandTrigger="<tab>"
