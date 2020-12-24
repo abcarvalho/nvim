@@ -774,8 +774,29 @@ command! SwapThemes call Theme_Swapper()
 nnoremap <leader>st :SwapThemes<CR>
 " }}}2
 " }}}1
+" ZTK {{{1
+function! Zettel(...)
 
+  " build the file name
+  let l:sep = ''
+  if len(a:000) > 0
+    let l:sep = '-'
+  endif
+  let l:fname = expand('~/$AMDG_WIKI_DIR/obsd/ztk/') . strftime("%F-%H%M") . l:sep . join(a:000, '-') . '.md'
 
+  " edit the new file
+  exec "e " . l:fname
+
+  " enter the title and timestamp (using ultisnips) in the new file
+  if len(a:000) > 0
+    exec "normal ggO\<c-r>=strftime('%Y-%m-%d %H:%M')\<cr> " . join(a:000) . "\<cr>\<esc>G"
+  else
+    exec "normal ggO\<c-r>=strftime('%Y-%m-%d %H:%M')\<cr>\<cr>\<esc>G"
+  endif
+endfunction
+
+command! -nargs=* Ztk call Zettel(<f-args>)
+" }}}1 
 " UltiSnippets {{{1
 let g:UltiSnipsExpandTrigger="<tab>"
 let g:UltiSnipsJumpForwardTrigger="<tab>"
