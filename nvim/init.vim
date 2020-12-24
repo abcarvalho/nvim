@@ -55,8 +55,7 @@ nnoremap <C-l> <C-w>l
 " }}}2
 " Save {{{2
 " Quick save file 
-nnoremap zz :update<CR>
-
+" nnoremap zz :update<CR>
 inoremap <C-s>     <C-O>:update<cr>
 nnoremap <C-s>     :update<cr>
 " }}}2
