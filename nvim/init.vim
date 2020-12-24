@@ -98,10 +98,9 @@ noremap <leader>t0 :tablast<cr>
 " }}}2
 " TABS v.s. WORKSPACES  {{{2
 " }}}2
-" Enable folding with the spacebar {{{2
-" nnoremap <space> za
+" Shortcut for Toggling Folding {{{2
 nnoremap <SPACE> za
-"nnoremap <TAB> za
+" nnoremap <TAB> za
 " }}}2
 " INDENTATION {{{2
 " Better tabbing 
