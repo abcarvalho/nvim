@@ -664,27 +664,8 @@ if (has("termguicolors"))
     set termguicolors
 endif
 
-" Themes
-" colorscheme dracula
-" colorscheme OceanicNext
-" colorscheme challenger_deep
-
-" Dogrun
-" colorscheme dogrun
-" let g:lightline = {'colorscheme': 'dogrun'}
-
 colorscheme nightfly
 let g:lightline = {'colorscheme': 'nightfly' }
-
-" Gruvbox
-" autocmd vimenter * colorscheme gruvbox
-" let g:gruvbox_contrast_dark = 'hard'
-" colorscheme gruvbox
-" let g:lightline = { 'colorscheme': 'gruvbox'}
-
-" One 
-" let g:one_allow_italics = 1 " I love italic for comments
-" colorscheme one
 " }}}3
 " Writing {{{3
 " noremap <leader>g :Goyo<CR>
@@ -826,6 +807,27 @@ let g:UltiSnipsEditSplit="vertical"
     " Plug 'rakr/vim-one'  
     " Plug 'gruvbox-community/gruvbox'
 " }}}2
+" Configure Plugins {{{2
+" Appearance: Themes & Airline/Lightline {{{3
+" Themes
+" colorscheme dracula
+" colorscheme OceanicNext
+" colorscheme challenger_deep
+
+" Dogrun
+" colorscheme dogrun
+" let g:lightline = {'colorscheme': 'dogrun'}
+
+" Gruvbox
+" autocmd vimenter * colorscheme gruvbox
+" let g:gruvbox_contrast_dark = 'hard'
+" colorscheme gruvbox
+" let g:lightline = { 'colorscheme': 'gruvbox'}
+
+" One 
+" let g:one_allow_italics = 1 " I love italic for comments
+" colorscheme one
+" }}}3
 " NERDTree {{{3
 " let NERDTreeShowBookmarks=1
 
