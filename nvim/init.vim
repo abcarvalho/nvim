@@ -133,6 +133,9 @@ nmap <leader>l :BLines<CR>
 nmap <leader>L :Lines<CR>
 nmap <leader>' :Marks<CR>
 " }}}2
+" Notational FZF {{{2
+let g:nv_search_paths = ['$AMDG_WIKI_DIR/obsd']
+" }}}2
 " List default and user-defined commands  {{{2
 nmap <Leader>C :Commands<CR>
 " }}}2
