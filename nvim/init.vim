@@ -220,31 +220,34 @@ autocmd FileType tex,latex inoremap ,h \huge
 " }}}3
 " my commands {{{3
 " insert braces
-autocmd FileType tex,latex inoremap ,i( \left(\right)<Esc>?(<CR>:noh<CR>a  
+autocmd FileType tex,latex,vimwiki inoremap ,i( \left(\right)<Esc>?(<CR>:noh<CR>a  
 
 " insert brackets
-autocmd FileType tex,latex inoremap ,i[ \left[\right]<Esc>?[<CR>:noh<CR>a
+autocmd FileType tex,latex,vimwiki inoremap ,i[ \left[\right]<Esc>?[<CR>:noh<CR>a
 
 " insert curly brackets
-autocmd FileType tex,latex inoremap ,i{ \{\}<Esc>hi
+autocmd FileType tex,latex,vimwiki inoremap ,i{ \{\}<Esc>hi
 
 " inline math
 autocmd FileType tex,latex inoremap ,im ~\(\)<ESC>hi
 
 " outline math
-autocmd FileType tex,latex inoremap ,om \[<CR><space><CR><BS>\]<Esc>kA
+autocmd FileType tex,latex,vimwiki inoremap ,om \[<CR><space><CR><BS>\]<Esc>kA
 
 " begin equation
-autocmd FileType tex,latex inoremap ,be \begin{equation}<CR><Space><Space>=<Space><CR>\end{equation}<Esc>khhi
+autocmd FileType tex,latex,vimwiki inoremap ,be \begin{equation}<CR><Space><Space>=<Space><CR>\end{equation}<Esc>khhi
 
 " begin align
-autocmd FileType tex,latex inoremap ,ba \begin{align}<CR><Space><Space>&=<Space><CR>\end{align}<Esc>khhhi
+autocmd FileType tex,latex,vimwiki inoremap ,ba \begin{align}<CR><Space><Space>&=<Space><CR>\end{align}<Esc>khhhi
 
 " emphasize
 autocmd FileType tex,latex inoremap ,em ~\emph{}<Esc>i 
 
+" reference
+autocmd FileType tex,latex inoremap ,ir ~\ref{}<Esc>i 
+
 " textcolor
-autocmd FileType tex,latex inoremap ,tc ~\textcolor{}{}<Esc>?{<CR>n:noh<CR>a
+autocmd FileType tex,latex inoremap ,tc ~\textcolor{}{<++>}<Esc>?{<CR>n:noh<CR>a
 
 " insert comment
 autocmd FileType tex,latex inoremap ,bc \begin{comment}<CR><CR>\end{comment}<Esc>ki
