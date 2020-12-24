@@ -8,6 +8,7 @@
 set nocompatible
 
 filetype plugin on
+syntax on 
 
 " Automatically change the current directory
 set autochdir
