@@ -357,8 +357,23 @@ augroup END
 " }}}2 
 " Configure Plugins {{{2
 " fzf {{{3
-nnoremap <leader>fp :call fzf#run({'options': '--reverse --prompt "AMDG PRIVATUS: "', 'down': 20, 'dir': '$AMDG_PRIVATUS_DIR', 'sink': 'e' })<CR>
+" nnoremap <leader>fp :call fzf#run({'options': '--reverse --prompt "AMDG PRIVATUS: "', 'down': 20, 'dir': '$AMDG_PRIVATUS_DIR', 'sink': 'e' })<CR>
 nnoremap <leader>fw :call fzf#run({'options': '--reverse --prompt "AMDG WORK: "', 'down': 20, 'dir': '$AMDG_WORK_DIR', 'sink': 'e' })<CR>
+
+nnoremap <leader>fk :call fzf#run({'options': '--reverse --prompt "AMDG WIKI: "', 'down': 20, 'dir': '$AMDG_WIKI_DIR', 'sink': 'e' })<CR>
+command! -bang -nargs=* RGrepWiki
+            \ call fzf#vim#grep(
+            \ "rg --column --line-number --no-heading --color=always --smart-case -- ".shellescape(<q-args>), 
+            \1, fzf#vim#with_preview({ 'dir': '$AMDG_WIKI_DIR'}), <bang>0)
+nnoremap <leader>fo :call fzf#run({'options': '--reverse --prompt "Obsidian: "', 'down': 20, 'dir': '$AMDG_WIKI_DIR/obsd', 'sink': 'e' })<CR>
+nnoremap <leader>rk :RGrepWiki<CR>
+
+command! -bang -nargs=* RGrepObs
+            \ call fzf#vim#grep(
+            \ "rg --column --line-number --no-heading --color=always --smart-case -- ".shellescape(<q-args>), 
+            \1, fzf#vim#with_preview({ 'dir': '$AMDG_WIKI_DIR/obsd'}), <bang>0)
+nnoremap <leader>ro :RGrepObs<CR>
+nnoremap <leader>fz :call fzf#run({'options': '--reverse --prompt "ZTK Notes: "', 'down': 20, 'dir': '$AMDG_WIKI_DIR/obsd/ztk', 'sink': 'e' })<CR>
 
 " Include option to search for hidden files in the dotfiles directory:
 nnoremap <leader>fc :call fzf#run({'source': 'find .', 'options': '--reverse --prompt "AMDG DOTFILES: "', 'down': 20, 'dir': '$AMDG_DOTFILES_DIR', 'sink': 'e' })<CR>
