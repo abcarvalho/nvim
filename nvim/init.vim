@@ -7,6 +7,8 @@
 " nnoremap c "_c
 set nocompatible
 
+let g:python3_host_prog = "/usr/local/Caskroom/miniconda/base/bin/python3"
+
 filetype plugin on
 syntax on 
 
@@ -635,10 +637,10 @@ nmap ga <Plug>(EasyAlign)
 " LaTeX - Vimtex {{{4
 "LaTeX Setup
 let g:vimtex_enabled=1
-let g:tex_flavor='latex'
 let g:vimtex_complete_recursive_bib=1
+let g:tex_flavor='latex'
 let g:vimtex_compiler_progname='nvr'  " required in neovim 
-let g:vimtex_view_method='zathura'
+let g:vimtex_view_method='skim'
 let g:vimtex_quickfix_mode=0
 let g:vimtex_complete_img_use_tail = 1
 let g:vimtex_fold_enabled = 1
