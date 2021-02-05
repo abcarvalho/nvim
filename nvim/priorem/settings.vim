@@ -228,6 +228,40 @@ autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
 " PLUGINS {{{1
 source $HOME/.config/nvim/plugins/plugins.vim
 
+" Vim-Plug {{{2
 	" Track the engine.
 	Plug 'SirVer/ultisnips'
+
+  " Note Taking Task Management:
+  Plug 'vimwiki/vimwiki', { 'branch': 'dev' }
+  Plug 'tools-life/taskwiki'
+
+" }}}2
+" Configure Plugins {{{2
+
+" Note Taking {{{3
+" VimWiki {{{4
+let g:vimwiki_list = [{'path': '$AMDG_WIKI_DIR/vwk', 
+            \ 'nested_syntaxes': {'python': 'python', 'latex': 'tex'}}]
+
+                       " \ 'syntax': 'markdown', 'ext': '.md'}]
+" nnoremap <leader>vv :VimwikiIndex<CR>
+
+" let g:vimwiki_hl_headers = 1
+
+" enable global highlighting
+let g:vimwiki_folding='expr'
+
+" prevent Vimwiki from considering every markdown-file as a wiki file
+let g:vimwiki_global_ext = 0
+" }}}4
+" TaskWiki {{{4
+set wildcharm=<tab>
+autocmd FileType vimwiki nnoremap <leader>tw :TaskWiki<tab>
+autocmd FileType vimwiki nnoremap <leader>tm :TaskWikiMod
+" }}}4
+" }}}3
+" }}}2
+" }}}1 
+
 
