@@ -137,7 +137,7 @@ nmap <leader>L :Lines<CR>
 nmap <leader>' :Marks<CR>
 " }}}2
 " Notational FZF {{{2
-let g:nv_search_paths = ['$AMDG_WIKI_DIR/obsd']
+let g:nv_search_paths = ['$ZEN_WIKI_DIR/obsd']
 " }}}2
 " List default and user-defined commands  {{{2
 nmap <Leader>C :Commands<CR>
@@ -172,7 +172,7 @@ map <F4> :e scp://artur@acropolis.uchicago.edu:22//home/artur/BondPricing/bond-m
 map <F5> :e scp://artur@acropolis.uchicago.edu:22//home/artur/BondPricing/Python/<CR>
 
 " Switch Directory to Work Directory (SHELL)
-nnoremap <leader>gw :cd $AMDG_WORK_DIR<CR>
+nnoremap <leader>gw :cd $ZEN_WORK_DIR<CR>
 " }}}2
 " Netrw {{{2
 nnoremap <leader><leader><CR> :Vex<CR>
@@ -359,26 +359,26 @@ augroup END
 " }}}2 
 " Configure Plugins {{{2
 " fzf {{{3
-" nnoremap <leader>fp :call fzf#run({'options': '--reverse --prompt "AMDG PRIVATUS: "', 'down': 20, 'dir': '$AMDG_PRIVATUS_DIR', 'sink': 'e' })<CR>
-nnoremap <leader>fw :call fzf#run({'options': '--reverse --prompt "AMDG WORK: "', 'down': 20, 'dir': '$AMDG_WORK_DIR', 'sink': 'e' })<CR>
+" nnoremap <leader>fp :call fzf#run({'options': '--reverse --prompt "ZEN PRIVATUS: "', 'down': 20, 'dir': '$ZEN_PRIVATUS_DIR', 'sink': 'e' })<CR>
+nnoremap <leader>fw :call fzf#run({'options': '--reverse --prompt "ZEN WORK: "', 'down': 20, 'dir': '$ZEN_WORK_DIR', 'sink': 'e' })<CR>
 
-nnoremap <leader>fk :call fzf#run({'options': '--reverse --prompt "AMDG WIKI: "', 'down': 20, 'dir': '$AMDG_WIKI_DIR', 'sink': 'e' })<CR>
+nnoremap <leader>fk :call fzf#run({'options': '--reverse --prompt "ZEN WIKI: "', 'down': 20, 'dir': '$ZEN_WIKI_DIR', 'sink': 'e' })<CR>
 command! -bang -nargs=* RGrepWiki
             \ call fzf#vim#grep(
             \ "rg --column --line-number --no-heading --color=always --smart-case -- ".shellescape(<q-args>), 
-            \1, fzf#vim#with_preview({ 'dir': '$AMDG_WIKI_DIR'}), <bang>0)
-nnoremap <leader>fo :call fzf#run({'options': '--reverse --prompt "Obsidian: "', 'down': 20, 'dir': '$AMDG_WIKI_DIR/obsd', 'sink': 'e' })<CR>
+            \1, fzf#vim#with_preview({ 'dir': '$ZEN_WIKI_DIR'}), <bang>0)
+nnoremap <leader>fo :call fzf#run({'options': '--reverse --prompt "Obsidian: "', 'down': 20, 'dir': '$ZEN_WIKI_DIR/obsd', 'sink': 'e' })<CR>
 nnoremap <leader>rk :RGrepWiki<CR>
 
 command! -bang -nargs=* RGrepObs
             \ call fzf#vim#grep(
             \ "rg --column --line-number --no-heading --color=always --smart-case -- ".shellescape(<q-args>), 
-            \1, fzf#vim#with_preview({ 'dir': '$AMDG_WIKI_DIR/obsd'}), <bang>0)
+            \1, fzf#vim#with_preview({ 'dir': '$ZEN_WIKI_DIR/obsd'}), <bang>0)
 nnoremap <leader>ro :RGrepObs<CR>
-nnoremap <leader>fz :call fzf#run({'options': '--reverse --prompt "ZTK Notes: "', 'down': 20, 'dir': '$AMDG_WIKI_DIR/obsd/ztk', 'sink': 'e' })<CR>
+nnoremap <leader>fz :call fzf#run({'options': '--reverse --prompt "ZTK Notes: "', 'down': 20, 'dir': '$ZEN_WIKI_DIR/obsd/ztk', 'sink': 'e' })<CR>
 
 " Include option to search for hidden files in the dotfiles directory:
-nnoremap <leader>fc :call fzf#run({'source': 'find .', 'options': '--reverse --prompt "AMDG DOTFILES: "', 'down': 20, 'dir': '$AMDG_DOTFILES_DIR', 'sink': 'e' })<CR>
+nnoremap <leader>fc :call fzf#run({'source': 'find .', 'options': '--reverse --prompt "ZEN DOTFILES: "', 'down': 20, 'dir': '$ZEN_DOTFILES_DIR', 'sink': 'e' })<CR>
 "}}}3
 " File Explorer {{{3
 " Netrw {{{4
@@ -414,7 +414,7 @@ let g:bullets_enabled_file_types = [
 let g:bullets_enable_in_empty_buffers = 0 " default = 1
 " }}}4
 " WikiVim {{{4
-let g:wiki_root=$AMDG_WIKI_DIR
+let g:wiki_root=$ZEN_WIKI_DIR
 let g:wiki_filetypes = ['md']
 let g:wiki_mappings_use_default=0
 let g:wiki_mappings_global = {
@@ -763,7 +763,7 @@ function! Zettel(...)
   if len(a:000) > 0
     let l:sep = '-'
   endif
-  let l:fname = expand('~/$AMDG_WIKI_DIR/obsd/ztk/') . strftime("%F-%H%M") . l:sep . join(a:000, '-') . '.md'
+  let l:fname = expand('~/$ZEN_WIKI_DIR/obsd/ztk/') . strftime("%F-%H%M") . l:sep . join(a:000, '-') . '.md'
 
   " edit the new file
   exec "e " . l:fname
@@ -786,7 +786,7 @@ let g:UltiSnipsJumpBackwardTrigger="<S-tab>"
 " If you want :UltiSnipsEdit to split your window.
 let g:UltiSnipsEditSplit="vertical"
 
-" set runtimepath+=$AMDG_DOTFILES_DIR/nvim/UltiSnips
+" set runtimepath+=$ZEN_DOTFILES_DIR/nvim/UltiSnips
 " let g:UltiSnipsSnippetDirectories=["UltiSnips", "tex.snippets"]
 " }}}
 " Disabled {{{1
