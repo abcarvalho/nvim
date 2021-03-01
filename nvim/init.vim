@@ -103,8 +103,8 @@ noremap <leader>t0 :tablast<cr>
 " TABS v.s. WORKSPACES  {{{2
 " }}}2
 " Shortcut for Toggling Folding {{{2
-nnoremap <SPACE> za
-" nnoremap <TAB> za
+" nnoremap <SPACE> za
+nnoremap <TAB> za
 " }}}2
 " INDENTATION {{{2
 " Better tabbing 
