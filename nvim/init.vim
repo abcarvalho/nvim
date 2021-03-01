@@ -36,20 +36,20 @@ let maplocalleader = ';'
 
 " Windows {{{2
 " <tab> / <s-tab> | Circular windows navigation
-nnoremap <tab>   <c-w>w
-nnoremap <S-tab> <c-w>W
+" nnoremap <tab>   <c-w>w
+" nnoremap <S-tab> <c-w>W
 
 " Better window navigation
 " Shortcutting split navigation, saving a keypress:
-" nnoremap <leader>ww <C-w>w
-" nnoremap <leader>wh <C-w>h
-" nnoremap <leader>wj <C-w>j
-" nnoremap <leader>wk <C-w>k
-" nnoremap <leader>wl <C-w>l
-nnoremap <C-h> <C-w>h
-nnoremap <C-j> <C-w>j
-nnoremap <C-k> <C-w>k
-nnoremap <C-l> <C-w>l
+nnoremap <leader>ww <C-w>w
+nnoremap <leader>wh <C-w>h
+nnoremap <leader>wj <C-w>j
+nnoremap <leader>wk <C-w>k
+nnoremap <leader>wl <C-w>l
+" nnoremap <C-h> <C-w>h
+" nnoremap <C-j> <C-w>j
+" nnoremap <C-k> <C-w>k
+" nnoremap <C-l> <C-w>l
 
 " Use alt + hjkl to resize windows
 " nnoremap <M-j>    :resize -2<CR>
@@ -114,8 +114,8 @@ vnoremap > >gv
 " Reordering lines  {{{2
 " :nnoremap <M-k> <Up>"add"ap<p>
 " :nnoremap <M-j> "add"ap
-:nnoremap <silent><C-k> :let save_a=@a<Cr><Up>"add"ap<Up>:let @a=save_a<Cr>
-:nnoremap <silent><C-j> :let save_a=@a<Cr>"add"ap:let @a=save_a<Cr>
+:nnoremap <silent><M-k> :let save_a=@a<Cr><Up>"add"ap<Up>:let @a=save_a<Cr>
+:nnoremap <silent><M-j> :let save_a=@a<Cr>"add"ap:let @a=save_a<Cr>
 " }}}2
 " FZF Plugin Maps {{{2
 
@@ -418,7 +418,9 @@ let g:wiki_root=$ZEN_WIKI_DIR
 let g:wiki_filetypes = ['md']
 let g:wiki_mappings_use_default=0
 let g:wiki_mappings_global = {
-        \ '<plug>(wiki-index)' : '<leader>ww',
+        \ '<plug>(wiki-index)' : '<leader>wv',
+        \ '<plug>(wiki-link-next)' : '<leader>j',  
+        \ '<plug>(wiki-link-prev)' : '<leader>k', 
         \}
 " }}}4
 " }}}3
