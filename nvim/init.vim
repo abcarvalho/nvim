@@ -173,6 +173,7 @@ map <F5> :e scp://artur@acropolis.uchicago.edu:22//home/artur/BondPricing/Python
 
 " Switch Directory to Work Directory (SHELL)
 nnoremap <leader>gw :cd $ZEN_WORK_DIR<CR>
+nnoremap <leader>gr :cd $ZEN_REPOS_DIR<CR>
 " }}}2
 " Netrw {{{2
 nnoremap <leader><leader><CR> :Vex<CR>
@@ -360,6 +361,7 @@ augroup END
 " Configure Plugins {{{2
 " fzf {{{3
 " nnoremap <leader>fp :call fzf#run({'options': '--reverse --prompt "ZEN PRIVATUS: "', 'down': 20, 'dir': '$ZEN_PRIVATUS_DIR', 'sink': 'e' })<CR>
+nnoremap <leader>fr :call fzf#run({'options': '--reverse --prompt "ZEN REPOS: "', 'down': 20, 'dir': '$ZEN_REPOS_DIR', 'sink': 'e' })<CR>
 nnoremap <leader>fw :call fzf#run({'options': '--reverse --prompt "ZEN WORK: "', 'down': 20, 'dir': '$ZEN_WORK_DIR', 'sink': 'e' })<CR>
 
 nnoremap <leader>fk :call fzf#run({'options': '--reverse --prompt "ZEN WIKI: "', 'down': 20, 'dir': '$ZEN_WIKI_DIR', 'sink': 'e' })<CR>
