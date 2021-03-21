@@ -60,8 +60,10 @@ nnoremap <leader>wl <C-w>l
 " Save {{{2
 " Quick save file 
 " nnoremap zz :update<CR>
-inoremap <C-s>     <C-O>:update<cr>
-nnoremap <C-s>     :update<cr>
+" inoremap <C-s>     <C-O>:update<cr>
+" nnoremap <C-s>     :update<cr>
+inoremap <leader>fs  <C-O>:w<cr>
+noremap <leader>fs  :w<cr>
 " }}}2
 " Quit {{{2
 inoremap <C-Q>     <esc>:q<cr>
@@ -118,7 +120,6 @@ vnoremap > >gv
 :nnoremap <silent><M-j> :let save_a=@a<Cr>"add"ap:let @a=save_a<Cr>
 " }}}2
 " FZF Plugin Maps {{{2
-
 " Files
 nmap <leader>gf :GFiles<CR>
 nmap <leader>ff :Files<CR>
@@ -132,12 +133,14 @@ nmap <leader>t :BTags<CR>
 nmap <leader>T :Tags<CR>
 
 " Lines
-nmap <leader>l :BLines<CR>
+" nmap <leader>l :BLines<CR>
+nmap <leader>sb :BLines<CR>
+
+" Search project
+nmap <leader>sp :Rg<CR>
+
 nmap <leader>L :Lines<CR>
 nmap <leader>' :Marks<CR>
-" }}}2
-" Notational FZF {{{2
-let g:nv_search_paths = ['$ZEN_WIKI_DIR/obsd']
 " }}}2
 " List default and user-defined commands  {{{2
 nmap <Leader>C :Commands<CR>
@@ -172,8 +175,10 @@ map <F4> :e scp://artur@acropolis.uchicago.edu:22//home/artur/BondPricing/bond-m
 map <F5> :e scp://artur@acropolis.uchicago.edu:22//home/artur/BondPricing/Python/<CR>
 
 " Switch Directory to Work Directory (SHELL)
-nnoremap <leader>gw :cd $ZEN_WORK_DIR<CR>
 nnoremap <leader>gr :cd $ZEN_REPOS_DIR<CR>
+nnoremap <leader>gk :cd $ZEN_WORK_DIR<CR>
+nnoremap <leader>gv :cd $ZEN_WIKI_DIR<CR>
+nnoremap <leader>go :cd $ZEN_ORG_DIR<CR>
 " }}}2
 " Netrw {{{2
 nnoremap <leader><leader><CR> :Vex<CR>
@@ -199,6 +204,8 @@ autocmd FileType markdown inoremap ,5 #####<Space><CR><CR><++><Esc>2k<S-a>
 autocmd FileType markdown inoremap ,u +<Space><CR><++><Esc>1k<S-a>
 autocmd FileType markdown inoremap ,o 1.<Space><CR><++><Esc>1k<S-a>
 autocmd FileType markdown inoremap ,f +@fig:
+
+autocmd FileType markdown inoremap ,sh ```sh<CR><CR>```<CR><ESC>kki<Tab>
 " }}}3
 " latex {{{3
 autocmd FileType tex,latex noremap <leader>d :w<CR>:!texify<Space>-cp<Space>%<CR>
@@ -224,7 +231,7 @@ autocmd FileType tex,latex inoremap ,sm \small
 autocmd FileType tex,latex inoremap ,l \large
 autocmd FileType tex,latex inoremap ,h \huge
 " }}}3
-" my commands {{{3
+" my commands {{{4
 " insert braces
 autocmd FileType tex,latex,vimwiki inoremap ,i( \left(\right)<Esc>?(<CR>:noh<CR>a  
 
@@ -257,7 +264,18 @@ autocmd FileType tex,latex inoremap ,tc ~\textcolor{}{<++>}<Esc>?{<CR>n:noh<CR>a
 
 " insert comment
 autocmd FileType tex,latex inoremap ,bc \begin{comment}<CR><CR>\end{comment}<Esc>ki
-" }}}3
+" }}}4
+" }}}2
+" Functions {{{2
+" CustomSections {{{3
+function! CustomSections(dir, regex)
+	if a:dir ==# 'up'
+		call search(a:regex,'bW')
+	else
+		call search(a:regex,'W')
+	endif
+endfunction
+" 3}}} "CustomSections
 " }}}2
 " }}}1
 " PLUGINS {{{1
@@ -273,9 +291,12 @@ endif
 " Vim-Plug {{{2
 call plug#begin('$HOME/.config/nvim/plugged')
     " Git
-    Plug 'tpope/vim-fugitive'
+    Plug 'jreybert/vimagit'
     Plug 'mhinz/vim-signify'
-   
+
+    " Language: Org
+    Plug 'dhruvasagar/vim-dotoo' 
+
     " Language: Markdown
     Plug 'vim-pandoc/vim-pandoc'
     Plug 'vim-pandoc/vim-pandoc-syntax'
@@ -359,17 +380,59 @@ augroup PlugGx
 augroup END
 " }}}2 
 " Configure Plugins {{{2
+" Org Mode {{{3
+autocmd! BufRead,BufNewFile *.org  setlocal filetype=dotoo
+
+let g:dotoo#agenda#files=['$ZEN_ORG_DIR/*.org']
+let g:dotoo#capture#refile=expand('$ZEN_ORG_DIR/refile.org')
+
+let g:dotoo_todo_keyword_faces = [['TODO', [':foreground 160', ':weight bold']],
+                               \  ['IN-PROGRESS', [':foreground 202', ':weight bold']],
+                               \  ['NEXT', [':foreground 27', ':weight bold']],
+                               \  ['DONE', [':foreground 22', ':weight bold']],
+                               \  ['WAITING', [':foreground 202', ':weight bold']],
+                               \  ['HOLD', [':foreground 53', ':weight bold']],
+                               \  ['CANCELLED', [':foreground 22', ':weight bold']],
+                               \  ['MEETING', [':foreground 22', ':weight bold']],
+                               \  ['PHONE', [':foreground 22', ':weight bold']],
+                               \ ]
+let g:dotoo#parser#todo_keywords = [
+  \ 'TODO',
+  \ 'IN-PROGRESS', 
+  \ 'NEXT',
+  \ 'WAITING',
+  \ 'HOLD',
+  \ 'PHONE',
+  \ 'MEETING',
+  \ '|',
+  \ 'CANCELLED',
+  \ 'DONE']
+
+
+nnoremap <buffer><silent> ]] :call CustomSections('down', '^\* ')<CR>
+nnoremap <buffer><silent> [[ :call CustomSections('up', '^\* ')<CR>
+xnoremap <buffer><silent> [[ :<C-U>exe "norm! gv"<bar>call CustomSections('up', '^\* ')<CR>
+xnoremap <buffer><silent> ]] :<C-U>exe "norm! gv"<bar>call CustomSections('down', '^\* ')<CR>
+
+inoreabbrev todo TODO
+inoreabbrev done DONE
+" }}}3
+" VimMagit {{{3
+let g:magit_default_fold_level = 0
+"}}}3
 " fzf {{{3
 " nnoremap <leader>fp :call fzf#run({'options': '--reverse --prompt "ZEN PRIVATUS: "', 'down': 20, 'dir': '$ZEN_PRIVATUS_DIR', 'sink': 'e' })<CR>
 nnoremap <leader>fr :call fzf#run({'options': '--reverse --prompt "ZEN REPOS: "', 'down': 20, 'dir': '$ZEN_REPOS_DIR', 'sink': 'e' })<CR>
-nnoremap <leader>fw :call fzf#run({'options': '--reverse --prompt "ZEN WORK: "', 'down': 20, 'dir': '$ZEN_WORK_DIR', 'sink': 'e' })<CR>
+nnoremap <leader>fk :call fzf#run({'options': '--reverse --prompt "ZEN WORK: "', 'down': 20, 'dir': '$ZEN_WORK_DIR', 'sink': 'e' })<CR>
 
-nnoremap <leader>fk :call fzf#run({'options': '--reverse --prompt "ZEN WIKI: "', 'down': 20, 'dir': '$ZEN_WIKI_DIR', 'sink': 'e' })<CR>
+nnoremap <leader>fv :call fzf#run({'options': '--reverse --prompt "ZEN WIKI: "', 'down': 20, 'dir': '$ZEN_WIKI_DIR', 'sink': 'e' })<CR>
+nnoremap <leader>fo :call fzf#run({'options': '--reverse --prompt "ZEN ORG: "', 'down': 20, 'dir': '$ZEN_ORG_DIR', 'sink': 'e' })<CR>
+
 command! -bang -nargs=* RGrepWiki
             \ call fzf#vim#grep(
             \ "rg --column --line-number --no-heading --color=always --smart-case -- ".shellescape(<q-args>), 
             \1, fzf#vim#with_preview({ 'dir': '$ZEN_WIKI_DIR'}), <bang>0)
-nnoremap <leader>fo :call fzf#run({'options': '--reverse --prompt "Obsidian: "', 'down': 20, 'dir': '$ZEN_WIKI_DIR/obsd', 'sink': 'e' })<CR>
+nnoremap <leader>fb :call fzf#run({'options': '--reverse --prompt "Obsidian: "', 'down': 20, 'dir': '$ZEN_WIKI_DIR/obsd', 'sink': 'e' })<CR>
 nnoremap <leader>rk :RGrepWiki<CR>
 
 command! -bang -nargs=* RGrepObs
@@ -382,6 +445,10 @@ nnoremap <leader>fz :call fzf#run({'options': '--reverse --prompt "ZTK Notes: "'
 " Include option to search for hidden files in the dotfiles directory:
 nnoremap <leader>fc :call fzf#run({'source': 'find .', 'options': '--reverse --prompt "ZEN DOTFILES: "', 'down': 20, 'dir': '$ZEN_DOTFILES_DIR', 'sink': 'e' })<CR>
 "}}}3
+" Notational FZF {{{3
+let g:nv_search_paths = ['$ZEN_WIKI_DIR']
+nnoremap <silent> <leader>fz :NV<CR>
+" }}}3
 " File Explorer {{{3
 " Netrw {{{4
 " Open up netrw File Explorer
@@ -410,6 +477,8 @@ autocmd filetype netrw nmap <c-a> <cr>:wincmd W<cr>
 let g:bullets_enabled_file_types = [
     \ 'markdown',
     \ 'text',
+    \ 'org',
+    \ 'dotoo',
     \]
 
 " Disable the plugin for empty buffers
@@ -620,7 +689,7 @@ let g:vimtex_enabled=1
 let g:vimtex_complete_recursive_bib=1
 let g:tex_flavor='latex'
 let g:vimtex_compiler_progname='nvr'  " required in neovim 
-let g:vimtex_view_method='skim'
+let g:vimtex_view_method='zathura'
 let g:vimtex_quickfix_mode=0
 let g:vimtex_complete_img_use_tail = 1
 let g:vimtex_fold_enabled = 1
