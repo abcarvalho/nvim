@@ -19,6 +19,9 @@
 " cmap w!! w !sudo tee %
 
 "  PLUGINS  {{{1
+    " Git 
+    " Plug 'tpope/vim-fugitive'
+
 	" Org Mode
 
 	" Quick TeX
