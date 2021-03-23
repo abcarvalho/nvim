@@ -81,26 +81,30 @@ nmap <leader>bb :Buffers<CR>
 " }}}2
 " TABS {{{2
 " New TAB
-nnoremap <leader>tn :tabnew<CR>
+" nnoremap <leader>tn :tabnew<CR>
+nnoremap <leader><tab>n :tabnew<CR>
+
 
 " Delete TAB
-nnoremap <leader>td :tabclose<CR>
+nnoremap <leader><tab>d :tabclose<CR>
 
 " Switch to next or previous tab
-nnoremap ]t :tabn<cr>
-nnoremap [t :tabp<cr>
+" nnoremap ]t :tabn<cr>
+" nnoremap [t :tabp<cr>
+nnoremap <leader><tab>] :tabn<cr>
+nnoremap <leader><tab>[ :tabp<cr>
 
 " Go to tab by number
-noremap <leader>t1 1gt
-noremap <leader>t2 2gt
-noremap <leader>t3 3gt
-noremap <leader>t4 4gt
-noremap <leader>t5 5gt
-noremap <leader>t6 6gt
-noremap <leader>t7 7gt
-noremap <leader>t8 8gt
-noremap <leader>t9 9gt
-noremap <leader>t0 :tablast<cr>
+noremap <leader><tab>1 1gt
+noremap <leader><tab>2 2gt
+noremap <leader><tab>3 3gt
+noremap <leader><tab>4 4gt
+noremap <leader><tab>5 5gt
+noremap <leader><tab>6 6gt
+noremap <leader><tab>7 7gt
+noremap <leader><tab>8 8gt
+noremap <leader><tab>9 9gt
+noremap <leader><tab>0 :tablast<cr>
 " }}}2
 " TABS v.s. WORKSPACES  {{{2
 " }}}2
@@ -122,7 +126,9 @@ vnoremap > >gv
 " FZF Plugin Maps {{{2
 " Files
 nmap <leader>gf :GFiles<CR>
-nmap <leader>ff :Files<CR>
+" nmap <leader>ff :Files<CR>
+nmap <leader><leader>f :Files<CR>
+
 
 " Buffers
 " nmap <leader>b :Buffers<CR>
@@ -181,7 +187,8 @@ nnoremap <leader>gv :cd $ZEN_WIKI_DIR<CR>
 nnoremap <leader>go :cd $ZEN_ORG_DIR<CR>
 " }}}2
 " Netrw {{{2
-nnoremap <leader><leader><CR> :Vex<CR>
+" nnoremap <leader><leader><CR> :Vex<CR>
+nnoremap <leader>n :Vex<CR>
 " }}}2
 " INSERT COMMANDS {{{2
 " Dates {{{3
