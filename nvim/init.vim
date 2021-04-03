@@ -239,6 +239,7 @@ let g:dotoo#capture#refile=expand('$ZEN_ORG_DIR/refile.org')
 "                                \  ['CANCELLED', [':foreground 22', ':weight bold']],
 "                                \  ['DONE', [':foreground 22', ':weight bold']],
 "                                \ ]
+
 let g:dotoo#parser#todo_keywords = [
   \ 'TODO',
   \ 'INPROGRESS', 
@@ -573,25 +574,6 @@ let g:which_key_map['Q'] = [ ':q'                       , 'quit' ]
 let g:which_key_map['v'] = [ '<C-W>v'                     , 'split right']
 let g:which_key_map['z'] = [ 'Goyo'                       , 'zen' ]
 " }}}3
-" Forward and Backwards {{{3
-nnoremap [ :WhichKey "search-prev"<CR>
-let g:my_search_prev_map = {
-      \ 'name' : '+switch-prev' ,
-      \ 'w' : ['<c-w>W'     , 'window'],
-      \ 'b' : [':bprev'     , 'buffer'],
-      \ '<Tab>' : [':tabprevious', 'tab'],
-      \}
-call which_key#register('search-prev', "g:my_search_prev_map")
-
-nnoremap ] :WhichKey "search-next"<CR>
-let g:my_search_next_map = {
-      \ 'name' : '+switch-next' ,
-      \ 'w' : ['<c-w>w'     , 'window'],
-      \ 'b' : [':bnext'     , 'buffer'],
-      \ '<Tab>' : [':tabnext', 'tab'],
-      \}
-call which_key#register('search-next', "g:my_search_next_map")
-" }}}3
 " a is for acropolis {{{3
 let g:which_key_map.a = {
       \ 'name' : '+acropolis-server' ,
@@ -793,6 +775,19 @@ let g:which_key_map.w.k = 'wiki-link-prev'
 " }}}3
 " Register which key map
 call which_key#register('<Space>', "g:which_key_map")
+" }}}2
+" Forward and Backwards {{{2
+" Buffers
+nnoremap ]b :bnext<cr>
+nnoremap [b :bprev<cr>
+
+" Tabs
+nnoremap ]<tab> :tabn<cr>
+nnoremap [<tab> :tabp<cr>
+
+"Windows
+nnoremap ]w <c-w>w
+nnoremap [w <c-w>W
 " }}}2
 " Indenting text {{{2
 " Better tabbing 

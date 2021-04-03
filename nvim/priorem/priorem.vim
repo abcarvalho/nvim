@@ -320,6 +320,27 @@ source $HOME/.config/nvim/plugins/bullets.vim
 source $HOME/.config/nvim/plugins/wiki.vim
 " }}}1
 " Config  {{{1
+" Which Key {{{2
+" Forward and Backwards {{{3
+nnoremap [ :WhichKey "search-prev"<CR>
+let g:my_search_prev_map = {
+      \ 'name' : '+switch-prev' ,
+      \ 'w' : ['<c-w>W'     , 'window'],
+      \ 'b' : [':bprev'     , 'buffer'],
+      \ '<Tab>' : [':tabprevious', 'tab'],
+      \}
+call which_key#register('search-prev', "g:my_search_prev_map")
+
+nnoremap ] :WhichKey "search-next"<CR>
+let g:my_search_next_map = {
+      \ 'name' : '+switch-next' ,
+      \ 'w' : ['<c-w>w'     , 'window'],
+      \ 'b' : [':bnext'     , 'buffer'],
+      \ '<Tab>' : [':tabnext', 'tab'],
+      \}
+call which_key#register('search-next', "g:my_search_next_map")
+" }}}3
+" }}}2
 " lf file manager {{{2
 map <leader>m :Lf<CR>
 
