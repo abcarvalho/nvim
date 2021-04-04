@@ -106,6 +106,19 @@
     " Plug 'matze/vim-move'
 "}}}1
 "  MAPPINGS  {{{1
+" Forward and Backwards {{{2
+" Buffers
+nnoremap ]b :bnext<cr>
+nnoremap [b :bprev<cr>
+
+" Tabs
+nnoremap ]<tab> :tabn<cr>
+nnoremap [<tab> :tabp<cr>
+
+"Windows
+nnoremap ]w <c-w>w
+nnoremap [w <c-w>W
+" }}}2
 " Sessions {{{2
 nnoremap <leader>sw :mksession! .quicksave.vim<CR>:echo "Session saved."<CR>
 nnoremap <leader>sr :source .quicksave.vim<CR>:echo "Session loaded."<CR>
@@ -119,7 +132,8 @@ map <F5> :e scp://artur@acropolis.uchicago.edu:22//home/artur/BondPricing/Python
 " Quit {{{2
 " nnoremap <Leader>q :q<cr>
 " nnoremap <Leader>Q :qa!<cr>
-
+inoremap <C-Q>     <esc>:q<cr>
+" }}}2
 " }}}2
 " Directories {{{2
 " Switch Directory to Work Directory (SHELL)
@@ -155,6 +169,12 @@ noremap <leader>fs  :w<cr>
 " nnoremap <M-h>    :vertical resize -2<CR>
 " nnoremap <M-l>    :vertical resize +2<CR>
 
+" Better window navigation
+" Shortcutting split navigation, saving a keypress:
+nnoremap <C-h> <C-w>h
+nnoremap <C-j> <C-w>j
+nnoremap <C-k> <C-w>k
+nnoremap <C-l> <C-w>l
 
 " use alt+hjkl to move between split/vsplit panels
 " tnoremap <A-h> <C-\><C-n><C-w>h

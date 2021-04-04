@@ -123,9 +123,7 @@ endif
 " }}}2 
 " Vim-Plug {{{2
 call plug#begin('$HOME/.config/nvim/plugged')
-    "File Manager
-    Plug 'ptzz/lf.vim'
-    Plug 'voldikss/vim-floaterm'
+    Plug 'kevinhwang91/rnvimr', {'do': 'make sync'}
 
     " Which Key
     Plug 'liuchengxu/vim-which-key'
@@ -135,7 +133,7 @@ call plug#begin('$HOME/.config/nvim/plugged')
     Plug 'tpope/vim-repeat'
 
     " Git:
-    Plug 'jreybert/vimagit'
+    Plug 'tpope/vim-fugitive'
     Plug 'mhinz/vim-signify'
 
     " Language: Org
@@ -216,10 +214,39 @@ augroup PlugGx
 augroup END
 " }}}2 
 " Configure Plugins {{{2
-" lf file manager {{{3
-let g:lf_map_keys = 0
+" ranger file manager {{{3
+" Make Ranger to be hidden after picking a file
+let g:rnvimr_pick_enable = 1
 
-let g:lf_replace_netrw = 1 " Open lf when vim opens a directory
+" Make Neovim to wipe the buffers corresponding to the files deleted by Ranger
+let g:rnvimr_bw_enable = 1
+
+" Make Ranger replace Netrw and be the file explorer
+let g:rnvimr_enable_ex = 1
+
+" Make Ranger to be hidden after picking a file
+let g:rnvimr_enable_picker = 1
+
+" Disable a border for floating window
+let g:rnvimr_draw_border = 1
+
+" Hide the files included in gitignore
+let g:rnvimr_hide_gitignore = 0
+
+" Change the border's color
+" let g:rnvimr_border_attr = {'fg': 14, 'bg': -1}
+
+" Make Neovim wipe the buffers corresponding to the files deleted by Ranger
+let g:rnvimr_enable_bw = 1
+
+" Add a shadow window, value is equal to 100 will disable shadow
+" let g:rnvimr_shadow_winblend = 70
+
+" Draw border with both
+let g:rnvimr_ranger_cmd = 'ranger --cmd="set draw_borders both"'
+
+" Link CursorLine into RnvimrNormal highlight in the Floating window
+highlight link RnvimrNormal CursorLine
 " }}}3
 " Org Mode {{{3
 autocmd! BufRead,BufNewFile *.org  setlocal filetype=dotoo
@@ -546,14 +573,8 @@ let g:lightline = {'colorscheme': 'deus' }
 " }}}2
 " }}}1
 " Mappings {{{1
-" Which Key {{{2
-" pre config {{{3
-" Map leader to which_key
-nnoremap <silent> <leader> :silent WhichKey '<Space>'<CR>
-vnoremap <silent> <leader> :silent <c-u> :silent WhichKeyVisual '<Space>'<CR>
-
+" Which Key - pre config {{{2
 " Create map to add keys to
-let g:which_key_map =  {}
 " Define a separator
 let g:which_key_sep = '→'
 " set timeoutlen=100
@@ -565,27 +586,40 @@ let g:which_key_use_floating_win = 0
 autocmd! FileType which_key
 autocmd  FileType which_key set laststatus=0 noshowmode noruler
   \| autocmd BufLeave <buffer> set laststatus=2 noshowmode ruler
-" }}}3
-" Single mappings {{{3
-let g:which_key_map['h'] = [ '<C-W>s'                     , 'split below']
+" }}}2
+" Which Key - space {{{2
+" Map leader to which_key
+nnoremap <silent> <leader> :silent WhichKey '<Space>'<CR>
+vnoremap <silent> <leader> :silent <c-u> :silent WhichKeyVisual '<Space>'<CR>
+
+" Register which key map
+call which_key#register('<Space>', "g:space_key_map")
+
+" Create map to add keys to
+let g:space_key_map =  {}
+
+" Single <space> mappings {{{3
+let g:space_key_map['j'] = [ '<C-W>s'                     , 'split below']
+let g:space_key_map['l'] = [ '<C-W>v'                     , 'split right']
 " List default and user-defined commands
-let g:which_key_map['C'] = [ ':Commands', 'list commands' ]
-let g:which_key_map['Q'] = [ ':q'                       , 'quit' ]
-let g:which_key_map['v'] = [ '<C-W>v'                     , 'split right']
-let g:which_key_map['z'] = [ 'Goyo'                       , 'zen' ]
+let g:space_key_map['C'] = [ ':Commands', 'list commands' ]
+let g:space_key_map['z'] = [ 'Goyo'      , 'zen' ]
+let g:space_key_map['n'] = [ 'RnvimrToggle' , 'ranger' ]
 " }}}3
 " a is for acropolis {{{3
-let g:which_key_map.a = {
+let g:space_key_map.a = {
       \ 'name' : '+acropolis-server' ,
       \ 'd' : [':e scp://artur@acropolis.uchicago.edu:22//home/artur/BondPricing/bond-data/', 'bond-data'], 
       \ 'm' : [':e scp://artur@acropolis.uchicago.edu:22//home/artur/BondPricing/bond-model/', 'bond-model'], 
       \}
 " }}}3
 " b is for buffers {{{3
-let g:which_key_map.b = {
+let g:space_key_map.b = {
       \ 'name' : '+buffer' ,
       \ 'd' : [':bd'     , 'delete'],
-      \ 'b' : [':Buffers', 'list buffers'],
+      \ 'b' : [':Buffers', 'list-buffers'],
+      \ 'n' : [':bnext', 'next-buffer'],
+      \ 'p' : [':bprevious', 'previous-buffer'],
       \}
 " }}}3
 " c for CoC {{{3
@@ -628,27 +662,27 @@ nnoremap <silent><nowait> <leader>ck  :<C-u>CocPrev<CR>
 " Resume latest coc list.
 nnoremap <silent><nowait> <leader>cp  :<C-u>CocListResume<CR>
 
-let g:which_key_map.c = {
+let g:space_key_map.c = {
       \ 'name' : '+coc' ,
       \}
 
-let g:which_key_map.c.a = 'codeaction-selected'
-let g:which_key_map.c.b = 'codeaction buffer'
-let g:which_key_map.c.c = 'commands'
-let g:which_key_map.c.d = 'diagnostics'
-let g:which_key_map.c.e = 'extensions'
-let g:which_key_map.c.f = 'format-selected'
-let g:which_key_map.c.j = 'next'
-let g:which_key_map.c.k = 'prev'
-let g:which_key_map.c.o = 'outline'
-let g:which_key_map.c.p = 'list resume'
-let g:which_key_map.c.r = 'rename symbol'
-let g:which_key_map.c.s = 'list symbols'
-let g:which_key_map.c.v = 'convert-snippet'
-let g:which_key_map.c.x = 'fix-current'
+let g:space_key_map.c.a = 'codeaction-selected'
+let g:space_key_map.c.b = 'codeaction buffer'
+let g:space_key_map.c.c = 'commands'
+let g:space_key_map.c.d = 'diagnostics'
+let g:space_key_map.c.e = 'extensions'
+let g:space_key_map.c.f = 'format-selected'
+let g:space_key_map.c.j = 'next'
+let g:space_key_map.c.k = 'prev'
+let g:space_key_map.c.o = 'outline'
+let g:space_key_map.c.p = 'list resume'
+let g:space_key_map.c.r = 'rename symbol'
+let g:space_key_map.c.s = 'list symbols'
+let g:space_key_map.c.v = 'convert-snippet'
+let g:space_key_map.c.x = 'fix-current'
 " }}}3
 " d is for directory {{{3
-let g:which_key_map.d = {
+let g:space_key_map.d = {
       \ 'name' : '+directory' ,
       \ 'r' : [':cd $ZEN_REPOS_DIR'     , 'repos'],
       \ 'k' : [':cd $ZEN_WORK_DIR'     , 'work'],
@@ -671,7 +705,7 @@ command! ZenDotFiles call fzf#run({'source': 'find .', 'options': '--reverse --p
 " Notational FZF 
 let g:nv_search_paths = ['$ZEN_WIKI_DIR']
 
-let g:which_key_map.f = { 
+let g:space_key_map.f = { 
      \ 'name' : '+file', 
      \ 'p' : [':ZenPrivatus', 'ZEN PRIVATUS'], 
      \ 'o' : [':ZenOrg', 'ZEN ORG'], 
@@ -681,113 +715,200 @@ let g:which_key_map.f = {
      \ 'c' : [':ZenDotFiles', 'ZEN DOTFILES'],
      \ 'z' : [':NV', 'NV DOTFILES'],
      \ 'n' : [':Lexplore', 'netrw'],
-     \ 'l' : [':Lf', 'lf'],
      \}
-let g:which_key_map.f.s = 'save-file'
+let g:space_key_map.f.s = 'save-file'
+" }}}3
+" g is for git {{{3
+let g:space_key_map.g = { 
+      \ 'name' : '+git/version-control' ,
+      \ 'b' : ['Gblame'                 , 'fugitive-blame']             ,
+      \ 'c' : ['BCommits'               , 'commits-for-current-buffer'] ,
+      \ 'C' : ['Gcommit'                , 'fugitive-commit']            ,
+      \ 'd' : ['Gdiff'                  , 'fugitive-diff']              ,
+      \ 'e' : ['Gedit'                  , 'fugitive-edit']              ,
+      \ 'l' : ['Glog'                   , 'fugitive-log']               ,
+      \ 'r' : ['Gread'                  , 'fugitive-read']              ,
+      \ 's' : ['Gstatus'                , 'fugitive-status']            ,
+      \ 'w' : ['Gwrite'                 , 'fugitive-write']             ,
+      \ 'p' : ['Git push'               , 'fugitive-push']              ,
+     \} 
+" }}}3
+" h is for help [ADJUST] {{{3
+let g:space_key_map.h = {
+      \ 'name' : '+help',
+      \ }
 " }}}3
 " md tables {{{3
 let g:table_mode_map_prefix = '<Leader>m'
-let g:which_key_map.m = {
+let g:space_key_map.m = {
       \ 'name' : '+md-table-mode',
       \ 'e' : ['TableEvalFormulaLine', 'eval formula line']
     \}
 " }}}3
-" r is for RGrep {{{3
+" q is for quitting {{{3
+let g:space_key_map.q = {
+      \ 'name' : '+quit',
+      \ 'w' : ['wq', 'save-&-quit'],
+      \ 'q' : [ 'q', 'quit' ],
+      \ 'Q' : [ 'qa!', 'quit-without-saving' ],
+    \}
+" }}}3
+" r is for ranger {{{3
+let g:space_key_map.r = { 
+     \ 'name' : '+ranger', 
+    \ 'r' : ['RnvimrToggle', 'ranger-toggle']
+    \}
+
+" Map Rnvimr action
+let g:rnvimr_action = {
+            \ '<C-t>': 'NvimEdit tabedit',
+            \ '<C-x>': 'NvimEdit split',
+            \ '<C-v>': 'NvimEdit vsplit',
+            \ 'gw': 'JumpNvimCwd',
+            \ 'yw': 'EmitRangerCwd'
+            \ }
+" }}}3
+" R is for RGrep {{{3
 command! -bang -nargs=* RGrepWiki
             \ call fzf#vim#grep(
             \ "rg --column --line-number --no-heading --color=always --smart-case -- ".shellescape(<q-args>), 
             \1, fzf#vim#with_preview({ 'dir': '$ZEN_WIKI_DIR'}), <bang>0)
 
-let g:which_key_map.r = { 
+let g:space_key_map.R = { 
      \ 'name' : '+rgrep', 
      \ 'r' : [':Rg', 'rgrep'], 
      \ 'v' : [':RGrepWiki', 'rgrep wiki'],
     \}
 " }}}3
 " s is for search {{{3
-let g:which_key_map.s = {
+let g:space_key_map.s = {
       \ 'name' : '+search' ,
       \ '/' : [':History/'     , 'history'],
       \ ';' : [':Commands'     , 'commands'],
-      \ 'a' : [':Ag'           , 'text Ag'],
-      \ 'b' : [':BLines'       , 'current buffer'],
-      \ 'B' : [':Buffers'      , 'open buffers'],
+      \ 'a' : [':Ag'           , 'text-Ag'],
+      \ 'b' : [':BLines'       , 'current-buffer'],
+      \ 'B' : [':Buffers'      , 'open-buffers'],
       \ 'c' : [':Commits'      , 'commits'],
-      \ 'C' : [':BCommits'     , 'buffer commits'],
-      \ 'f' : [':Files'        , 'fzf files'],
-      \ 'g' : [':GFiles'       , 'fzf git files'],
-      \ 'G' : [':GFiles?'      , 'fzf modified git files'],
-      \ 'h' : [':History'      , 'file history'],
-      \ 'H' : [':History:'     , 'command history'],
-      \ 'l' : [':Lines'        , 'fzf lines'] ,
+      \ 'C' : [':BCommits'     , 'buffer-commits'],
+      \ 'f' : [':Files'        , 'fzf-files'],
+      \ 'g' : [':GFiles'       , 'fzf-git-files'],
+      \ 'G' : [':GFiles?'      , 'fzf-modified-git-files'],
+      \ 'h' : [':History'      , 'file-history'],
+      \ 'H' : [':History:'     , 'command-history'],
+      \ 'l' : [':Lines'        , 'fzf-lines'] ,
       \ 'm' : [':Marks'        , 'marks'] ,
-      \ 'M' : [':Maps'         , 'normal maps'] ,
-      \ 'p' : [':Rg'     ,     'project'] ,
-      \ 'P' : [':Tags'         , 'project tags'],
+      \ 'M' : [':Maps'         , 'normal-maps'] ,
+      \ 'p' : [':Rg'           , 'project'] ,
+      \ 'P' : [':Tags'         , 'project-tags'],
       \ 's' : [':Snippets'     , 'snippets'],
-      \ 'S' : [':Colors'       , 'color schemes'],
-      \ 't' : [':BTags'        , 'fzf buffer tags'],
-      \ 'T' : [':Tags'        , 'fzf tags'],
-      \ 'w' : [':Windows'      , 'search windows'],
-      \ 'y' : [':Filetypes'    , 'file types'],
-      \ 'z' : [':FZF'          , 'FZF'],
+      \ 'S' : [':Colors'       , 'color-schemes'],
+      \ 't' : [':BTags'        , 'fzf-buffer-tags'],
+      \ 'T' : [':Tags'         , 'fzf-tags'],
+      \ 'w' : [':Windows'      , 'search-windows'],
+      \ 'y' : [':Filetypes'    , 'file-types'],
+      \ 'z' : [':FZF'          , 'fzf'],
       \ }
 " }}}3
-" S is for sessions {{{3
+" S is for sessions [ADJUST] {{{3
 nnoremap <leader>Ss :mksession! .quicksave.vim<CR>:echo "Session saved."<CR>
 nnoremap <leader>Sl :source .quicksave.vim<CR>:echo "Session loaded."<CR>
 
-let g:which_key_map.S = {
+let g:space_key_map.S = {
       \ 'name' : '+session' ,
       \} 
-let g:which_key_map.S.s = 'save'
-let g:which_key_map.S.l = 'load'
+let g:space_key_map.S.s = 'save'
+let g:space_key_map.S.l = 'load'
 " }}}3
 " <tab> is for tabs {{{3
-let g:which_key_map['<Tab>'] = {
+let g:space_key_map['<Tab>'] = {
       \ 'name' : '+tab' ,
-      \ '1' : [':1gt', 'tab 1'],
-      \ '2' : [':2gt', 'tab 2'],
-      \ '3' : [':3gt', 'tab 3'],
-      \ '4' : [':4gt', 'tab 4'],
-      \ '5' : [':5gt', 'tab 5'],
-      \ '6' : [':6gt', 'tab 6'],
-      \ '7' : [':7gt', 'tab 7'],
-      \ '8' : [':8gt', 'tab 8'],
-      \ '9' : [':9gt', 'tab 9'],
+      \ '1' : [':1gt', 'tab-1'],
+      \ '2' : [':2gt', 'tab-2'],
+      \ '3' : [':3gt', 'tab-3'],
+      \ '4' : [':4gt', 'tab-4'],
+      \ '5' : [':5gt', 'tab-5'],
+      \ '6' : [':6gt', 'tab-6'],
+      \ '7' : [':7gt', 'tab-7'],
+      \ '8' : [':8gt', 'tab-8'],
+      \ '9' : [':9gt', 'tab-9'],
       \ '0' : [':tablast', 'last'],
       \ 'n' : [':tabnew', 'new'],
       \ 'd' : [':tabclose', 'delete'],
+      \ 'o' : [':tabonly', 'close-all-tabs-except-current'],
       \}
 " }}}3
-" w is for wiki {{{3
+" v is for wiki {{{3
 let g:wiki_mappings_global = {
-        \ '<plug>(wiki-index)' : '<leader>wv',
-        \ '<plug>(wiki-link-next)' : '<leader>wj',  
-        \ '<plug>(wiki-link-prev)' : '<leader>wk', 
+        \ '<plug>(wiki-index)' : '<leader>vv',
+        \ '<plug>(wiki-link-next)' : '<leader>vj',  
+        \ '<plug>(wiki-link-prev)' : '<leader>vk', 
         \}
-let g:which_key_map.w = {
+let g:space_key_map.v = {
       \ 'name' : '+wikivim',
       \}
-let g:which_key_map.w.v = 'wiki-index'
-let g:which_key_map.w.j = 'wiki-link-next'
-let g:which_key_map.w.k = 'wiki-link-prev'
+let g:space_key_map.v.v = 'wiki-index'
+let g:space_key_map.v.j = 'wiki-link-next'
+let g:space_key_map.v.k = 'wiki-link-prev'
 " }}}3
-" Register which key map
-call which_key#register('<Space>', "g:which_key_map")
+" w is for window {{{3
+let g:space_key_map.w = {
+      \ 'name' : '+window' ,
+      \ 'w' : ['<C-w>w'     , 'other-window'],
+      \ 'c' : ['<C-w>c'     , 'window-close'],
+      \ 'h' : ['<C-w>h'     , 'window-left'],
+      \ 'j' : ['<C-w>j'     , 'window-below'],
+      \ 'k' : ['<C-w>k'     , 'window-right'],
+      \ 'l' : ['<C-w>l'     , 'window-up'],
+      \ 'H' : [':vertical resize +2','expand-window-left' ],
+      \ 'J' : [':resize -2','expand-window-below'],
+      \ 'L' : [':vertical resize -2', 'expand-window-right'],
+      \ 'K' : [':resize +2'     ,'expand-window-up'   ],
+      \ '-' : ['split' , 'split-window-below'],
+      \ '|' : ['vs' , 'split-window-right'],
+      \ '=' : ["<C-w>=", 'balance-window'],
+      \ 'o' : [":only", 'close-all-windows-except-current'],
+      \}
+" }}}3
 " }}}2
-" Forward and Backwards {{{2
-" Buffers
-nnoremap ]b :bnext<cr>
-nnoremap [b :bprev<cr>
+" Which Key - [, ] {{{2
+nnoremap <silent> [ :<c-u>WhichKey '['<CR>
+nnoremap <silent> ] :<c-u>WhichKey ']'<CR>
 
-" Tabs
-nnoremap ]<tab> :tabn<cr>
-nnoremap [<tab> :tabp<cr>
+" Register which key maps
+call which_key#register('[', "g:prev_key_map")
+call which_key#register(']', "g:next_key_map")
 
-"Windows
-nnoremap ]w <c-w>w
-nnoremap [w <c-w>W
+" Create map to add keys to
+let g:prev_key_map = {}
+let g:next_key_map = {} 
+" Forward and Backwards {{{3
+let g:prev_key_map['b'] = ['bprev'     , 'prev-buffer']
+let g:prev_key_map['<Tab>'] = ['tabp'     , 'prev-tab']
+let g:prev_key_map['w'] = ['<c-w>W'     , 'prev-window']
+
+let g:next_key_map['b'] = ['bnext'     , 'next-buffer']
+let g:next_key_map['<Tab>'] = ['tabn'     , 'next-tab']
+let g:next_key_map['w'] = ['<c-w>W'     , 'next-window']
+" }}}3
+" }}}2
+" Which key - dotcomma {{{2
+nnoremap <silent> <localleader> :<c-u>WhichKey  ';'<CR>
+" vnoremap <silent> <localleader> :silent <c-u> :silent WhichKeyVisual ';'<CR>
+
+" Register which key map
+call which_key#register(';', "g:dotcomma_key_map")
+
+" Create map to add keys to
+let g:dotcomma_key_map =  {}
+" }}}2
+" Which key - comma {{{2
+nnoremap <silent> , :<c-u>WhichKey  ','<CR>
+
+" Register which key map
+call which_key#register(';', "g:comma_key_map")
+
+" Create map to add keys to
+let g:comma_key_map =  {}
 " }}}2
 " Indenting text {{{2
 " Better tabbing 
@@ -814,14 +935,6 @@ nnoremap <TAB> za
 " replace all {{{2
 nnoremap R :%s//gc<Left><Left><Left>
 " }}}2
-" windows {{{2
-" Better window navigation
-" Shortcutting split navigation, saving a keypress:
-nnoremap <C-h> <C-w>h
-nnoremap <C-j> <C-w>j
-nnoremap <C-k> <C-w>k
-nnoremap <C-l> <C-w>l
-" }}}2
 " switch NVim and iTerm2 Themes {{{2
 function! Theme_Swapper()
     if &background ==? 'dark'
@@ -841,9 +954,6 @@ command! SwapThemes call Theme_Swapper()
 " }}}2
 " time {{{2
 map <F2> :echo 'Current time is ' . strftime('%c')<CR>
-" }}}2
-" quit {{{2
-inoremap <C-Q>     <esc>:q<cr>
 " }}}2
 " }}}1
 " INSERT COMMANDS {{{1
