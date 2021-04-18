@@ -38,7 +38,7 @@ set clipboard=unnamedplus               " Copy paste between vim and everything 
 let g:python3_host_prog = "/usr/local/Caskroom/miniconda/base/bin/python"
 " }}}2
 " TAB completion {{{2
-inoremap <expr><TAB> pumvisible() ? "\<C-n>" : "\<TAB>"
+" inoremap <expr><TAB> pumvisible() ? "\<C-n>" : "\<TAB>"
 " }}}2
 " leader and local leader keys {{{2
 " make sure SPC is not mapped to anything
@@ -123,21 +123,17 @@ endif
 " }}}2 
 " Vim-Plug {{{2
 call plug#begin('$HOME/.config/nvim/plugged')
-    Plug 'kevinhwang91/rnvimr', {'do': 'make sync'}
 
     " Which Key
     Plug 'liuchengxu/vim-which-key'
 
     " Commands:
-    Plug 'tpope/vim-unimpaired'
+    " Plug 'tpope/vim-unimpaired'
     Plug 'tpope/vim-repeat'
 
     " Git:
     Plug 'tpope/vim-fugitive'
     Plug 'mhinz/vim-signify'
-
-    " Language: Org
-    Plug 'dhruvasagar/vim-dotoo' 
 
     " Language: Markdown
     Plug 'vim-pandoc/vim-pandoc'
@@ -162,7 +158,7 @@ call plug#begin('$HOME/.config/nvim/plugged')
     Plug 'dkarter/bullets.vim'
     Plug 'lervag/wiki.vim'
   
-   	" Files Folders: 
+   	" Files and Folders:
    	Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
   	Plug 'junegunn/fzf.vim'
     Plug 'https://github.com/alok/notational-fzf-vim'
@@ -180,7 +176,7 @@ call plug#begin('$HOME/.config/nvim/plugged')
     Plug 'bluz71/vim-nightfly-guicolors'
     Plug 'ajmwagar/vim-deus'
 
-    " Lightline 
+    " Appearance: Lightline 
     Plug 'itchyny/lightline.vim'
   
     " Initialize plugin system
@@ -214,80 +210,6 @@ augroup PlugGx
 augroup END
 " }}}2 
 " Configure Plugins {{{2
-" ranger file manager {{{3
-" Make Ranger to be hidden after picking a file
-let g:rnvimr_pick_enable = 1
-
-" Make Neovim to wipe the buffers corresponding to the files deleted by Ranger
-let g:rnvimr_bw_enable = 1
-
-" Make Ranger replace Netrw and be the file explorer
-let g:rnvimr_enable_ex = 1
-
-" Make Ranger to be hidden after picking a file
-let g:rnvimr_enable_picker = 1
-
-" Disable a border for floating window
-let g:rnvimr_draw_border = 1
-
-" Hide the files included in gitignore
-let g:rnvimr_hide_gitignore = 0
-
-" Change the border's color
-" let g:rnvimr_border_attr = {'fg': 14, 'bg': -1}
-
-" Make Neovim wipe the buffers corresponding to the files deleted by Ranger
-let g:rnvimr_enable_bw = 1
-
-" Add a shadow window, value is equal to 100 will disable shadow
-" let g:rnvimr_shadow_winblend = 70
-
-" Draw border with both
-let g:rnvimr_ranger_cmd = 'ranger --cmd="set draw_borders both"'
-
-" Link CursorLine into RnvimrNormal highlight in the Floating window
-highlight link RnvimrNormal CursorLine
-" }}}3
-" Org Mode {{{3
-autocmd! BufRead,BufNewFile *.org  setlocal filetype=dotoo
-
-let g:dotoo#agenda#files=['$ZEN_ORG_DIR/*.org']
-let g:dotoo#capture#refile=expand('$ZEN_ORG_DIR/refile.org')
-
-" let g:dotoo_todo_keyword_faces = [
-"                                \  ['TODO', [':foreground 160', ':weight bold']],
-"                                \  ['INPROGRESS', [':foreground 202', ':weight bold']],
-"                                \  ['NEXT', [':foreground 27', ':weight bold']],
-"                                \  ['WAIT', [':foreground 202', ':weight bold']],
-"                                \  ['HOLD', [':foreground 53', ':weight bold']],
-"                                \  ['MEETING', [':foreground 22', ':weight bold']],
-"                                \  ['PHONE', [':foreground 22', ':weight bold']],
-"                                \  ['KILL', [':foreground 22', ':weight bold']],
-"                                \  ['CANCELLED', [':foreground 22', ':weight bold']],
-"                                \  ['DONE', [':foreground 22', ':weight bold']],
-"                                \ ]
-
-let g:dotoo#parser#todo_keywords = [
-  \ 'TODO',
-  \ 'INPROGRESS', 
-  \ 'NEXT',
-  \ 'WAIT',
-  \ 'HOLD',
-  \ 'MEETING',
-  \ 'PHONE',
-  \ '|',
-  \ 'KILL', 
-  \ 'CANCELLED',
-  \ 'DONE']
-
-nnoremap <buffer><silent> ]] :call CustomSections('down', '^\* ')<CR>
-nnoremap <buffer><silent> [[ :call CustomSections('up', '^\* ')<CR>
-xnoremap <buffer><silent> [[ :<C-U>exe "norm! gv"<bar>call CustomSections('up', '^\* ')<CR>
-xnoremap <buffer><silent> ]] :<C-U>exe "norm! gv"<bar>call CustomSections('down', '^\* ')<CR>
-
-autocmd FileType org,dotoo inoreabbrev todo TODO
-autocmd FileType org,dotoo inoreabbrev done DONE
-" }}}3
 " VimMagit {{{3
 let g:magit_default_fold_level = 0
 "}}}3
@@ -372,8 +294,8 @@ inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm()
 
 " Use `[g` and `]g` to navigate diagnostics
 " Use `:CocDiagnostics` to get all diagnostics of current buffer in location list.
-nmap <silent> [g <Plug>(coc-diagnostic-prev)
-nmap <silent> ]g <Plug>(coc-diagnostic-next)
+" nmap <silent> [g <Plug>(coc-diagnostic-prev)
+" nmap <silent> ]g <Plug>(coc-diagnostic-next)
 
 " GoTo code navigation.
 nmap <silent> gd <Plug>(coc-definition)
@@ -533,8 +455,8 @@ let g:latex_to_unicode_tab = 0
 let g:vimtex_enabled=1
 let g:vimtex_complete_recursive_bib=1
 let g:tex_flavor='latex'
-let g:vimtex_compiler_progname='nvr'  " required in neovim 
 let g:vimtex_view_method='zathura'
+let g:vimtex_compiler_progname='nvr'  " required in neovim 
 let g:vimtex_quickfix_mode=0
 let g:vimtex_complete_img_use_tail = 1
 let g:vimtex_fold_enabled = 1
@@ -565,10 +487,10 @@ if (has("termguicolors"))
     set termguicolors
 endif
 
- " colorscheme nightfly
-colorscheme deus
-" let g:lightline = {'colorscheme': 'nightfly' }
-let g:lightline = {'colorscheme': 'deus' }
+" colorscheme deus
+" let g:lightline = {'colorscheme': 'deus' }
+colorscheme nightfly
+let g:lightline = {'colorscheme': 'nightfly' }
 " }}}3
 " }}}2
 " }}}1
@@ -604,7 +526,6 @@ let g:space_key_map['l'] = [ '<C-W>v'                     , 'split right']
 " List default and user-defined commands
 let g:space_key_map['C'] = [ ':Commands', 'list commands' ]
 let g:space_key_map['z'] = [ 'Goyo'      , 'zen' ]
-let g:space_key_map['n'] = [ 'RnvimrToggle' , 'ranger' ]
 " }}}3
 " a is for acropolis {{{3
 let g:space_key_map.a = {
@@ -715,6 +636,7 @@ let g:space_key_map.f = {
      \ 'c' : [':ZenDotFiles', 'ZEN DOTFILES'],
      \ 'z' : [':NV', 'NV DOTFILES'],
      \ 'n' : [':Lexplore', 'netrw'],
+     \ 't' : [':edit ${ZEN_REPOS_DIR}/dissertation/paper/abcarvalho_paper.tex', 'thesis'],
      \}
 let g:space_key_map.f.s = 'save-file'
 " }}}3
@@ -753,28 +675,13 @@ let g:space_key_map.q = {
       \ 'Q' : [ 'qa!', 'quit-without-saving' ],
     \}
 " }}}3
-" r is for ranger {{{3
-let g:space_key_map.r = { 
-     \ 'name' : '+ranger', 
-    \ 'r' : ['RnvimrToggle', 'ranger-toggle']
-    \}
-
-" Map Rnvimr action
-let g:rnvimr_action = {
-            \ '<C-t>': 'NvimEdit tabedit',
-            \ '<C-x>': 'NvimEdit split',
-            \ '<C-v>': 'NvimEdit vsplit',
-            \ 'gw': 'JumpNvimCwd',
-            \ 'yw': 'EmitRangerCwd'
-            \ }
-" }}}3
-" R is for RGrep {{{3
+" r is for rgrep {{{3
 command! -bang -nargs=* RGrepWiki
             \ call fzf#vim#grep(
             \ "rg --column --line-number --no-heading --color=always --smart-case -- ".shellescape(<q-args>), 
             \1, fzf#vim#with_preview({ 'dir': '$ZEN_WIKI_DIR'}), <bang>0)
 
-let g:space_key_map.R = { 
+let g:space_key_map.r = { 
      \ 'name' : '+rgrep', 
      \ 'r' : [':Rg', 'rgrep'], 
      \ 'v' : [':RGrepWiki', 'rgrep wiki'],
@@ -870,30 +777,9 @@ let g:space_key_map.w = {
       \}
 " }}}3
 " }}}2
-" Which Key - [, ] {{{2
-nnoremap <silent> [ :<c-u>WhichKey '['<CR>
-nnoremap <silent> ] :<c-u>WhichKey ']'<CR>
-
-" Register which key maps
-call which_key#register('[', "g:prev_key_map")
-call which_key#register(']', "g:next_key_map")
-
-" Create map to add keys to
-let g:prev_key_map = {}
-let g:next_key_map = {} 
-" Forward and Backwards {{{3
-let g:prev_key_map['b'] = ['bprev'     , 'prev-buffer']
-let g:prev_key_map['<Tab>'] = ['tabp'     , 'prev-tab']
-let g:prev_key_map['w'] = ['<c-w>W'     , 'prev-window']
-
-let g:next_key_map['b'] = ['bnext'     , 'next-buffer']
-let g:next_key_map['<Tab>'] = ['tabn'     , 'next-tab']
-let g:next_key_map['w'] = ['<c-w>W'     , 'next-window']
-" }}}3
-" }}}2
 " Which key - dotcomma {{{2
 nnoremap <silent> <localleader> :<c-u>WhichKey  ';'<CR>
-" vnoremap <silent> <localleader> :silent <c-u> :silent WhichKeyVisual ';'<CR>
+vnoremap <silent> <localleader> :silent <c-u> :silent WhichKeyVisual ';'<CR>
 
 " Register which key map
 call which_key#register(';', "g:dotcomma_key_map")
@@ -915,6 +801,25 @@ let g:comma_key_map =  {}
 vnoremap < <gv
 vnoremap > >gv
 " }}}2
+" Forward and Backwards {{{2
+" Buffers
+nnoremap ]b :bnext<cr>
+nnoremap [b :bprev<cr>
+
+" Tabs
+nnoremap ]<tab> :tabn<cr>
+nnoremap [<tab> :tabp<cr>
+
+"Windows
+nnoremap ]w <c-w>w
+nnoremap [w <c-w>W
+
+" Coc Diagnostics
+" Use `[g` and `]g` to navigate diagnostics
+" Use `:CocDiagnostics` to get all diagnostics of current buffer in location list.
+nmap <silent> [g <Plug>(coc-diagnostic-prev)
+nmap <silent> ]g <Plug>(coc-diagnostic-next)
+" }}}2
 " FZF Plugin Maps {{{2
 " Fuzzy Search
 let g:fzf_action = {
@@ -931,6 +836,7 @@ let g:fzf_action = {
 " }}}2
 " toggle folding {{{2
 nnoremap <TAB> za
+onoremap <TAB> <C-C>za
 " }}}2
 " replace all {{{2
 nnoremap R :%s//gc<Left><Left><Left>

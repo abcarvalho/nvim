@@ -23,7 +23,8 @@
     Plug 'tpope/vim-fugitive'
     
     " Org Mode
-    
+    Plug 'dhruvasagar/vim-dotoo' 
+
     " Quick TeX
     Plug 'brennier/quicktex'
     
@@ -33,6 +34,9 @@
     " Languages
     Plug 'sheerun/vim-polyglot'
     Plug 'vim-pandoc/vim-pandoc'
+
+    " Files and Folders: Ranger
+    Plug 'kevinhwang91/rnvimr', {'do': 'make sync'}
 
     " Language: LaTeX
     " Plug 'KeitaNakamura/tex-conceal.vim', {'for': 'tex'}
@@ -48,7 +52,7 @@
     Plug 'lervag/wiki.vim'
     Plug 'jceb/vim-orgmode'
     
-        " Task Management
+    " Task Management
     Plug 'tbabej/taskwiki'
     Plug 'blindFS/vim-taskwarrior'
     
@@ -340,8 +344,125 @@ source $HOME/.config/nvim/plugins/bullets.vim
 source $HOME/.config/nvim/plugins/wiki.vim
 " }}}1
 " Config  {{{1
+" Org Mode {{{2
+autocmd! BufRead,BufNewFile *.org  setlocal filetype=dotoo
+
+let g:dotoo#agenda#files=['$ZEN_ORG_DIR/*.org']
+let g:dotoo#capture#refile=expand('$ZEN_ORG_DIR/refile.org')
+
+" let g:dotoo_todo_keyword_faces = [
+"                                \  ['TODO', [':foreground 160', ':weight bold']],
+"                                \  ['INPROGRESS', [':foreground 202', ':weight bold']],
+"                                \  ['NEXT', [':foreground 27', ':weight bold']],
+"                                \  ['WAIT', [':foreground 202', ':weight bold']],
+"                                \  ['HOLD', [':foreground 53', ':weight bold']],
+"                                \  ['MEETING', [':foreground 22', ':weight bold']],
+"                                \  ['PHONE', [':foreground 22', ':weight bold']],
+"                                \  ['KILL', [':foreground 22', ':weight bold']],
+"                                \  ['CANCELLED', [':foreground 22', ':weight bold']],
+"                                \  ['DONE', [':foreground 22', ':weight bold']],
+"                                \ ]
+
+let g:dotoo#parser#todo_keywords = [
+  \ 'TODO',
+  \ 'INPROGRESS', 
+  \ 'NEXT',
+  \ 'WAIT',
+  \ 'HOLD',
+  \ 'MEETING',
+  \ 'PHONE',
+  \ '|',
+  \ 'KILL', 
+  \ 'CANCELLED',
+  \ 'DONE']
+
+nnoremap <buffer><silent> ]] :call CustomSections('down', '^\* ')<CR>
+nnoremap <buffer><silent> [[ :call CustomSections('up', '^\* ')<CR>
+xnoremap <buffer><silent> [[ :<C-U>exe "norm! gv"<bar>call CustomSections('up', '^\* ')<CR>
+xnoremap <buffer><silent> ]] :<C-U>exe "norm! gv"<bar>call CustomSections('down', '^\* ')<CR>
+
+autocmd FileType org,dotoo inoreabbrev todo TODO
+autocmd FileType org,dotoo inoreabbrev done DONE
+" }}}2
+" ranger file manager {{{2
+" Make Ranger to be hidden after picking a file
+let g:rnvimr_pick_enable = 1
+
+" Make Neovim to wipe the buffers corresponding to the files deleted by Ranger
+let g:rnvimr_bw_enable = 1
+
+" Make Ranger replace Netrw and be the file explorer
+let g:rnvimr_enable_ex = 1
+
+" Make Ranger to be hidden after picking a file
+let g:rnvimr_enable_picker = 1
+
+" Disable a border for floating window
+let g:rnvimr_draw_border = 1
+
+" Hide the files included in gitignore
+let g:rnvimr_hide_gitignore = 0
+
+" Change the border's color
+" let g:rnvimr_border_attr = {'fg': 14, 'bg': -1}
+
+" Make Neovim wipe the buffers corresponding to the files deleted by Ranger
+let g:rnvimr_enable_bw = 1
+
+" Add a shadow window, value is equal to 100 will disable shadow
+" let g:rnvimr_shadow_winblend = 70
+
+" Draw border with both
+let g:rnvimr_ranger_cmd = 'ranger --cmd="set draw_borders both"'
+
+" Link CursorLine into RnvimrNormal highlight in the Floating window
+highlight link RnvimrNormal CursorLine
+" }}}2
 " Which Key {{{2
-" Forward and Backwards {{{3
+let g:space_key_map['n'] = [ 'RnvimrToggle' , 'ranger' ]
+
+" r is for ranger {{{3
+let g:space_key_map.r = { 
+     \ 'name' : '+ranger', 
+    \ 'r' : ['RnvimrToggle', 'ranger-toggle']
+    \}
+
+" Map Rnvimr action
+let g:rnvimr_action = {
+            \ '<C-t>': 'NvimEdit tabedit',
+            \ '<C-x>': 'NvimEdit split',
+            \ '<C-v>': 'NvimEdit vsplit',
+            \ 'gw': 'JumpNvimCwd',
+            \ 'yw': 'EmitRangerCwd'
+            \ }
+" }}}3
+" Which Key - [, ] {{{3
+" nnoremap <silent> [ :<c-u>WhichKey 'bb'<CR>
+" " vnoremap <silent> [ :<c-u>WhichKeyVisual '['<CR>
+
+" nnoremap <silent> ] :<c-u>WhichKey 'ff'<CR>
+" " vnoremap <silent> ] :<c-u>WhichKeyVisual ']'<CR>
+
+" " Register which key maps
+" call which_key#register('bb', "g:prev_key_map")
+" call which_key#register('ff', "g:next_key_map")
+
+" " Create map to add keys to
+" let g:prev_key_map = {}
+" let g:next_key_map = {} 
+" Forward and Backwards {{{4
+" let g:prev_key_map['b'] = ['bprev'     , 'prev-buffer']
+" let g:prev_key_map['<Tab>'] = ['tabp'     , 'prev-tab']
+" let g:prev_key_map['w'] = ['<c-w>W'     , 'prev-window']
+" let g:prev_key_map['g'] = ['<Plug>(coc-diagnostic-prev)'     , 'coc-diagnostic-prev']
+" " let g:prev_key_map['s'] = 'prev-mispell'
+
+" let g:next_key_map['b'] = ['bnext'     , 'next-buffer']
+" let g:next_key_map['<Tab>'] = ['tabn'     , 'next-tab']
+" let g:next_key_map['w'] = ['<c-w>W'     , 'next-window']
+" let g:next_key_map['g'] = ['<Plug>(coc-diagnostic-next)'     , 'coc-diagnostic-next']
+" " let g:next_key_map['s'] = 'next-mispell'
+
 nnoremap [ :WhichKey "search-prev"<CR>
 let g:my_search_prev_map = {
       \ 'name' : '+switch-prev' ,
@@ -359,6 +480,7 @@ let g:my_search_next_map = {
       \ '<Tab>' : [':tabnext', 'tab'],
       \}
 call which_key#register('search-next', "g:my_search_next_map")
+" }}}4
 " }}}3
 " }}}2
 " lf file manager {{{2
