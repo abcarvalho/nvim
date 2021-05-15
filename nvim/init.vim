@@ -1,114 +1,42 @@
 " vim: set fdm=marker : 
 
 " Settings {{{1
-" Some basics: {{{2
-" nnoremap c "_c
-set nocompatible
-
 filetype plugin on
-syntax on 
-
-" Automatically change the current directory
-set autochdir
+    
+syntax enable
 
 " Clear highlighting on escape in normal mode
 nnoremap <esc> :noh<return><esc>
 nnoremap <esc>^[ <esc>^[
 
-syntax enable                          " Enables syntax highlighing
-set hidden                             " Required to keep multiple buffers open multiple buffers
+set formatoptions-=cro                  " Stop newline continuation of comments
 
-set pumheight=10                        " Makes popup menu smaller
-" set fileencoding=utf-8                  " The encoding written to file
-set ruler              			            " Show the cursor position all the time
-set mouse=a                             " Enable your mouse
-set t_Co=256                            " Support 256 colors
-
-set background=dark                     " tell vim what the background color looks like
-set showtabline=2                       " Always show tabs 
-set noshowmode                          " We don't need to see things like -- INSERT -- anymore
-set timeoutlen=300                      " By default timeoutlen is 1000 ms
-set formatoptions-=cro                  " Stop newline continution of comments
-set clipboard=unnamedplus               " Copy paste between vim and everything else
-" }}}2
-" python {{{2
-" install pynvim: conda install pynvim
-" check health:  :checkhealth
-" let g:python3_host_prog = "/usr/local/Caskroom/miniconda/base/bin/python3"
-let g:python3_host_prog = "/usr/local/Caskroom/miniconda/base/bin/python"
-" }}}2
-" TAB completion {{{2
-" inoremap <expr><TAB> pumvisible() ? "\<C-n>" : "\<TAB>"
-" }}}2
-" leader and local leader keys {{{2
-" make sure SPC is not mapped to anything
-nnoremap <SPACE> <Nop>
-let g:mapleader = " "                  " set leader key
-let maplocalleader = ';'
-" }}}2
-" Soft Wrap Mode {{{2
 " Move normally between wrapped lines
 :map j gj
 :map k gk
 :map 0 g0
 :map $ g$
-" }}}2
-" SELL CHECKING {{{2
-set spell
-" }}}2
-" TEXT WIDTH {{{2 
-set tw=80                               " set textwidth
-" }}}2
-" LINE WRAPPING {{{2
-set wrap linebreak nolist               " Soft wrap
-set encoding=utf-8                      " The encoding displayed 
 
-set cmdheight=2                         " More space for displaying messages
+set spell
+
 set iskeyword+=-                      	" treat dash separated words as a word text object"
 
-set splitbelow                          " Horizontal splits will automatically be below
-set splitright                          " Vertical splits will automatically be to the right
-
-set conceallevel=2 
-" }}}2
-" INDENTATION {{{2 
-"Indentation  without hard tabs
-set smarttab                            " Makes tabbing smarter will realize you have 2 vs 4
-set expandtab                           " Converts tabs to spaces
-set smartindent                         " Makes indenting smart
-set autoindent                          " Good auto indent
-set tabstop=2                           " Insert 2 spaces for a tab
-set shiftwidth=4                        " Change the number of space characters inserted for indentation
-" }}}2
-" LINE NUMBERS {{{2
-" set number " Display Line Numbers
-set number relativenumber
-
-set cursorline                          " Enable highlighting of the current line
-
-set nobackup                            " This is recommended by coc
-set nowritebackup                       " This is recommended by coc
-set updatetime=300                      " Faster completion
-
 au! BufWritePost $MYVIMRC source %      " auto source when writing to init.vm alternatively you can run :source $MYVIMRC
-" }}}2
-" FOLDING {{{2
-" Enable folding
-set foldmethod=syntax
-" set foldlevel=1
-set foldlevelstart=1
-" }}}2
-" AUTOCOMPLETION {{{2
+
 " Enable autocompletion:
 set wildmode=longest,list,full
 
 " ****** Key Behavior *****
 set backspace=2 " make backspace work like most other programs
 
-" }}}2
-" COMMENTING {{{2
 " Disables automatic commenting on newline:
 autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
+
+" leader and local leader keys {{{2
+" make sure SPC is not mapped to anything
+nnoremap <SPACE> <Nop>
+let g:mapleader = " "                  " set leader key
+let maplocalleader = ';'
 " }}}2
 " }}}1
 " Plugins {{{1
@@ -123,7 +51,6 @@ endif
 " }}}2 
 " Vim-Plug {{{2
 call plug#begin('$HOME/.config/nvim/plugged')
-
     " Which Key
     Plug 'liuchengxu/vim-which-key'
 
@@ -143,42 +70,27 @@ call plug#begin('$HOME/.config/nvim/plugged')
     " Languages: Julia
     Plug 'JuliaEditorSupport/julia-vim'
    
-    " Language: Python
-   	" Plug 'python-mode/python-mode', { 'branch': 'develop' }
-   
-    " Languages: LaTeX
-    Plug 'lervag/vimtex'
-   
    	" Code Editing:
-    Plug 'easymotion/vim-easymotion'
-    Plug 'tpope/vim-commentary'
+    Plug 'unblevable/quick-scope'
+    Plug 'justinmk/vim-sneak'
+    " Plug 'tpope/vim-commentary'
     Plug 'junegunn/vim-easy-align'
+    " Plug 'easymotion/vim-easymotion'
    
     " Note Taking Task Management:
     Plug 'dkarter/bullets.vim'
     Plug 'lervag/wiki.vim'
   
-   	" Files and Folders:
-   	Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
-  	Plug 'junegunn/fzf.vim'
-    Plug 'https://github.com/alok/notational-fzf-vim'
+    " Files and Folders:
+    Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+    Plug 'junegunn/fzf.vim'
   
-   	" Coc Extensions: Autocompletion, File Explorer, Snippets
+    " Coc Extensions: Autocompletion, File Explorer, Snippets
     Plug 'neoclide/coc.nvim', {'branch': 'release'}
    
     " Snippets:     
     Plug 'honza/vim-snippets' " snippet files
-   
-    " Writing Experience: LaTeX
-    Plug 'junegunn/goyo.vim'
-
-    " Appearance: Themes
-    Plug 'bluz71/vim-nightfly-guicolors'
-    Plug 'ajmwagar/vim-deus'
-
-    " Appearance: Lightline 
-    Plug 'itchyny/lightline.vim'
-  
+ 
     " Initialize plugin system
 call plug#end()
 " }}}2
@@ -209,11 +121,51 @@ augroup PlugGx
   autocmd FileType vim-plug nnoremap <buffer> <silent> gx :call <sid>plug_gx()<cr>
 augroup END
 " }}}2 
-" Configure Plugins {{{2
-" VimMagit {{{3
-let g:magit_default_fold_level = 0
-"}}}3
-" Netrw {{{3
+" }}}1
+lua require('plugins')
+" lua require('ac-wiki')
+
+" Configure Plugins {{{1
+" Org Mode {{{2
+autocmd! BufRead,BufNewFile *.org  setlocal filetype=dotoo
+
+let g:dotoo#agenda#files=['$ZEN_ORG_DIR/*.org']
+let g:dotoo#capture#refile=expand('$ZEN_ORG_DIR/refile.org')
+
+let g:dotoo#parser#todo_keywords = [
+  \ 'TODO',
+  \ 'INPROGRESS', 
+  \ 'NEXT',
+  \ 'WAIT',
+  \ '|',
+  \ 'CANCELLED',
+  \ 'DONE']
+
+let g:dotoo#agenda_views#agenda#span = 'week'
+" }}}2
+" Sneak and Quickscope {{{2
+let g:sneak#label = 1
+
+" case insensitive sneak
+let g:sneak#use_ic_scs = 1
+
+" immediately move to the next instance of search, if you move the cursor sneak is back to default behavior
+let g:sneak#s_next = 1
+
+" remap so I can use , and ; with f and t
+map gS <Plug>Sneak_,
+map gs <Plug>Sneak_;
+
+
+" Trigger a highlight in the appropriate direction when pressing these keys:
+let g:qs_highlight_on_keys = ['f', 'F', 't', 'T']
+
+highlight QuickScopePrimary guifg='#00C7DF' gui=underline ctermfg=155 cterm=underline
+highlight QuickScopeSecondary guifg='#afff5f' gui=underline ctermfg=81 cterm=underline
+
+let g:qs_max_chars=150
+" }}}2
+" Netrw {{{2
 " Open up netrw File Explorer
 " Remove directory banner. Access it by pressing: I
 let g:netrw_banner = 0
@@ -231,9 +183,9 @@ let g:netrw_liststyle = 3
 
 " Open file, but keep focus in Explorer
 autocmd filetype netrw nmap <c-a> <cr>:wincmd W<cr>
-" }}}3
-" Note Taking {{{3
-" Bullets {{{4
+" }}}2
+" Note Taking {{{2
+" Bullets {{{3
 let g:bullets_enabled_file_types = [
     \ 'markdown',
     \ 'text',
@@ -243,14 +195,24 @@ let g:bullets_enabled_file_types = [
 
 " Disable the plugin for empty buffers
 let g:bullets_enable_in_empty_buffers = 0 " default = 1
-" }}}4
-" WikiVim {{{4
+" }}}3
+" WikiVim {{{3
 let g:wiki_root=$ZEN_WIKI_DIR
 let g:wiki_filetypes = ['md']
+let g:wiki_link_target_type = 'md'
+let g:wiki_link_extension = '.md'
+
 let g:wiki_mappings_use_default=0
-" }}}4
+let g:wiki_global_load=0
+let g:wiki_link_toggle_on_follow=0
+" let g:wiki_mappings_use_defaults='global'
+" let g:wiki_mappings_global = {
+"          \ '<plug>(wiki-link-follow)' : ',fl',
+"          \ '<plug>(wiki-link-return)'  : ',bl',
+"          \}
 " }}}3
-" Coc Autocompletion and Explorer{{{3
+" }}}2
+" Coc Autocompletion and Explorer{{{2
 " Give more space for displaying messages.
 set cmdheight=2
 
@@ -391,8 +353,8 @@ set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
 
 " " List all presets
 " nmap <space>el :CocList explPresets
-" }}}4
-" Coc-Snippets {{{4
+" }}}3
+" Coc-Snippets {{{3
 " Use <C-l> for trigger snippet expand.
 imap <C-l> <Plug>(coc-snippets-expand)
 
@@ -421,16 +383,16 @@ function! s:check_back_space() abort
 endfunction
 
 let g:coc_snippet_next = '<tab>'
-" }}}4
-" My CONFIG {{{4
+" }}}3
+" My CONFIG {{{3
 " autocmd FileType markdown,org,dotoo let b:coc_suggest_disable = 1
 
 " enable/disable coc integration with airline:
 " let g:airline#extensions#coc#enabled = 1
-" }}}4
 " }}}3
-" Languages {{{3
-" Markdown {{{4
+" }}}2
+" Languages {{{2
+" Markdown {{{3
 let g:pandoc#syntax#conceal#urls = 1
 let g:pandoc#folding#fold_fenced_codeblocks = 1
 let g:pandoc#filetypes#handled = ["pandoc", "markdown"]
@@ -443,14 +405,14 @@ let g:pandoc#folding#mode = "syntax"
 " augroup pandoc_syntax
 "     au! BufNewFile,BufFilePre,BufRead *.md set filetype=markdown.pandoc
 " augroup END
-" }}}4
-" Julia {{{4
+" }}}3
+" Julia {{{3
 " Enabling and disabling the LaTeX-to-Unicode functionality
 " noremap <expr> <leader>lu LaTeXtoUnicode#Toggle()
 " noremap! <expr> <leader>lu LaTeXtoUnicode#Toggle()
 let g:latex_to_unicode_tab = 0
-" }}}
-" LaTeX - Vimtex {{{4
+" }}}3
+" LaTeX - Vimtex {{{3
 "LaTeX Setup
 let g:vimtex_enabled=1
 let g:vimtex_complete_recursive_bib=1
@@ -467,7 +429,7 @@ let g:vimtex_compiler_latexmk = {
     \   '-shell-escape',
     \   '-verbose',
     \   '-file-line-error',
-    \   '-synctex=1',
+    \   '-synctex=1', 
     \   '-interaction=nonstopmode',
     \ ],
 \}
@@ -476,9 +438,9 @@ let g:vimtex_compiler_latexmk = {
 " let g:tex_conceal='abdmg'
 "set conceal level to zero in latex files
 let g:tex_conceal=""
-" }}}4
 " }}}3
-" Appearance: Themes & Airline/Lightline {{{3
+" }}}2
+" Appearance: Themes & Airline/Lightline {{{2
 " Ensure transparency
 au ColorScheme * hi Normal ctermbg=none guibg=none
 au ColorScheme * hi NonText ctermbg=none guibg=none
@@ -486,12 +448,6 @@ au ColorScheme * hi NonText ctermbg=none guibg=none
 if (has("termguicolors"))
     set termguicolors
 endif
-
-" colorscheme deus
-" let g:lightline = {'colorscheme': 'deus' }
-colorscheme nightfly
-let g:lightline = {'colorscheme': 'nightfly' }
-" }}}3
 " }}}2
 " }}}1
 " Mappings {{{1
@@ -623,9 +579,6 @@ command! ZenWiki call fzf#run({'options': '--reverse --prompt "ZEN WIKI: "', 'do
 " Include option to search for hidden files in the dotfiles directory:
 command! ZenDotFiles call fzf#run({'source': 'find .', 'options': '--reverse --prompt "ZEN DOTFILES: "', 'down': 20, 'dir': '$ZEN_DOTFILES_DIR', 'sink': 'e' })<CR>
 
-" Notational FZF 
-let g:nv_search_paths = ['$ZEN_WIKI_DIR']
-
 let g:space_key_map.f = { 
      \ 'name' : '+file', 
      \ 'p' : [':ZenPrivatus', 'ZEN PRIVATUS'], 
@@ -634,7 +587,6 @@ let g:space_key_map.f = {
      \ 'k' : [':ZenWork', 'ZEN WORK'], 
      \ 'v' : [':ZenWiki', 'ZEN WIKI'], 
      \ 'c' : [':ZenDotFiles', 'ZEN DOTFILES'],
-     \ 'z' : [':NV', 'NV DOTFILES'],
      \ 'n' : [':Lexplore', 'netrw'],
      \ 't' : [':edit ${ZEN_REPOS_DIR}/dissertation/paper/abcarvalho_paper.tex', 'thesis'],
      \}
@@ -660,12 +612,59 @@ let g:space_key_map.h = {
       \ 'name' : '+help',
       \ }
 " }}}3
-" md tables {{{3
+" m is for markdown {{{3
 let g:table_mode_map_prefix = '<Leader>m'
+
+autocmd FileType markdown,pandoc nmap <leader>m1 i#<Space><CR><CR><++><Esc>2k<S-a>
+autocmd FileType markdown,pandoc nmap <leader>m2 i##<Space><CR><CR><++><Esc>2k<S-a>
+autocmd FileType markdown,pandoc nmap <leader>m3 i###<Space><CR><CR><++><Esc>2k<S-a>
+autocmd FileType markdown,pandoc nmap <leader>m4 i####<Space><CR><CR><++><Esc>2k<S-a>
+autocmd FileType markdown,pandoc nmap <leader>m5 i#####<Space><CR><CR><++><Esc>2k<S-a>
+
+autocmd FileType markdown,pandoc nmap <leader>ms i```sh<CR><CR>```<CR><ESC>kki<Tab>
+
+" Markdown Dates
+autocmd FileType markdown,pandoc nmap <leader>md i[<C-R>=strftime("%Y-%m-%d")<CR>]<Esc>
+
+" Markdown DateTime
+autocmd FileType markdown,pandoc nmap <leader>mt i<C-R>=strftime("%Y-%m-%d %a %I:%M %p")<CR><Esc>
+
 let g:space_key_map.m = {
       \ 'name' : '+md-table-mode',
-      \ 'e' : ['TableEvalFormulaLine', 'eval formula line']
+      \ 'e' : ['TableEvalFormulaLine', 'eval formula line'],
     \}
+
+let g:space_key_map.m.s = 'shell block'
+let g:space_key_map.m.d = 'date'
+let g:space_key_map.m.t = 'datetime'
+let g:space_key_map.m.1 = 'header 1'
+let g:space_key_map.m.2 = 'header 2'
+let g:space_key_map.m.3 = 'header 3'
+let g:space_key_map.m.4 = 'header 4'
+let g:space_key_map.m.5 = 'header 5'
+
+
+" }}}3
+" o is for org {{{3
+" Org Date
+autocmd FileType org,dotoo nmap <leader>od i<<C-R>=strftime("%Y-%m-%d %a")<CR>>
+
+" Org DateTime
+autocmd FileType org,dotoo nmap <leader>ot i<<C-R>=strftime("%Y-%m-%d %a %H:%M")<CR>>
+
+" Org Schedule
+autocmd FileType org,dotoo nmap <leader>os iSCHEDULE: <<C-R>=strftime("%Y-%m-%d %a")<CR>><Esc>
+autocmd FileType org,dotoo nmap <leader>oD iDEADLINE: <<C-R>=strftime("%Y-%m-%d %a")<CR>><Esc>
+
+let g:space_key_map.o = {
+      \ 'name' : '+org-mode',
+      \ 'a' : ['<Plug>(dotoo-agenda)a', 'agenda']
+    \}
+
+let g:space_key_map.o.D = 'deadline'
+let g:space_key_map.o.s = 'schedule'
+let g:space_key_map.o.d = 'date'
+let g:space_key_map.o.t = 'datetime'
 " }}}3
 " q is for quitting {{{3
 let g:space_key_map.q = {
@@ -749,6 +748,8 @@ let g:wiki_mappings_global = {
         \ '<plug>(wiki-index)' : '<leader>vv',
         \ '<plug>(wiki-link-next)' : '<leader>vj',  
         \ '<plug>(wiki-link-prev)' : '<leader>vk', 
+        \ '<plug>(wiki-link-follow)' : '<leader>vf', 
+        \ '<plug>(wiki-link-return)' : '<leader>vb',
         \}
 let g:space_key_map.v = {
       \ 'name' : '+wikivim',
@@ -756,6 +757,8 @@ let g:space_key_map.v = {
 let g:space_key_map.v.v = 'wiki-index'
 let g:space_key_map.v.j = 'wiki-link-next'
 let g:space_key_map.v.k = 'wiki-link-prev'
+let g:space_key_map.v.f = 'wiki-link-follow'
+let g:space_key_map.v.b = 'wiki-link-return'
 " }}}3
 " w is for window {{{3
 let g:space_key_map.w = {
@@ -787,14 +790,134 @@ call which_key#register(';', "g:dotcomma_key_map")
 " Create map to add keys to
 let g:dotcomma_key_map =  {}
 " }}}2
-" Which key - comma {{{2
-nnoremap <silent> , :<c-u>WhichKey  ','<CR>
+" Which key - backslash {{{2
+nnoremap <silent> <Bslash> :<c-u>WhichKey  '\<Bslash\>'<CR>
 
 " Register which key map
-call which_key#register(';', "g:comma_key_map")
+call which_key#register('\<Bslash\>', "g:back_key_map")
+
+let g:back_key_map =  {
+        \ 'name' : '+tex,latex,org,md'}
+
+" latex autocmds {{{3
+" emphasize
+autocmd FileType tex,latex inoremap \le ~\emph{}<Esc>i 
+
+" citation
+autocmd FileType tex,latex inoremap \lc ~\citet{}<Esc>a
+
+" reference
+autocmd FileType tex,latex inoremap \lr ~\ref{}<Esc>a
+
+" autocmd FileType tex,latex inoremap \rc \renewcommand{}{<++>}<CR><CR><++><Esc>?}{<CR>i
+
 
 " Create map to add keys to
-let g:comma_key_map =  {}
+let g:back_key_map.l = {
+    \ 'name' : '+latex',
+    \ 'e' : ['call feedkeys("i"."\\le")' , 'emph'],
+    \ 'c' : ['call feedkeys("i"."\\lc")' , 'citet'],
+    \ 'r' : ['call feedkeys("i"."\\lr")' , 'ref'],
+    \ }
+
+" math {{{4
+" begin align
+autocmd FileType tex,latex,vimwiki inoremap \lma \begin{align}<CR><Space><Space>&=<Space><CR>\end{align}<Esc>khhhi
+
+" inline math
+autocmd FileType tex,latex inoremap \lmi ~\(\)<ESC>hi
+
+" outline math
+autocmd FileType tex,latex,vimwiki inoremap \lmo \[<CR><space><CR><BS>\]<Esc>kA
+
+" begin equation
+autocmd FileType tex,latex,vimwiki inoremap \lme \begin{equation}<CR><Space><Space>=<Space><CR>\end{equation}<Esc>khhi
+
+" insert braces
+autocmd FileType tex,latex,vimwiki inoremap \lm( \left(\right)<Esc>?(<CR>:noh<CR>a  
+
+" insert brackets
+autocmd FileType tex,latex,vimwiki inoremap \lm[ \left[\right]<Esc>?[<CR>:noh<CR>a
+
+" insert curly brackets
+autocmd FileType tex,latex,vimwiki inoremap \lm{ \{\}<Esc>hi
+
+let g:back_key_map.l.m = {
+    \ 'name' : '+math',
+    \ 'a' : ['call feedkeys("i"."\\lma")' , 'align'],
+    \ 'e' : ['call feedkeys("i"."\\lme")' , 'equation'],
+    \ 'i' : ['call feedkeys("i"."\\lmi")' , 'inline'],
+    \ 'o' : ['call feedkeys("i"."\\lmo")' , 'outline'],
+    \ '(' : ['call feedkeys("i"."\\lm(")' , 'braces'],
+    \ '[' : ['call feedkeys("i"."\\lm[")' , 'brackets'],
+    \ '{' : ['call feedkeys("i"."\\lm{")' , 'curly brackets'],
+  \ }
+" }}}4 
+" sections {{{4
+autocmd FileType tex,latex inoremap \ls1 \section{}<CR><CR><++><Esc>?}<CR>i
+autocmd FileType tex,latex inoremap \ls2 \subsection{}<CR><CR><++><Esc>?}<CR>i
+autocmd FileType tex,latex inoremap \ls3 \subsubsection{}<CR><CR><++><Esc>?}<CR>i
+
+" autocmd FileType tex,latex inoremap \lsf \titleformat{}{<++>}{<++>}{<++>}{<++>}<CR><CR><++><Esc>?{}<CR>li
+
+let g:back_key_map.l.s = {
+    \ 'name' : '+sections',
+    \ 't' : ['call feedkeys("i"."\\lst")' , 'title'],
+    \ 'a' : ['call feedkeys("i"."\\lsa")' , 'author'],
+    \ 'm' : ['call feedkeys("i"."\\lsm")' , 'maketitle'],
+    \ '1' : ['call feedkeys("i"."\\ls1")' , 'section'],
+    \ '2' : ['call feedkeys("i"."\\ls2")' , 'subsection'],
+    \ '3' : ['call feedkeys("i"."\\ls3")' , 'huge'],
+  \ }
+" }}}4
+" document {{{4
+autocmd FileType tex,latex inoremap \lda \author{}<CR><CR><++><Esc>?}<CR>i
+autocmd FileType tex,latex inoremap \ldt \title{}<CR><CR><++><Esc>?}<CR>i
+autocmd FileType tex,latex inoremap \ldm \maketitle<CR><CR>
+
+let g:back_key_map.l.d = {
+    \ 'name' : '+sections',
+    \ 't' : ['call feedkeys("i"."\\ldt")' , 'title'],
+    \ 'a' : ['call feedkeys("i"."\\lda")' , 'author'],
+    \ 'm' : ['call feedkeys("i"."\\ldm")' , 'maketitle'],
+  \ }
+" }}}4
+" insert {{{4
+" textcolor
+autocmd FileType tex,latex inoremap \lic ~\textcolor{}{<++>}<Esc>?{<CR>n:noh<CR>a
+
+" insert comment
+autocmd FileType tex,latex inoremap \lim \begin{comment}<CR><CR>\end{comment}<Esc>ki
+
+" symbol
+autocmd FileType tex,latex inoremap \lis {\LaTeX}<Space>
+
+let g:back_key_map.l.i = {
+    \ 'name' : '+insert',
+    \ 'c' : ['call feedkeys("i"."\\lic")' , 'textcolor'],
+    \ 'm' : ['call feedkeys("i"."\\lim")' , 'comment'],
+    \ 's' : ['call feedkeys("i"."\\lis")' , 'symbol (LaTeX)'],
+    \}
+" }}}4
+" text size {{{4 
+" autocmd FileType tex,latex inoremap \ltb \bfseries
+autocmd FileType tex,latex inoremap \ltt \tiny
+autocmd FileType tex,latex inoremap \ltp \scriptsize
+autocmd FileType tex,latex inoremap \ltf \footnotesize
+autocmd FileType tex,latex inoremap \lts \small
+autocmd FileType tex,latex inoremap \ltl \large
+autocmd FileType tex,latex inoremap \lth \huge
+let g:back_key_map.l.t = {
+    \ 'name' : '+text',
+    \ 't' : ['call feedkeys("i"."\\ltt")' , 'tiny'],
+    \ 'p' : ['call feedkeys("i"."\\ltp")' , 'scriptsize'],
+    \ 'f' : ['call feedkeys("i"."\\ltf")' , 'footnotesize'],
+    \ 's' : ['call feedkeys("i"."\\lts")' , 'small'],
+    \ 'l' : ['call feedkeys("i"."\\ltl")' , 'large'],
+    \ 'h' : ['call feedkeys("i"."\\lth")' , 'huge'],
+  \ }
+" }}}4
+" }}}3
 " }}}2
 " Indenting text {{{2
 " Better tabbing 
@@ -858,102 +981,10 @@ command! SwapThemes call Theme_Swapper()
 " Define Shortcut:
 " nnoremap <leader>st :SwapThemes<CR>
 " }}}2
-" time {{{2
-map <F2> :echo 'Current time is ' . strftime('%c')<CR>
-" }}}2
 " }}}1
-" INSERT COMMANDS {{{1
-" Dates {{{2
-" Markdown Dates
-autocmd FileType markdown nmap <localleader>id i[<C-R>=strftime("%Y-%m-%d")<CR>]<Esc>
-autocmd FileType markdown imap <localleader>id [<C-R>=strftime("%Y-%m-%d")<CR>]
 
-" Markdown DateTime
-autocmd FileType markdown nmap <localleader>idt i<C-R>=strftime("%Y-%m-%d %a %I:%M %p")<CR><Esc>
-autocmd FileType markdown imap <localleader>idt <C-R>=strftime("%Y-%m-%d %a %I:%M %p")<CR>
+lua require('settings')
+lua require('colorscheme')
+lua require('ac-comment')
 
-" Org Date
-autocmd FileType org,dotoo nmap <localleader>id i:date:
-autocmd FileType org,dotoo imap <localleader>id :date:
-
-" Org DateTime
-autocmd FileType org,dotoo nmap <localleader>idt i:time:
-autocmd FileType org,dotoo imap <localleader>idt :time:
-" }}}2
-" Org {{{2
-autocmd FileType org,dotoo nmap <localleader>dt i:date:
-autocmd FileType org,dotoo imap <localleader>dt :date:
-" }}}2
-" markdown {{{2
-" autocmd FileType markdown inoremap ,i ![](<++>){#fig:<++>}<Space><CR><CR><++><Esc>kkF]i
-autocmd FileType markdown inoremap ,a [](<++>)<Space><++><Esc>F]i
-autocmd FileType markdown inoremap ,1 #<Space><CR><CR><++><Esc>2k<S-a>
-autocmd FileType markdown inoremap ,2 ##<Space><CR><CR><++><Esc>2k<S-a>
-autocmd FileType markdown inoremap ,3 ###<Space><CR><CR><++><Esc>2k<S-a>
-autocmd FileType markdown inoremap ,4 ####<Space><CR><CR><++><Esc>2k<S-a>
-autocmd FileType markdown inoremap ,5 #####<Space><CR><CR><++><Esc>2k<S-a>
-autocmd FileType markdown inoremap ,u +<Space><CR><++><Esc>1k<S-a>
-autocmd FileType markdown inoremap ,o 1.<Space><CR><++><Esc>1k<S-a>
-autocmd FileType markdown inoremap ,f +@fig:
-
-autocmd FileType markdown inoremap ,sh ```sh<CR><CR>```<CR><ESC>kki<Tab>
-" }}}2
-" latex {{{2
-autocmd FileType tex,latex noremap <leader>d :w<CR>:!texify<Space>-cp<Space>%<CR>
-autocmd FileType tex,latex inoremap ,c \{<++>}<CR><++><Esc>?{<CR>i
-autocmd FileType tex,latex inoremap ,dc \documentclass{}<CR><CR><++><Esc>?}<CR>i
-autocmd FileType tex,latex inoremap ,up \usepackage{}<CR><CR><++><Esc>?}<CR>i
-autocmd FileType tex,latex inoremap ,bd \begin{document}<CR><CR><CR><CR>\end{document}<Esc>kki
-" autocmd FileType tex,latex inoremap ,be \begin{}<CR><CR><CR><CR>\end{<++>}<Esc>?n{<CR>lli
-autocmd FileType tex,latex inoremap ,ti \title{}<CR><CR><++><Esc>?}<CR>i
-autocmd FileType tex,latex inoremap ,a \author{}<CR><CR><++><Esc>?}<CR>i
-autocmd FileType tex,latex inoremap ,mt \maketitle<CR><CR>
-autocmd FileType tex,latex inoremap ,s \section{}<CR><CR><++><Esc>?}<CR>i
-autocmd FileType tex,latex inoremap ,ss \subsection{}<CR><CR><++><Esc>?}<CR>i
-autocmd FileType tex,latex inoremap ,sss \subsubsection{}<CR><CR><++><Esc>?}<CR>i
-autocmd FileType tex,latex inoremap ,rc \renewcommand{}{<++>}<CR><CR><++><Esc>?}{<CR>i
-autocmd FileType tex,latex inoremap ,tf \titleformat{}{<++>}{<++>}{<++>}{<++>}<CR><CR><++><Esc>?{}<CR>li
-autocmd FileType tex,latex inoremap ,lt {\LaTeX}<Space>
-autocmd FileType tex,latex inoremap ,b \bfseries
-autocmd FileType tex,latex inoremap ,t \tiny
-autocmd FileType tex,latex inoremap ,sc \scriptsize
-autocmd FileType tex,latex inoremap ,fn \footnotesize
-autocmd FileType tex,latex inoremap ,sm \small
-autocmd FileType tex,latex inoremap ,l \large
-autocmd FileType tex,latex inoremap ,h \huge
-" }}}2
-" my commands {{{2
-" insert braces
-autocmd FileType tex,latex,vimwiki inoremap ,i( \left(\right)<Esc>?(<CR>:noh<CR>a  
-
-" insert brackets
-autocmd FileType tex,latex,vimwiki inoremap ,i[ \left[\right]<Esc>?[<CR>:noh<CR>a
-
-" insert curly brackets
-autocmd FileType tex,latex,vimwiki inoremap ,i{ \{\}<Esc>hi
-
-" inline math
-autocmd FileType tex,latex inoremap ,im ~\(\)<ESC>hi
-
-" outline math
-autocmd FileType tex,latex,vimwiki inoremap ,om \[<CR><space><CR><BS>\]<Esc>kA
-
-" begin equation
-autocmd FileType tex,latex,vimwiki inoremap ,be \begin{equation}<CR><Space><Space>=<Space><CR>\end{equation}<Esc>khhi
-
-" begin align
-autocmd FileType tex,latex,vimwiki inoremap ,ba \begin{align}<CR><Space><Space>&=<Space><CR>\end{align}<Esc>khhhi
-
-" emphasize
-autocmd FileType tex,latex inoremap ,em ~\emph{}<Esc>i 
-
-" reference
-autocmd FileType tex,latex inoremap ,ir ~\ref{}<Esc>i 
-
-" textcolor
-autocmd FileType tex,latex inoremap ,tc ~\textcolor{}{<++>}<Esc>?{<CR>n:noh<CR>a
-
-" insert comment
-autocmd FileType tex,latex inoremap ,bc \begin{comment}<CR><CR>\end{comment}<Esc>ki
-" }}}2
-" }}}1
+set wrap linebreak nolist               " Soft wrap
