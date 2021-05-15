@@ -22,10 +22,7 @@
     " Git 
     Plug 'tpope/vim-fugitive'
     
-    " Org Mode
-    Plug 'dhruvasagar/vim-dotoo' 
-
-    " Quick TeX
+     " Quick TeX
     Plug 'brennier/quicktex'
     
     " Buffers & Tabs
@@ -37,10 +34,20 @@
 
     " Files and Folders: Ranger
     Plug 'kevinhwang91/rnvimr', {'do': 'make sync'}
+    Plug 'https://github.com/alok/notational-fzf-vim'
 
     " Language: LaTeX
     " Plug 'KeitaNakamura/tex-conceal.vim', {'for': 'tex'}
 
+    " Language: Org
+    Plug 'dhruvasagar/vim-dotoo' 
+
+    " Language: Python
+    Plug 'python-mode/python-mode', { 'branch': 'develop' }
+   
+    " Languages: LaTeX
+    Plug 'lervag/vimtex'
+ 
     " Language: 
     Plug 'dkarter/bullets.vim'
     
@@ -87,12 +94,17 @@
     Plug 'rakr/vim-one'  
     Plug 'gruvbox-community/gruvbox'
     Plug 'ghifarit53/daycula-vim' , {'branch' : 'main'}
+    Plug 'bluz71/vim-nightfly-guicolors'
+    Plug 'ajmwagar/vim-deus'
     
     " Airline and LightLine
     Plug 'vim-airline/vim-airline'
     Plug 'vim-airline/vim-airline-themes'
     Plug 'itchyny/lightline.vim'
-    
+
+    " Appearance: Lightline 
+    " Plug 'itchyny/lightline.vim'
+  
     " Appearance: Line Indentation
     " Plug 'Yggdroot/indentLine'
 
@@ -103,12 +115,26 @@
     Plug 'ctrlpvim/ctrlp.vim'
     
     Plug 'preservim/nerdcommenter'
+
     " Appearance: Math
-    " Plug 'junegunn/rainbow_parentheses.vim'
+    Plug 'junegunn/rainbow_parentheses.vim'
 
     " Moving Text Around
-    " Plug 'matze/vim-move'
+    Plug 'matze/vim-move'
+
+
+    " Writing Experience: LaTeX
+    Plug 'junegunn/goyo.vim'
+
 "}}}1
+" Appearance: Themes & Airline/Lightline {{{1
+" colorscheme deus
+" let g:lightline = {'colorscheme': 'deus' }
+" colorscheme tokyonight
+" let g:tokyonight_transparent = true
+
+" let g:lightline = {'colorscheme': 'nightfly' }
+" }}}1
 "  MAPPINGS  {{{1
 " Forward and Backwards {{{2
 " Buffers
@@ -279,6 +305,18 @@ nnoremap <C-p> :FZF<CR>
 " }}}2
 " Goyo {{{2
 noremap <leader>gg :Goyo<CR>
+" }}}2
+" time {{{2
+map <F2> :echo 'Current time is ' . strftime('%c')<CR>
+" }}}2
+" Vim Which Key {{{2
+" Notational FZF 
+let g:nv_search_paths = ['$ZEN_WIKI_DIR']
+
+let g:space_key_map.f = { 
+     \ 'name' : '+file', 
+     \ 'z' : [':NV', 'NV DOTFILES'],
+     \}
 " }}}2
 " }}}1
 "  TEXT_EDITING  {{{1
@@ -480,6 +518,70 @@ let g:my_search_next_map = {
       \ '<Tab>' : [':tabnext', 'tab'],
       \}
 call which_key#register('search-next', "g:my_search_next_map")
+" }}}4
+" }}}3
+" Which key - backslash {{{3
+nnoremap <silent> <Bslash> :<c-u>WhichKey  '\<Bslash\>'<CR>
+
+" Register which key map
+call which_key#register('\<Bslash\>', "g:back_key_map")
+
+let g:back_key_map =  {
+        \ 'name' : '+tex,latex,org,md'}
+
+" org autocmds {{{4
+" Org Date
+autocmd FileType org,dotoo nmap \od i<<C-R>=strftime("%Y-%m-%d %a")<CR>>
+autocmd FileType org,dotoo imap \od <<C-R>=strftime("%Y-%m-%d %a")<CR>>
+
+" Org DateTime
+autocmd FileType org,dotoo nmap \ot i<<C-R>=strftime("%Y-%m-%d %a %H:%M")<CR>>
+autocmd FileType org,dotoo imap \ot <<C-R>=strftime("%Y-%m-%d %a %H:%M")<CR>>
+
+" Org Schedule
+autocmd FileType org,dotoo nmap \os iSCHEDULE: <<C-R>=strftime("%Y-%m-%d %a")<CR>><Esc>
+autocmd FileType org,dotoo imap \os SCHEDULE: <<C-R>=strftime("%Y-%m-%d %a")<CR>>
+autocmd FileType org,dotoo nmap \oD iDEADLINE: <<C-R>=strftime("%Y-%m-%d %a")<CR>><Esc>
+autocmd FileType org,dotoo imap \oD DEADLINE: <<C-R>=strftime("%Y-%m-%d %a")<CR>>
+
+let g:back_key_map.o = {
+    \ 'name' : '+org',
+    \ 'D' : ['call feedkeys("i"."\\oD")' , 'deadline'],
+    \ 's' : ['call feedkeys("i"."\\os")' , 'schedule'],
+    \ 'd' : ['call feedkeys("i"."\\od")' , 'date'],
+    \ 't' : ['call feedkeys("i"."\\ot")' , 'datetime'],
+    \}
+" }}}4
+" markdown autcmds {{{4
+autocmd FileType markdown inoremap \m1 #<Space><CR><CR><++><Esc>2k<S-a>
+autocmd FileType markdown inoremap \m2 ##<Space><CR><CR><++><Esc>2k<S-a>
+autocmd FileType markdown inoremap \m3 ###<Space><CR><CR><++><Esc>2k<S-a>
+autocmd FileType markdown inoremap \m4 ####<Space><CR><CR><++><Esc>2k<S-a>
+autocmd FileType markdown inoremap \m5 #####<Space><CR><CR><++><Esc>2k<S-a>
+
+autocmd FileType markdown inoremap \ms ```sh<CR><CR>```<CR><ESC>kki<Tab>
+
+" Markdown Dates
+autocmd FileType markdown nmap \md i[<C-R>=strftime("%Y-%m-%d")<CR>]<Esc>
+autocmd FileType markdown imap \md [<C-R>=strftime("%Y-%m-%d")<CR>]
+
+" Markdown DateTime
+autocmd FileType markdown nmap \mt i<C-R>=strftime("%Y-%m-%d %a %I:%M %p")<CR><Esc>
+autocmd FileType markdown imap \mt <C-R>=strftime("%Y-%m-%d %a %I:%M %p")<CR>
+
+let g:back_key_map.m = {
+    \ 'name' : '+markdown',
+    \ 'd' : ['call feedkeys("i"."\\md")' , 'date'],
+    \ 's' : ['call feedkeys("i"."\\ms")' , 'shell block'],
+    \ 't' : ['call feedkeys("i"."\\mt")' , 'datetime'],
+    \ '1' : ['call feedkeys("i"."\\m1")' , 'header 1'],
+    \ '2' : ['call feedkeys("i"."\\m2")' , 'header 2'],
+    \ '3' : ['call feedkeys("i"."\\m3")' , 'header 3'],
+    \ '4' : ['call feedkeys("i"."\\m4")' , 'header 4'],
+    \ '5' : ['call feedkeys("i"."\\m5")' , 'header 5'],
+    \ }
+let g:back_key_map.m.d = 'date'
+let g:back_key_map.m.t = 'datetime'
 " }}}4
 " }}}3
 " }}}2
@@ -798,3 +900,21 @@ function! CustomSections(dir, regex)
 	endif
 endfunction
 " }}}1
+" INSERT COMMANDS {{{1
+" markdown {{{2
+autocmd FileType markdown inoremap ,i ![](<++>){#fig:<++>}<Space><CR><CR><++><Esc>kkF]i
+autocmd FileType markdown inoremap ,a [](<++>)<Space><++><Esc>F]i
+autocmd FileType markdown inoremap ,u +<Space><CR><++><Esc>1k<S-a>
+autocmd FileType markdown inoremap ,o 1.<Space><CR><++><Esc>1k<S-a>
+autocmd FileType markdown inoremap ,f +@fig:
+" }}}2
+" latex {{{2
+autocmd FileType tex,latex noremap <leader>d :w<CR>:!texify<Space>-cp<Space>%<CR>
+autocmd FileType tex,latex inoremap ,c \{<++>}<CR><++><Esc>?{<CR>i
+autocmd FileType tex,latex inoremap ,dc \documentclass{}<CR><CR><++><Esc>?}<CR>i
+autocmd FileType tex,latex inoremap ,up \usepackage{}<CR><CR><++><Esc>?}<CR>i
+autocmd FileType tex,latex inoremap ,bd \begin{document}<CR><CR><CR><CR>\end{document}<Esc>kki
+autocmd FileType tex,latex inoremap ,be \begin{}<CR><CR><CR><CR>\end{<++>}<Esc>?n{<CR>lli
+" }}}2
+" }}}1
+
