@@ -458,6 +458,14 @@ highlight link RnvimrNormal CursorLine
 " }}}2
 " Which Key {{{2
 let g:space_key_map['n'] = [ 'RnvimrToggle' , 'ranger' ]
+" b is for buffers {{{3
+let g:space_key_map.b = {
+      \ 'name' : '+buffer' ,
+      \ 'b' : [':Buffers', 'list-buffers'],
+      \}
+
+" }}}3
+" f is for file {{{3
 command! ZenPrivatus call fzf#run({'options': '--reverse --prompt "ZEN PRIVATUS: "', 'down': 20, 'dir': '$ZEN_PRIVATUS_DIR', 'sink': 'e' })<CR>
 command! ZenOrg call fzf#run({'options': '--reverse --prompt "ZEN ORG: "', 'down': 20, 'dir': '$ZEN_ORG_DIR', 'sink': 'e' })
 command! ZenRepos call fzf#run({'options': '--reverse --prompt "ZEN REPOS: "', 'down': 20, 'dir': '$ZEN_REPOS_DIR', 'sink': 'e' })<CR>
@@ -521,6 +529,7 @@ let g:space_key_map.s = {
       \ 'y' : [':Filetypes'    , 'file-types'],
       \ 'z' : [':FZF'          , 'fzf'],
       \ }
+" }}}3
 " }}}3
 " Which Key - [, ] {{{3
 " nnoremap <silent> [ :<c-u>WhichKey 'bb'<CR>
