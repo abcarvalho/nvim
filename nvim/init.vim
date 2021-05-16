@@ -491,13 +491,14 @@ let g:space_key_map.a = {
       \}
 " }}}3
 " b is for buffers {{{3
+nnoremap <leader>tb :lua require('telescope.builtin').buffers()<CR>
 let g:space_key_map.b = {
       \ 'name' : '+buffer' ,
       \ 'd' : [':bd'     , 'delete'],
-      \ 'b' : [':Buffers', 'list-buffers'],
       \ 'n' : [':bnext', 'next-buffer'],
       \ 'p' : [':bprevious', 'previous-buffer'],
       \}
+let g:space_key_map.b.b = 'list-buffers'
 " }}}3
 " c for CoC {{{3
 " Applying codeAction to the selected region.
@@ -571,26 +572,26 @@ let g:space_key_map.d = {
 " nnoremap <silent> <leader>fs :update<CR>
 inoremap <leader>fs  <C-O>:w<cr>
 noremap <leader>fs  :w<cr>
-command! ZenPrivatus call fzf#run({'options': '--reverse --prompt "ZEN PRIVATUS: "', 'down': 20, 'dir': '$ZEN_PRIVATUS_DIR', 'sink': 'e' })<CR>
-command! ZenOrg call fzf#run({'options': '--reverse --prompt "ZEN ORG: "', 'down': 20, 'dir': '$ZEN_ORG_DIR', 'sink': 'e' })
-command! ZenRepos call fzf#run({'options': '--reverse --prompt "ZEN REPOS: "', 'down': 20, 'dir': '$ZEN_REPOS_DIR', 'sink': 'e' })<CR>
-command! ZenWork call fzf#run({'options': '--reverse --prompt "ZEN WORK: "', 'down': 20, 'dir': '$ZEN_WORK_DIR', 'sink': 'e' })<CR>
-command! ZenWiki call fzf#run({'options': '--reverse --prompt "ZEN WIKI: "', 'down': 20, 'dir': '$ZEN_WIKI_DIR', 'sink': 'e' })<CR>
-" Include option to search for hidden files in the dotfiles directory:
-command! ZenDotFiles call fzf#run({'source': 'find .', 'options': '--reverse --prompt "ZEN DOTFILES: "', 'down': 20, 'dir': '$ZEN_DOTFILES_DIR', 'sink': 'e' })<CR>
+
+nnoremap <leader>fd :lua require('ac-telescope').search_dir('ZEN_DOTFILES_DIR')<CR>
+nnoremap <leader>fo :lua require('ac-telescope').search_dir('ZEN_ORG_DIR')<CR>
+nnoremap <leader>fr :lua require('ac-telescope').search_dir('ZEN_REPOS_DIR')<CR>
+nnoremap <leader>fv :lua require('ac-telescope').search_dir('ZEN_WIKI_DIR')<CR>
+nnoremap <leader>fw :lua require('ac-telescope').search_dir('ZEN_WORK_DIR')<CR>
 
 let g:space_key_map.f = { 
      \ 'name' : '+file', 
-     \ 'p' : [':ZenPrivatus', 'ZEN PRIVATUS'], 
-     \ 'o' : [':ZenOrg', 'ZEN ORG'], 
-     \ 'r' : [':ZenRepos', 'ZEN REPOS'], 
-     \ 'k' : [':ZenWork', 'ZEN WORK'], 
-     \ 'v' : [':ZenWiki', 'ZEN WIKI'], 
-     \ 'c' : [':ZenDotFiles', 'ZEN DOTFILES'],
      \ 'n' : [':Lexplore', 'netrw'],
      \ 't' : [':edit ${ZEN_REPOS_DIR}/dissertation/paper/abcarvalho_paper.tex', 'thesis'],
      \}
+
 let g:space_key_map.f.s = 'save-file'
+let g:space_key_map.f.d = 'ZEN DOTFILES'
+let g:space_key_map.f.o = 'ZEN ORG'
+let g:space_key_map.f.r = 'ZEN REPOS'
+let g:space_key_map.f.v = 'ZEN WIKI'
+let g:space_key_map.f.w = 'ZEN WORK'
+
 " }}}3
 " g is for git {{{3
 let g:space_key_map.g = { 
@@ -687,12 +688,12 @@ let g:space_key_map.r = {
     \}
 " }}}3
 " s is for search {{{3
+nnoremap <leader>sb :lua require('telescope.builtin').current_buffer_fuzzy_find()<CR>
 let g:space_key_map.s = {
       \ 'name' : '+search' ,
       \ '/' : [':History/'     , 'history'],
       \ ';' : [':Commands'     , 'commands'],
       \ 'a' : [':Ag'           , 'text-Ag'],
-      \ 'b' : [':BLines'       , 'current-buffer'],
       \ 'B' : [':Buffers'      , 'open-buffers'],
       \ 'c' : [':Commits'      , 'commits'],
       \ 'C' : [':BCommits'     , 'buffer-commits'],
@@ -714,6 +715,7 @@ let g:space_key_map.s = {
       \ 'y' : [':Filetypes'    , 'file-types'],
       \ 'z' : [':FZF'          , 'fzf'],
       \ }
+let g:space_key_map.s.b = 'current-buffer' 
 " }}}3
 " S is for sessions [ADJUST] {{{3
 nnoremap <leader>Ss :mksession! .quicksave.vim<CR>:echo "Session saved."<CR>
@@ -986,5 +988,6 @@ command! SwapThemes call Theme_Swapper()
 lua require('settings')
 lua require('colorscheme')
 lua require('ac-comment')
+lua require('ac-telescope')
 
 set wrap linebreak nolist               " Soft wrap

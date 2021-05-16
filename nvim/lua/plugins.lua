@@ -43,6 +43,12 @@ return require('packer').startup(
 
     -- Note Taking & Task Management:
     -- use 'lervag/wiki.vim'
+
+    -- Fuzzy Finder
+    use {'nvim-telescope/telescope.nvim',
+         requires = {{'nvim-lua/popup.nvim'},
+                     {'nvim-lua/plenary.nvim'}}
+        }
  
     -- Folding
     use {"arecarn/vim-fold-cycle", opt=true}
@@ -72,4 +78,5 @@ return require('packer').startup(
     require_plugin("nvim-web-devicons")
     require_plugin("barbar.nvim")
     require_plugin("nvim-comment")
+    require_plugin("telescope")
   end)
