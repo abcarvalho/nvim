@@ -53,6 +53,9 @@ return require('packer').startup(
     -- Folding
     use {"arecarn/vim-fold-cycle", opt=true}
 
+    -- Note Taking 
+    use "dkarter/bullets.vim"
+
     -- Icons
     use {"kyazdani42/nvim-web-devicons", opt=true}
 
@@ -80,3 +83,5 @@ return require('packer').startup(
     require_plugin("nvim-comment")
     require_plugin("telescope")
   end)
+
+

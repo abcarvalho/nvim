@@ -50,6 +50,10 @@
  
     " Language: 
     Plug 'dkarter/bullets.vim'
+
+    " Code Editing:
+    Plug 'tpope/vim-commentary'
+    Plug 'easymotion/vim-easymotion'
     
     " Markdown Preview:
     Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug']}

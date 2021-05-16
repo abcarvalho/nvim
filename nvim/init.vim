@@ -73,12 +73,9 @@ call plug#begin('$HOME/.config/nvim/plugged')
    	" Code Editing:
     Plug 'unblevable/quick-scope'
     Plug 'justinmk/vim-sneak'
-    " Plug 'tpope/vim-commentary'
     Plug 'junegunn/vim-easy-align'
-    " Plug 'easymotion/vim-easymotion'
    
     " Note Taking Task Management:
-    Plug 'dkarter/bullets.vim'
     Plug 'lervag/wiki.vim'
   
     " Files and Folders:
@@ -492,13 +489,16 @@ let g:space_key_map.a = {
 " }}}3
 " b is for buffers {{{3
 nnoremap <leader>tb :lua require('telescope.builtin').buffers()<CR>
+
 let g:space_key_map.b = {
       \ 'name' : '+buffer' ,
       \ 'd' : [':bd'     , 'delete'],
       \ 'n' : [':bnext', 'next-buffer'],
       \ 'p' : [':bprevious', 'previous-buffer'],
       \}
+
 let g:space_key_map.b.b = 'list-buffers'
+
 " }}}3
 " c for CoC {{{3
 " Applying codeAction to the selected region.
@@ -689,6 +689,7 @@ let g:space_key_map.r = {
 " }}}3
 " s is for search {{{3
 nnoremap <leader>sb :lua require('telescope.builtin').current_buffer_fuzzy_find()<CR>
+
 let g:space_key_map.s = {
       \ 'name' : '+search' ,
       \ '/' : [':History/'     , 'history'],
@@ -715,6 +716,7 @@ let g:space_key_map.s = {
       \ 'y' : [':Filetypes'    , 'file-types'],
       \ 'z' : [':FZF'          , 'fzf'],
       \ }
+
 let g:space_key_map.s.b = 'current-buffer' 
 " }}}3
 " S is for sessions [ADJUST] {{{3
@@ -991,3 +993,4 @@ lua require('ac-comment')
 lua require('ac-telescope')
 
 set wrap linebreak nolist               " Soft wrap
+
