@@ -1,6 +1,8 @@
-local M = {}
+local config = {}
+local actions = require('telescope.actions')
 
-M.search_dir = function(x)
+
+config.search_dir = function(x)
   require('telescope.builtin').find_files({
 		-- shorten_path = true,
     prompt_title = x,
@@ -15,9 +17,33 @@ end
 -- 	})
 -- end
 -- 
-
-M.search_dotfiles = function()
-  return M.search_dir('ZEN_DOTFILES_DIR')
+function config.telescope()
+  require('telescope').setup {
+    defaults = {
+      prompt_prefix = '🔭 ',
+      prompt_position = 'top',
+      selection_caret = " ",
+      sorting_strategy = 'ascending',
+      results_width = 0.75,
+      file_previewer = actions.vim_buffer_cat.new,
+      grep_previewer = actions.vim_buffer_vimgrep.new,
+      qflist_previewer = actions.vim_buffer_qflist.new,
+    },
+    extensions = {
+        fzy_native = {
+            override_generic_sorter = false,
+            override_file_sorter = true,
+        }
+    }
+  }
+  require('telescope').load_extension('fzy_native')
+  require'telescope'.load_extension('dotfiles')
 end
 
-return M
+-- require M({ attach_mappings = function(_, map)
+--   map('n', '<leader>fd', search_dir('ZEN_DOTFILES_DIR'))
+--   return true
+-- end})
+-- 
+return config
+

@@ -81,7 +81,6 @@ return require('packer').startup(
     require_plugin("nvim-web-devicons")
     require_plugin("barbar.nvim")
     require_plugin("nvim-comment")
-    require_plugin("telescope")
   end)
 
 
