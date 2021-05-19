@@ -32,6 +32,8 @@ set backspace=2 " make backspace work like most other programs
 " Disables automatic commenting on newline:
 autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
 
+set wrap linebreak nolist               " Soft wrap
+
 " leader and local leader keys {{{2
 " make sure SPC is not mapped to anything
 nnoremap <SPACE> <Nop>
@@ -39,107 +41,11 @@ let g:mapleader = " "                  " set leader key
 let maplocalleader = ';'
 " }}}2
 " }}}1
-" Plugins {{{1
-" Automatically Install Vim-Plug {{{2
-if empty(glob('$HOME/.config/nvim/autoload/plug.vim'))
-    echo "Downloading junegunn/vim-plug to manage plugins..."
-    silent !curl -fLo $HOME/.config/nvim/autoload/plug.vim --create-dirs
-    \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-
-    autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
-endif
-" }}}2 
-" Vim-Plug {{{2
-call plug#begin('$HOME/.config/nvim/plugged')
-    " Which Key
-    Plug 'liuchengxu/vim-which-key'
-
-    " Commands:
-    " Plug 'tpope/vim-unimpaired'
-    Plug 'tpope/vim-repeat'
-
-    " Git:
-    Plug 'tpope/vim-fugitive'
-    Plug 'mhinz/vim-signify'
-
-    " Language: Markdown
-    Plug 'vim-pandoc/vim-pandoc'
-    Plug 'vim-pandoc/vim-pandoc-syntax'
-    Plug 'dhruvasagar/vim-table-mode'
-
-    " Languages: Julia
-    Plug 'JuliaEditorSupport/julia-vim'
-   
-   	" Code Editing:
-    Plug 'unblevable/quick-scope'
-    Plug 'justinmk/vim-sneak'
-    Plug 'junegunn/vim-easy-align'
-   
-    " Note Taking Task Management:
-    Plug 'lervag/wiki.vim'
-  
-    " Files and Folders:
-    Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
-    Plug 'junegunn/fzf.vim'
-  
-    " Coc Extensions: Autocompletion, File Explorer, Snippets
-    Plug 'neoclide/coc.nvim', {'branch': 'release'}
-   
-    " Snippets:     
-    Plug 'honza/vim-snippets' " snippet files
- 
-    " Initialize plugin system
-call plug#end()
-" }}}2
-" Automatically install missing plugins on startup {{{2
-autocmd VimEnter *
-  \  if len(filter(values(g:plugs), '!isdirectory(v:val.dir)'))
-  \|   PlugInstall --sync | q
-  \| endif
-
-" Press gx to open the GitHub URL for a plugin or a commit with the default browser.
-function! s:plug_gx()
-  let line = getline('.')
-  let sha  = matchstr(line, '^  \X*\zs\x\{7,9}\ze ')
-  let name = empty(sha) ? matchstr(line, '^[-x+] \zs[^:]\+\ze:')
-                      \ : getline(search('^- .*:$', 'bn'))[2:-2]
-  let uri  = get(get(g:plugs, name, {}), 'uri', '')
-  if uri !~ 'github.com'
-    return
-  endif
-  let repo = matchstr(uri, '[^:/]*/'.name)
-  let url  = empty(sha) ? 'https://github.com/'.repo
-                      \ : printf('https://github.com/%s/commit/%s', repo, sha)
-  call netrw#BrowseX(url, 0)
-endfunction
-
-augroup PlugGx
-  autocmd!
-  autocmd FileType vim-plug nnoremap <buffer> <silent> gx :call <sid>plug_gx()<cr>
-augroup END
-" }}}2 
-" }}}1
 lua require('plugins')
-" lua require('ac-wiki')
+lua require('ac-telescope')
+lua require('keymappings')
 
 " Configure Plugins {{{1
-" Org Mode {{{2
-autocmd! BufRead,BufNewFile *.org  setlocal filetype=dotoo
-
-let g:dotoo#agenda#files=['$ZEN_ORG_DIR/*.org']
-let g:dotoo#capture#refile=expand('$ZEN_ORG_DIR/refile.org')
-
-let g:dotoo#parser#todo_keywords = [
-  \ 'TODO',
-  \ 'INPROGRESS', 
-  \ 'NEXT',
-  \ 'WAIT',
-  \ '|',
-  \ 'CANCELLED',
-  \ 'DONE']
-
-let g:dotoo#agenda_views#agenda#span = 'week'
-" }}}2
 " Sneak and Quickscope {{{2
 let g:sneak#label = 1
 
@@ -180,213 +86,6 @@ let g:netrw_liststyle = 3
 
 " Open file, but keep focus in Explorer
 autocmd filetype netrw nmap <c-a> <cr>:wincmd W<cr>
-" }}}2
-" Note Taking {{{2
-" Bullets {{{3
-let g:bullets_enabled_file_types = [
-    \ 'markdown',
-    \ 'text',
-    \ 'org',
-    \ 'dotoo',
-    \]
-
-" Disable the plugin for empty buffers
-let g:bullets_enable_in_empty_buffers = 0 " default = 1
-" }}}3
-" WikiVim {{{3
-let g:wiki_root=$ZEN_WIKI_DIR
-let g:wiki_filetypes = ['md']
-let g:wiki_link_target_type = 'md'
-let g:wiki_link_extension = '.md'
-
-let g:wiki_mappings_use_default=0
-let g:wiki_global_load=0
-let g:wiki_link_toggle_on_follow=0
-" let g:wiki_mappings_use_defaults='global'
-" let g:wiki_mappings_global = {
-"          \ '<plug>(wiki-link-follow)' : ',fl',
-"          \ '<plug>(wiki-link-return)'  : ',bl',
-"          \}
-" }}}3
-" }}}2
-" Coc Autocompletion and Explorer{{{2
-" Give more space for displaying messages.
-set cmdheight=2
-
-" Having longer updatetime (default is 4000 ms = 4 s) leads to noticeable
-" delays and poor user experience.
-" set updatetime=300 " already set
-
-" Don't pass messages to |ins-completion-menu|.
-set shortmess+=c
-
-" Always show the signcolumn, otherwise it would shift the text each time
-" diagnostics appear/become resolved.
-" Recently vim can merge signcolumn and number column into one
-set signcolumn=yes 
-
-" Use tab for trigger completion with characters ahead and navigate.
-" NOTE: Use command ':verbose imap <tab>' to make sure tab is not mapped by
-" other plugin before putting this into your config.
-inoremap <silent><expr> <TAB>
-      \ pumvisible() ? "\<C-n>" :
-      \ <SID>check_back_space() ? "\<TAB>" :
-      \ coc#refresh()
-inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
-
-function! s:check_back_space() abort
-  let col = col('.') - 1
-  return !col || getline('.')[col - 1]  =~# '\s'
-endfunction
-
-" Use <c-space> to trigger completion.
-if has('nvim')
-  inoremap <silent><expr> <c-space> coc#refresh()
-else
-  inoremap <silent><expr> <c-@> coc#refresh()
-endif
-
-" Make <CR> auto-select the first completion item and notify coc.nvim to
-" format on enter, <cr> could be remapped by other vim plugin
-inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm()
-                              \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
-
-" Use `[g` and `]g` to navigate diagnostics
-" Use `:CocDiagnostics` to get all diagnostics of current buffer in location list.
-" nmap <silent> [g <Plug>(coc-diagnostic-prev)
-" nmap <silent> ]g <Plug>(coc-diagnostic-next)
-
-" GoTo code navigation.
-nmap <silent> gd <Plug>(coc-definition)
-nmap <silent> gy <Plug>(coc-type-definition)
-nmap <silent> gi <Plug>(coc-implementation)
-nmap <silent> gr <Plug>(coc-references)
-
-" Use K to show documentation in preview window.
-nnoremap <silent> K :call <SID>show_documentation()<CR>
-
-function! s:show_documentation()
-  if (index(['vim','help'], &filetype) >= 0)
-    execute 'h '.expand('<cword>')
-  elseif (coc#rpc#ready())
-    call CocActionAsync('doHover')
-  else
-    execute '!' . &keywordprg . " " . expand('<cword>')
-  endif
-endfunction
-
-" Highlight the symbol and its references when holding the cursor.
-autocmd CursorHold * silent call CocActionAsync('highlight')
-
-augroup mygroup
-  autocmd!
-  " Setup formatexpr specified filetype(s).
-  autocmd FileType typescript,json setl formatexpr=CocAction('formatSelected')
-  " Update signature help on jump placeholder.
-  autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
-augroup end
-
-" Map function and class text objects
-" NOTE: Requires 'textDocument.documentSymbol' support from the language server.
-xmap if <Plug>(coc-funcobj-i)
-omap if <Plug>(coc-funcobj-i)
-xmap af <Plug>(coc-funcobj-a)
-omap af <Plug>(coc-funcobj-a)
-xmap ic <Plug>(coc-classobj-i)
-omap ic <Plug>(coc-classobj-i)
-xmap ac <Plug>(coc-classobj-a)
-omap ac <Plug>(coc-classobj-a)
-
-" Remap <C-f> and <C-b> for scroll float windows/popups.
-nnoremap <silent><nowait><expr> <C-f> coc#float#has_scroll() ? coc#float#scroll(1) : "\<C-f>"
-nnoremap <silent><nowait><expr> <C-b> coc#float#has_scroll() ? coc#float#scroll(0) : "\<C-b>"
-inoremap <silent><nowait><expr> <C-f> coc#float#has_scroll() ? "\<c-r>=coc#float#scroll(1)\<cr>" : "\<Right>"
-inoremap <silent><nowait><expr> <C-b> coc#float#has_scroll() ? "\<c-r>=coc#float#scroll(0)\<cr>" : "\<Left>"
-vnoremap <silent><nowait><expr> <C-f> coc#float#has_scroll() ? coc#float#scroll(1) : "\<C-f>"
-vnoremap <silent><nowait><expr> <C-b> coc#float#has_scroll() ? coc#float#scroll(0) : "\<C-b>"
-
-" Use CTRL-S for selections ranges.
-" Requires 'textDocument/selectionRange' support of language server.
-nmap <silent> <C-s> <Plug>(coc-range-select)
-xmap <silent> <C-s> <Plug>(coc-range-select)
-
-" Add `:Format` command to format current buffer.
-command! -nargs=0 Format :call CocAction('format')
-
-" Add `:Fold` command to fold current buffer.
-command! -nargs=? Fold :call     CocAction('fold', <f-args>)
-
-" Add `:OR` command for organize imports of the current buffer.
-command! -nargs=0 OR   :call     CocAction('runCommand', 'editor.action.organizeImport')
-
-" Add (Neo)Vim's native statusline support.
-" NOTE: Please see `:h coc-status` for integrations with external plugins that
-" provide custom statusline: lightline.vim, vim-airline.
-set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
-
-" Coc-Explorer {{{4
-" let g:coc_explorer_global_presets = {
-" \   'floating': {
-" \     'position': 'floating',
-" \   },
-" \   'floatingLeftside': {
-" \     'position': 'floating',
-" \     'floating-position': 'left-center',
-" \     'floating-width': 30,
-" \   },
-" \   'floatingRightside': {
-" \     'position': 'floating',
-" \     'floating-position': 'left-center',
-" \     'floating-width': 30,
-" \   },
-" \   'simplify': {
-" \     'file-child-template': '[selection | clip | 1] [indent][icon | 1] [filename omitCenter 1]'
-" \   }
-" \ }
-
-" " Use preset argument to open it
-" " nmap <space>ed :CocCommand explorer --preset .julia<CR>
-" nmap <space>ef :CocCommand explorer --preset floatingLeftSide<CR>
-
-" " List all presets
-" nmap <space>el :CocList explPresets
-" }}}3
-" Coc-Snippets {{{3
-" Use <C-l> for trigger snippet expand.
-imap <C-l> <Plug>(coc-snippets-expand)
-
-" Use <C-j> for select text for visual placeholder of snippet.
-vmap <C-j> <Plug>(coc-snippets-select)
-
-" Use <C-j> for jump to next placeholder, it's default of coc.nvim
-let g:coc_snippet_next = '<c-j>'
-
-" Use <C-k> for jump to previous placeholder, it's default of coc.nvim
-let g:coc_snippet_prev = '<c-k>'
-
-" Use <C-j> for both expand and jump (make expand higher priority.)
-imap <C-j> <Plug>(coc-snippets-expand-jump)
-
-" Make <tab> used for trigger completion, completion confirm, snippet expand and jump like VSCode.
-inoremap <silent><expr> <TAB>
-      \ pumvisible() ? coc#_select_confirm() :
-      \ coc#expandableOrJumpable() ? "\<C-r>=coc#rpc#request('doKeymap', ['snippets-expand-jump',''])\<CR>" :
-      \ <SID>check_back_space() ? "\<TAB>" :
-      \ coc#refresh()
-
-function! s:check_back_space() abort
-  let col = col('.') - 1
-  return !col || getline('.')[col - 1]  =~# '\s'
-endfunction
-
-let g:coc_snippet_next = '<tab>'
-" }}}3
-" My CONFIG {{{3
-" autocmd FileType markdown,org,dotoo let b:coc_suggest_disable = 1
-
-" enable/disable coc integration with airline:
-" let g:airline#extensions#coc#enabled = 1
-" }}}3
 " }}}2
 " Languages {{{2
 " Markdown {{{3
@@ -447,6 +146,16 @@ if (has("termguicolors"))
 endif
 " }}}2
 " }}}1
+
+lua require('ac-lsp')
+lua require('ac-treesitter')
+lua require('ac-autopairs')
+lua require('ac-bullets')
+lua require('ac-comment')
+lua require('ac-gitsigns')
+lua require('ac-wiki')
+lua require('ac-zen')
+
 " Mappings {{{1
 " Which Key - pre config {{{2
 " Create map to add keys to
@@ -478,7 +187,6 @@ let g:space_key_map['j'] = [ '<C-W>s'                     , 'split below']
 let g:space_key_map['l'] = [ '<C-W>v'                     , 'split right']
 " List default and user-defined commands
 let g:space_key_map['C'] = [ ':Commands', 'list commands' ]
-let g:space_key_map['z'] = [ 'Goyo'      , 'zen' ]
 " }}}3
 " a is for acropolis {{{3
 let g:space_key_map.a = {
@@ -488,8 +196,6 @@ let g:space_key_map.a = {
       \}
 " }}}3
 " b is for buffers {{{3
-nnoremap <leader>tb :lua require('telescope.builtin').buffers()<CR>
-
 let g:space_key_map.b = {
       \ 'name' : '+buffer' ,
       \ 'd' : [':bd'     , 'delete'],
@@ -500,72 +206,13 @@ let g:space_key_map.b = {
 let g:space_key_map.b.b = 'list-buffers'
 
 " }}}3
-" c for CoC {{{3
-" Applying codeAction to the selected region.
-" Example: `<leader>aap` for current paragraph
-xmap <leader>ca  <Plug>(coc-codeaction-selected)
-nmap <leader>ca  <Plug>(coc-codeaction-selected)
-
-" Remap keys for applying codeAction to the current buffer.
-nmap <leader>cb  <Plug>(coc-codeaction)
-
-" Formatting selected code.
-xmap <leader>cf  <Plug>(coc-format-selected)
-nmap <leader>cf  <Plug>(coc-format-selected)
-
-" Symbol renaming.
-nmap <leader>cr <Plug>(coc-rename)
-
-" Use <leader>cx for convert visual selected code to snippet
-xmap <leader>cv  <Plug>(coc-convert-snippet)
-
-" Apply AutoFix to problem on the current line.
-nmap <leader>cx  <Plug>(coc-fix-current)
-
-" Mappings for CoCList
-" Show all diagnostics.
-nnoremap <silent><nowait> <leader>cd  :<C-u>CocList diagnostics<cr>
-" Manage extensions.
-nnoremap <silent><nowait> <leader>ce  :<C-u>CocList extensions<cr>
-" Show commands.
-nnoremap <silent><nowait> <leader>cc  :<C-u>CocList commands<cr>
-" Find symbol of current document.
-nnoremap <silent><nowait> <leader>co  :<C-u>CocList outline<cr>
-" Search workspace symbols.
-nnoremap <silent><nowait> <leader>cs  :<C-u>CocList -I symbols<cr>
-" Do default action for next item.
-nnoremap <silent><nowait> <leader>cj  :<C-u>CocNext<CR>
-" Do default action for previous item.
-nnoremap <silent><nowait> <leader>ck  :<C-u>CocPrev<CR>
-" Resume latest coc list.
-nnoremap <silent><nowait> <leader>cp  :<C-u>CocListResume<CR>
-
-let g:space_key_map.c = {
-      \ 'name' : '+coc' ,
-      \}
-
-let g:space_key_map.c.a = 'codeaction-selected'
-let g:space_key_map.c.b = 'codeaction buffer'
-let g:space_key_map.c.c = 'commands'
-let g:space_key_map.c.d = 'diagnostics'
-let g:space_key_map.c.e = 'extensions'
-let g:space_key_map.c.f = 'format-selected'
-let g:space_key_map.c.j = 'next'
-let g:space_key_map.c.k = 'prev'
-let g:space_key_map.c.o = 'outline'
-let g:space_key_map.c.p = 'list resume'
-let g:space_key_map.c.r = 'rename symbol'
-let g:space_key_map.c.s = 'list symbols'
-let g:space_key_map.c.v = 'convert-snippet'
-let g:space_key_map.c.x = 'fix-current'
-" }}}3
 " d is for directory {{{3
 let g:space_key_map.d = {
       \ 'name' : '+directory' ,
+      \ 'd' : [':cd $ZEN_DOTFILES_DIR'     , 'dotfiles'],
       \ 'r' : [':cd $ZEN_REPOS_DIR'     , 'repos'],
       \ 'k' : [':cd $ZEN_WORK_DIR'     , 'work'],
       \ 'v' : [':cd $ZEN_WIKI_DIR'     , 'wiki'],
-      \ 'o' : [':cd $ZEN_ORG_DIR'     , 'org'],
       \}
 " }}}3
 " f is for file {{{3
@@ -573,21 +220,16 @@ let g:space_key_map.d = {
 inoremap <leader>fs  <C-O>:w<cr>
 noremap <leader>fs  :w<cr>
 
-nnoremap <leader>fd :lua require('ac-telescope').search_dir('ZEN_DOTFILES_DIR')<CR>
-nnoremap <leader>fo :lua require('ac-telescope').search_dir('ZEN_ORG_DIR')<CR>
-nnoremap <leader>fr :lua require('ac-telescope').search_dir('ZEN_REPOS_DIR')<CR>
-nnoremap <leader>fv :lua require('ac-telescope').search_dir('ZEN_WIKI_DIR')<CR>
-nnoremap <leader>fw :lua require('ac-telescope').search_dir('ZEN_WORK_DIR')<CR>
-
 let g:space_key_map.f = { 
      \ 'name' : '+file', 
      \ 'n' : [':Lexplore', 'netrw'],
+     \ 'a' : [':edit ${ZEN_WIKI_DIR}/tasks.md', 'tasks'],
      \ 't' : [':edit ${ZEN_REPOS_DIR}/dissertation/paper/abcarvalho_paper.tex', 'thesis'],
      \}
 
+let g:space_key_map.f.b = 'file-browser'
 let g:space_key_map.f.s = 'save-file'
 let g:space_key_map.f.d = 'ZEN DOTFILES'
-let g:space_key_map.f.o = 'ZEN ORG'
 let g:space_key_map.f.r = 'ZEN REPOS'
 let g:space_key_map.f.v = 'ZEN WIKI'
 let g:space_key_map.f.w = 'ZEN WORK'
@@ -625,47 +267,33 @@ autocmd FileType markdown,pandoc nmap <leader>m5 i#####<Space><CR><CR><++><Esc>2
 autocmd FileType markdown,pandoc nmap <leader>ms i```sh<CR><CR>```<CR><ESC>kki<Tab>
 
 " Markdown Dates
-autocmd FileType markdown,pandoc nmap <leader>md i[<C-R>=strftime("%Y-%m-%d")<CR>]<Esc>
+autocmd FileType markdown,pandoc nmap <leader>mid i[<C-R>=strftime("%Y-%m-%d")<CR>]<Esc>
 
 " Markdown DateTime
-autocmd FileType markdown,pandoc nmap <leader>mt i<C-R>=strftime("%Y-%m-%d %a %I:%M %p")<CR><Esc>
+autocmd FileType markdown,pandoc nmap <leader>mit i<C-R>=strftime("%Y-%m-%d %a %I:%M %p")<CR><Esc>
 
 let g:space_key_map.m = {
-      \ 'name' : '+md-table-mode',
-      \ 'e' : ['TableEvalFormulaLine', 'eval formula line'],
+      \ 'name' : '+md-mode',
     \}
-
 let g:space_key_map.m.s = 'shell block'
-let g:space_key_map.m.d = 'date'
-let g:space_key_map.m.t = 'datetime'
 let g:space_key_map.m.1 = 'header 1'
 let g:space_key_map.m.2 = 'header 2'
 let g:space_key_map.m.3 = 'header 3'
 let g:space_key_map.m.4 = 'header 4'
 let g:space_key_map.m.5 = 'header 5'
 
-
-" }}}3
-" o is for org {{{3
-" Org Date
-autocmd FileType org,dotoo nmap <leader>od i<<C-R>=strftime("%Y-%m-%d %a")<CR>>
-
-" Org DateTime
-autocmd FileType org,dotoo nmap <leader>ot i<<C-R>=strftime("%Y-%m-%d %a %H:%M")<CR>>
-
-" Org Schedule
-autocmd FileType org,dotoo nmap <leader>os iSCHEDULE: <<C-R>=strftime("%Y-%m-%d %a")<CR>><Esc>
-autocmd FileType org,dotoo nmap <leader>oD iDEADLINE: <<C-R>=strftime("%Y-%m-%d %a")<CR>><Esc>
-
-let g:space_key_map.o = {
-      \ 'name' : '+org-mode',
-      \ 'a' : ['<Plug>(dotoo-agenda)a', 'agenda']
+let g:space_key_map.m.i = {
+      \ 'name' : '+md-insert',
     \}
+let g:space_key_map.m.i.d = 'date'
+let g:space_key_map.m.i.t = 'datetime'
 
-let g:space_key_map.o.D = 'deadline'
-let g:space_key_map.o.s = 'schedule'
-let g:space_key_map.o.d = 'date'
-let g:space_key_map.o.t = 'datetime'
+let g:space_key_map.m.t = {
+      \ 'name' : '+md-table-mode',
+      \ 'e' : ['TableEvalFormulaLine', 'eval formula line'],
+      \ 't' : ['TableModeEnable', 'table-mode-enable'],
+      \ 'd' : ['TableModeEnable', 'table-mode-disable'],
+    \}
 " }}}3
 " q is for quitting {{{3
 let g:space_key_map.q = {
@@ -688,36 +316,46 @@ let g:space_key_map.r = {
     \}
 " }}}3
 " s is for search {{{3
-nnoremap <leader>sb :lua require('telescope.builtin').current_buffer_fuzzy_find()<CR>
-
+      " \ '/' : [':History/'     , 'history'],
+      " \ ';' : [':Commands'     , 'commands'],
+      " \ 'b' : [':BLines'      , 'buffers'],
+      " \ 'f' : [':Files'        , 'fzf-files'],
+      " \ 'h' : [':History'      , 'file-history'],
+      " \ 'H' : [':History:'     , 'command-history'],
+      " \ 'M' : [':Maps'         , 'normal-maps'] ,
+      " \ 'p' : [':Rg'           , 'project'],
+      " \ 'S' : [':Colors'       , 'color-schemes'],
+      " \ 't' : [':BTags'        , 'fzf-buffer-tags'],
 let g:space_key_map.s = {
       \ 'name' : '+search' ,
-      \ '/' : [':History/'     , 'history'],
-      \ ';' : [':Commands'     , 'commands'],
       \ 'a' : [':Ag'           , 'text-Ag'],
       \ 'B' : [':Buffers'      , 'open-buffers'],
       \ 'c' : [':Commits'      , 'commits'],
       \ 'C' : [':BCommits'     , 'buffer-commits'],
-      \ 'f' : [':Files'        , 'fzf-files'],
       \ 'g' : [':GFiles'       , 'fzf-git-files'],
       \ 'G' : [':GFiles?'      , 'fzf-modified-git-files'],
-      \ 'h' : [':History'      , 'file-history'],
-      \ 'H' : [':History:'     , 'command-history'],
       \ 'l' : [':Lines'        , 'fzf-lines'] ,
       \ 'm' : [':Marks'        , 'marks'] ,
-      \ 'M' : [':Maps'         , 'normal-maps'] ,
-      \ 'p' : [':Rg'           , 'project'] ,
       \ 'P' : [':Tags'         , 'project-tags'],
       \ 's' : [':Snippets'     , 'snippets'],
-      \ 'S' : [':Colors'       , 'color-schemes'],
-      \ 't' : [':BTags'        , 'fzf-buffer-tags'],
       \ 'T' : [':Tags'         , 'fzf-tags'],
       \ 'w' : [':Windows'      , 'search-windows'],
       \ 'y' : [':Filetypes'    , 'file-types'],
       \ 'z' : [':FZF'          , 'fzf'],
       \ }
 
+let g:space_key_map.s['/'] = 'search-history' 
+let g:space_key_map.s[';'] = 'commands' 
 let g:space_key_map.s.b = 'current-buffer' 
+let g:space_key_map.s.f = 'fzf-files' 
+let g:space_key_map.s.h = 'file-history'
+let g:space_key_map.s.h = 'command-history'
+let g:space_key_map.s.M = 'keymaps'
+let g:space_key_map.s.p = 'rgrep-project'
+let g:space_key_map.s.S = 'colorschemes'
+let g:space_key_map.s.t = 'tags-buffer'
+
+
 " }}}3
 " S is for sessions [ADJUST] {{{3
 nnoremap <leader>Ss :mksession! .quicksave.vim<CR>:echo "Session saved."<CR>
@@ -801,7 +439,7 @@ nnoremap <silent> <Bslash> :<c-u>WhichKey  '\<Bslash\>'<CR>
 call which_key#register('\<Bslash\>', "g:back_key_map")
 
 let g:back_key_map =  {
-        \ 'name' : '+tex,latex,org,md'}
+        \ 'name' : '+tex,latex,md'}
 
 " latex autocmds {{{3
 " emphasize
@@ -940,12 +578,6 @@ nnoremap [<tab> :tabp<cr>
 "Windows
 nnoremap ]w <c-w>w
 nnoremap [w <c-w>W
-
-" Coc Diagnostics
-" Use `[g` and `]g` to navigate diagnostics
-" Use `:CocDiagnostics` to get all diagnostics of current buffer in location list.
-nmap <silent> [g <Plug>(coc-diagnostic-prev)
-nmap <silent> ]g <Plug>(coc-diagnostic-next)
 " }}}2
 " FZF Plugin Maps {{{2
 " Fuzzy Search
@@ -989,8 +621,10 @@ command! SwapThemes call Theme_Swapper()
 
 lua require('settings')
 lua require('colorscheme')
-lua require('ac-comment')
-lua require('ac-telescope')
 
-set wrap linebreak nolist               " Soft wrap
+" lua require('lsp.lua-ls')
 
+" vim pandoc syntax
+" augroup pandoc_syntax
+"     au! BufNewFile,BufFilePre,BufRead *.md set filetype=markdown.pandoc
+" augroup END

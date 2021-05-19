@@ -37,27 +37,70 @@ return require('packer').startup(
     -- Packer can manage itself
     use 'wbthomason/packer.nvim'
 
-    -- Languages:
-    use {'dhruvasagar/vim-dotoo', opt=true}        -- Org
-    use 'lervag/vimtex'                            -- LaTeX
+    -- which key  (change)
+    use 'liuchengxu/vim-which-key'
+
+    -- Git (change)
+    use 'tpope/vim-fugitive'
+
+    -- Language: Markdown (change)
+    use 'vim-pandoc/vim-pandoc'
+    use 'vim-pandoc/vim-pandoc-syntax'
+
+    -- fzf (remove)
+    use {'junegunn/fzf', dir = '~/.fzf', run = './install --all' }
+    use 'junegunn/fzf.vim'
+
+    -- Snippets (change)
+    use 'honza/vim-snippets'
+
+    -- lsp
+    use 'neovim/nvim-lspconfig'
+    use 'kabouzeid/nvim-lspinstall'
+
+    -- Treesitter
+    use {"nvim-treesitter/nvim-treesitter", run = ":TSUpdate"}
+
+    -- Code Editing
+    use 'unblevable/quick-scope'
+    use 'justinmk/vim-sneak'
+
+    -- Git
+    use {'lewis6991/gitsigns.nvim',
+         requires = {'nvim-lua/plenary.nvim'}
+        }
+
+    -- Julia
+    use 'JuliaEditorSupport/julia-vim'
+
+    -- Markdown
+    use {'dhruvasagar/vim-table-mode', opt=true,
+          ft={'md', 'markdown', 'pandoc'}}
+
+    -- LaTeX:
+    use 'lervag/vimtex'
 
     -- Note Taking & Task Management:
-    -- use 'lervag/wiki.vim'
+    use {"dkarter/bullets.vim", opt=true,
+         ft={'md', 'markdown', 'pandoc', 'txt'}}
+    use 'lervag/wiki.vim'
 
     -- Fuzzy Finder
     use {'nvim-telescope/telescope.nvim',
          requires = {{'nvim-lua/popup.nvim'},
-                     {'nvim-lua/plenary.nvim'}}
+                     {'nvim-lua/plenary.nvim'},
+                     {'nvim-telescope/telescope-fzy-native.nvim',opt = true}}
         }
- 
-    -- Folding
-    use {"arecarn/vim-fold-cycle", opt=true}
 
-    -- Note Taking 
-    use "dkarter/bullets.vim"
+    -- Folding
+    use {"arecarn/vim-fold-cycle", opt=true,
+         ft={'md', 'markdown', 'pandoc', 'txt', 'vim', 'lua'}}
+
+    -- Autocompletion
+    use 'windwp/nvim-autopairs'
 
     -- Icons
-    use {"kyazdani42/nvim-web-devicons", opt=true}
+    use "kyazdani42/nvim-web-devicons"
 
     -- ColorScheme
     use {'folke/tokyonight.nvim', opt=true}
@@ -65,22 +108,20 @@ return require('packer').startup(
     use 'shaunsingh/moonlight.nvim'
 
     -- BufferLine
-    use {"romgrk/barbar.nvim", opt = true}
+    use "romgrk/barbar.nvim"
 
     -- LuaLine
     use 'hoob3rt/lualine.nvim'
 
-    -- Writing experience: LaTeX
-    use {'junegunn/goyo.vim', opt=true}
+    -- Writing experience:
+    use 'folke/zen-mode.nvim'
 
     -- Commenting
-    use {"terrortylor/nvim-comment", opt = true}
+    use "terrortylor/nvim-comment"
 
-    require_plugin("vim-dotoo")
-    require_plugin("vim-fold-cycle")
-    require_plugin("nvim-web-devicons")
-    require_plugin("barbar.nvim")
-    require_plugin("nvim-comment")
+    -- Text Alignment
+    use {'junegunn/vim-easy-align', opt=true}
+
+    require_plugin('arecarn/vim-fold-cycle')
   end)
-
 
