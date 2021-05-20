@@ -70,3 +70,32 @@ kmap('n', '<leader>st',
      {noremap = true})
 -- }}}2
 -- }}}1
+-- Other Mappings {{{1
+-- Forwards and Backwards {{{2
+-- Buffers
+kmap('n', ']b', ':bnext<cr>', { noremap = true, silent = true })
+kmap('n', '[b', ':bprev<cr>', { noremap = true, silent = true })
+
+-- Tabs
+kmap('n', ']<tab>', ':tabn<cr>', { noremap = true, silent = true })
+kmap('n', ']<tab>', ':tabp<cr>', { noremap = true, silent = true })
+
+-- Windows
+kmap('n', ']w', '<c-w>w<cr>', { noremap = true, silent = true })
+kmap('n', ']w', '<c-w>W<cr>', { noremap = true, silent = true })
+-- }}}2
+-- replace all {{{2
+kmap('n', 'R', ':%s//gc<Left><Left><Left>', { noremap = true, silent = true })
+-- }}}2
+-- Reordering Lines {{{2
+kmap('n', '<M-k>',
+     ':let save_a=@a<cr><Up>"add"ap<Up>:let @a=save_a<cr>',
+     { noremap = true, silent = true })
+kmap('n', '<M-j>',
+     ':let save_a=@a<cr>"add"ap:let @a=save_a<cr>',
+     { noremap = true, silent = true })
+-- }}}2
+-- toggle folding {{{2
+kmap('n', '<tab>', 'za', { noremap = true, silent = true })
+-- }}}2
+-- }}}1

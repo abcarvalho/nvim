@@ -136,7 +136,7 @@ let g:vimtex_compiler_latexmk = {
 let g:tex_conceal=""
 " }}}3
 " }}}2
-" Appearance: Themes & Airline/Lightline {{{2
+" Appearance: {{{2
 " Ensure transparency
 au ColorScheme * hi Normal ctermbg=none guibg=none
 au ColorScheme * hi NonText ctermbg=none guibg=none
@@ -566,19 +566,6 @@ let g:back_key_map.l.t = {
 vnoremap < <gv
 vnoremap > >gv
 " }}}2
-" Forward and Backwards {{{2
-" Buffers
-nnoremap ]b :bnext<cr>
-nnoremap [b :bprev<cr>
-
-" Tabs
-nnoremap ]<tab> :tabn<cr>
-nnoremap [<tab> :tabp<cr>
-
-"Windows
-nnoremap ]w <c-w>w
-nnoremap [w <c-w>W
-" }}}2
 " FZF Plugin Maps {{{2
 " Fuzzy Search
 let g:fzf_action = {
@@ -586,19 +573,6 @@ let g:fzf_action = {
   \ 'ctrl-s': 'split',
   \ 'ctrl-v': 'vsplit'
   \}
-" }}}2
-" Reordering lines  {{{2
-" :nnoremap <M-k> <Up>"add"ap<p>
-" :nnoremap <M-j> "add"ap
-:nnoremap <silent><M-k> :let save_a=@a<Cr><Up>"add"ap<Up>:let @a=save_a<Cr>
-:nnoremap <silent><M-j> :let save_a=@a<Cr>"add"ap:let @a=save_a<Cr>
-" }}}2
-" toggle folding {{{2
-nnoremap <TAB> za
-onoremap <TAB> <C-C>za
-" }}}2
-" replace all {{{2
-nnoremap R :%s//gc<Left><Left><Left>
 " }}}2
 " switch NVim and iTerm2 Themes {{{2
 function! Theme_Swapper()
@@ -618,7 +592,6 @@ command! SwapThemes call Theme_Swapper()
 " nnoremap <leader>st :SwapThemes<CR>
 " }}}2
 " }}}1
-
 lua require('settings')
 lua require('colorscheme')
 

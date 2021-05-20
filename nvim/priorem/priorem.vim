@@ -205,7 +205,7 @@ augroup END
 
 " let g:lightline = {'colorscheme': 'nightfly' }
 " }}}1
-"  MAPPINGS  {{{1
+"  mappings  {{{1
 " Forward and Backwards {{{2
 " Buffers
 nnoremap ]b :bnext<cr>
@@ -385,14 +385,19 @@ noremap <leader>gg :Goyo<CR>
 " time {{{2
 map <F2> :echo 'Current time is ' . strftime('%c')<CR>
 " }}}2
-" Vim Which Key {{{2
-" Notational FZF 
-let g:nv_search_paths = ['$ZEN_WIKI_DIR']
-
-let g:space_key_map.f = { 
-     \ 'name' : '+file', 
-     \ 'z' : [':NV', 'NV DOTFILES'],
-     \}
+" }}}2
+" replace all {{{2
+nnoremap R :%s//gc<Left><Left><Left>
+" }}}2
+" Reordering lines  {{{2
+" :nnoremap <M-k> <Up>"add"ap<p>
+" :nnoremap <M-j> "add"ap
+:nnoremap <silent><M-k> :let save_a=@a<Cr><Up>"add"ap<Up>:let @a=save_a<Cr>
+:nnoremap <silent><M-j> :let save_a=@a<Cr>"add"ap:let @a=save_a<Cr>
+" }}}2
+" toggle folding {{{2
+nnoremap <TAB> za
+onoremap <TAB> <C-C>za
 " }}}2
 " }}}1
 "  TEXT_EDITING  {{{1
@@ -770,15 +775,16 @@ let g:rnvimr_ranger_cmd = 'ranger --cmd="set draw_borders both"'
 highlight link RnvimrNormal CursorLine
 " }}}2
 " Which Key {{{2
+" Which Key - Space {{{3
 let g:space_key_map['n'] = [ 'RnvimrToggle' , 'ranger' ]
 let g:space_key_map['z'] = [ 'Goyo'      , 'zen' ]
-" b is for buffers {{{3
+" b is for buffers {{{4
 let g:space_key_map.b = {
       \ 'name' : '+buffer' ,
       \ 'b' : [':Buffers', 'list-buffers'],
       \}
-" }}}3
-" c for CoC {{{3
+" }}}4
+" c for CoC {{{4
 " Applying codeAction to the selected region.
 " Example: `<leader>aap` for current paragraph
 xmap <leader>ca  <Plug>(coc-codeaction-selected)
@@ -836,8 +842,8 @@ let g:space_key_map.c.r = 'rename symbol'
 let g:space_key_map.c.s = 'list symbols'
 let g:space_key_map.c.v = 'convert-snippet'
 let g:space_key_map.c.x = 'fix-current'
-" }}}3
-" d is for directory {{{3
+" }}}4
+" d is for directory {{{4
 let g:space_key_map.d = {
       \ 'name' : '+directory' ,
       \ 'r' : [':cd $ZEN_REPOS_DIR'     , 'repos'],
@@ -845,8 +851,8 @@ let g:space_key_map.d = {
       \ 'v' : [':cd $ZEN_WIKI_DIR'     , 'wiki'],
       \ 'o' : [':cd $ZEN_ORG_DIR'     , 'org'],
       \}
-" }}}3
-" f is for file {{{3
+" }}}4
+" f is for file {{{4
 command! ZenPrivatus call fzf#run({'options': '--reverse --prompt "ZEN PRIVATUS: "', 'down': 20, 'dir': '$ZEN_PRIVATUS_DIR', 'sink': 'e' })<CR>
 command! ZenOrg call fzf#run({'options': '--reverse --prompt "ZEN ORG: "', 'down': 20, 'dir': '$ZEN_ORG_DIR', 'sink': 'e' })
 command! ZenRepos call fzf#run({'options': '--reverse --prompt "ZEN REPOS: "', 'down': 20, 'dir': '$ZEN_REPOS_DIR', 'sink': 'e' })<CR>
@@ -854,6 +860,9 @@ command! ZenWork call fzf#run({'options': '--reverse --prompt "ZEN WORK: "', 'do
 command! ZenWiki call fzf#run({'options': '--reverse --prompt "ZEN WIKI: "', 'down': 20, 'dir': '$ZEN_WIKI_DIR', 'sink': 'e' })<CR>
 " Include option to search for hidden files in the dotfiles directory:
 command! ZenDotFiles call fzf#run({'source': 'find .', 'options': '--reverse --prompt "ZEN DOTFILES: "', 'down': 20, 'dir': '$ZEN_DOTFILES_DIR', 'sink': 'e' })<CR>
+
+" Notational FZF 
+let g:nv_search_paths = ['$ZEN_WIKI_DIR']
 
 let g:space_key_map.f = { 
      \ 'name' : '+file', 
@@ -863,9 +872,10 @@ let g:space_key_map.f = {
      \ 'k' : [':ZenWork', 'ZEN WORK'], 
      \ 'v' : [':ZenWiki', 'ZEN WIKI'], 
      \ 'c' : [':ZenDotFiles', 'ZEN DOTFILES'],
+     \ 'z' : [':NV', 'NV DOTFILES'],
      \}
-" }}}3
-" o is for org {{{3
+" }}}4
+" o is for org {{{4
 " Org Date
 autocmd FileType org,dotoo nmap <leader>od i<<C-R>=strftime("%Y-%m-%d %a")<CR>>
 
@@ -885,8 +895,8 @@ let g:space_key_map.o.D = 'deadline'
 let g:space_key_map.o.s = 'schedule'
 let g:space_key_map.o.d = 'date'
 let g:space_key_map.o.t = 'datetime'
-" }}}3
-" r is for ranger {{{3
+" }}}4
+" r is for ranger {{{4
 let g:space_key_map.r = { 
      \ 'name' : '+ranger', 
     \ 'r' : ['RnvimrToggle', 'ranger-toggle']
@@ -900,9 +910,8 @@ let g:rnvimr_action = {
             \ 'gw': 'JumpNvimCwd',
             \ 'yw': 'EmitRangerCwd'
             \ }
-" }}}3
-" s is for search {{{3
-
+" }}}4
+" s is for search {{{4
 let g:space_key_map.s = {
       \ 'name' : '+search' ,
       \ '/' : [':History/'     , 'history'],
@@ -930,7 +939,7 @@ let g:space_key_map.s = {
       \ 'y' : [':Filetypes'    , 'file-types'],
       \ 'z' : [':FZF'          , 'fzf'],
       \ }
-" }}}3
+" }}}4
 " }}}3
 " Which Key - [, ] {{{3
 " nnoremap <silent> [ :<c-u>WhichKey 'bb'<CR>
