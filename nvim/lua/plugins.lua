@@ -93,6 +93,7 @@ return require('packer').startup(
 
     -- Text Alignment
     use {'junegunn/vim-easy-align', opt=true}
+    use {"lukas-reineke/indent-blankline.nvim"}
 
   end)
 
