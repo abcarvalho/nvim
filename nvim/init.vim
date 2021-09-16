@@ -69,8 +69,3 @@ lua require('settings')
 lua require('colorscheme')
 
 " lua require('lsp.lua-ls')
-
-" vim pandoc syntax
-" augroup pandoc_syntax
-"     au! BufNewFile,BufFilePre,BufRead *.md set filetype=markdown.pandoc
-" augroup END
