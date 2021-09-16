@@ -42,8 +42,7 @@ return require('packer').startup(
     use {"nvim-treesitter/nvim-treesitter", run = ":TSUpdate"}
 
     -- Code Editing
-    use 'unblevable/quick-scope'
-    use 'justinmk/vim-sneak'
+    use 'ggandor/lightspeed.nvim'
 
     -- Git
     use {'lewis6991/gitsigns.nvim',
