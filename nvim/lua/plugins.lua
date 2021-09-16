@@ -42,8 +42,10 @@ return require('packer').startup(
 
     -- Git
     use {'lewis6991/gitsigns.nvim',
-         requires = {'nvim-lua/plenary.nvim'}
+         requires = {
+          'nvim-lua/plenary.nvim'
         }
+      }
 
     -- Julia
     use 'JuliaEditorSupport/julia-vim'
