@@ -4,17 +4,25 @@ vim.g.tokyonight_transparent = true
 -- vim.g.tokyonight_colors = { hint = "orange"} --, error = "#ff0000" }
 
 -- Load the colorscheme
--- vim.cmd[[colorscheme tokyonight]]
+-- vim.g.moonlight_italic_comments = true
+-- vim.g.moonlight_disable_background = true
+-- require('moonlight').set()
+-- 
+-- require('lualine').setup {
+--   options = {
+--     -- ... your lualine config
+--     -- theme = 'tokyonight'
+--     theme = 'moonlight'
+--     -- ... your lualine config
+--   }
+-- }
 
-vim.g.moonlight_italic_comments = true
-vim.g.moonlight_disable_background = true
-require('moonlight').set()
-
+vim.cmd[[colorscheme tokyonight]]
+ 
 require('lualine').setup {
   options = {
     -- ... your lualine config
-    -- theme = 'tokyonight'
-    theme = 'moonlight'
+    theme = 'tokyonight'
     -- ... your lualine config
   }
 }
