@@ -1,7 +1,6 @@
 local config = {}
 local actions = require('telescope.actions')
 
-
 config.search_dir = function(x)
   require('telescope.builtin').find_files({
 		-- shorten_path = true,
@@ -16,7 +15,6 @@ end
 -- 		cwd = os.getenv('ZEN_DOTFILES_DIR'),
 -- 	})
 -- end
--- 
 function config.telescope()
   require('telescope').setup {
     defaults = {
@@ -44,6 +42,4 @@ end
 --   map('n', '<leader>fd', search_dir('ZEN_DOTFILES_DIR'))
 --   return true
 -- end})
--- 
 return config
-

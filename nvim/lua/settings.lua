@@ -103,5 +103,4 @@ end
 -- -- o.guifont = "Hack\\ Nerd\\ Font\\ Mono"
 -- -- o.guifont = "SauceCodePro Nerd Font:h17"
 -- o.guifont = "FiraCode Nerd Font:h17"
-
 -- o.guifont = "JetBrains\\ Mono\\ Regular\\ Nerd\\ Font\\ Complete"
