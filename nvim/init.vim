@@ -51,12 +51,12 @@ source ${AB_DOTFILES_DIR}/nvim/lua/ac-netrw/init.vim
 source ${AB_DOTFILES_DIR}/nvim/lua/ac-pandoc/init.vim
 source ${AB_DOTFILES_DIR}/nvim/lua/ac-julia/init.vim
 source ${AB_DOTFILES_DIR}/nvim/lua/ac-vimtex/init.vim
+lua require('ac-gitsigns')
 lua require('ac-lsp')
 lua require('ac-treesitter')
 lua require('ac-autopairs')
 lua require('ac-bullets')
 lua require('ac-comment')
-lua require('ac-gitsigns')
 lua require('ac-blankline')
 lua require('ac-wiki')
 lua require('ac-zen')
