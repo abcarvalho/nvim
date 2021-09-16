@@ -17,9 +17,6 @@ return require('packer').startup(
     -- Packer can manage itself
     use 'wbthomason/packer.nvim'
 
-    -- which key  (change)
-    use 'liuchengxu/vim-which-key'
-
     -- Git (change)
     use 'tpope/vim-fugitive'
 
@@ -33,6 +30,9 @@ return require('packer').startup(
 
     -- Snippets (change)
     use 'honza/vim-snippets'
+
+    -- which key
+    use 'folke/which-key.nvim'
 
     -- lsp
     use 'neovim/nvim-lspconfig'
