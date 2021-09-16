@@ -69,10 +69,6 @@ return require('packer').startup(
                      {'nvim-telescope/telescope-fzy-native.nvim',opt = true}}
         }
 
-    -- Folding
-    use {"arecarn/vim-fold-cycle", opt=true,
-         ft={'md', 'markdown', 'pandoc', 'txt', 'vim', 'lua'}}
-
     -- Autocompletion
     use 'windwp/nvim-autopairs'
 
@@ -98,6 +94,5 @@ return require('packer').startup(
     -- Text Alignment
     use {'junegunn/vim-easy-align', opt=true}
 
-    require_plugin('arecarn/vim-fold-cycle')
   end)
 
