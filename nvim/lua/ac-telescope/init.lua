@@ -8,13 +8,15 @@ config.search_dir = function(x)
 		cwd = os.getenv(x),
 	})
 end
--- M.search_dotfiles = function()
--- 	require('telescope.builtin').find_files({
--- 		-- shorten_path = true,
---     prompt_title = 'ZEN_DOTFILES_DIR',
--- 		cwd = os.getenv('ZEN_DOTFILES_DIR'),
--- 	})
--- end
+
+config.rgrep_dir = function(x)
+  require('telescope.builtin').live_grep({
+		-- shorten_path = true,
+    prompt_title = x,
+		cwd = os.getenv(x),
+	})
+end
+
 function config.telescope()
   require('telescope').setup {
     defaults = {
