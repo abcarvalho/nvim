@@ -225,6 +225,11 @@ nnoremap [w <c-w>W
 nmap <silent> [g <Plug>(coc-diagnostic-prev)
 nmap <silent> ]g <Plug>(coc-diagnostic-next)
 " }}}2
+" Indenting text {{{2
+" Better tabbing 
+vnoremap < <gv
+vnoremap > >gv
+" }}}2
 " Sessions {{{2
 nnoremap <leader>sw :mksession! .quicksave.vim<CR>:echo "Session saved."<CR>
 nnoremap <leader>sr :source .quicksave.vim<CR>:echo "Session loaded."<CR>
