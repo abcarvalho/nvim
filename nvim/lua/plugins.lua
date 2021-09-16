@@ -24,10 +24,6 @@ return require('packer').startup(
     use 'vim-pandoc/vim-pandoc'
     use 'vim-pandoc/vim-pandoc-syntax'
 
-    -- fzf (remove)
-    use {'junegunn/fzf', dir = '~/.fzf', run = './install --all' }
-    use 'junegunn/fzf.vim'
-
     -- Snippets (change)
     use 'honza/vim-snippets'
 
