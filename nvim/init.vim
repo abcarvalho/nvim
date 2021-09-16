@@ -33,13 +33,6 @@ set backspace=2 " make backspace work like most other programs
 autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
 
 set wrap linebreak nolist               " Soft wrap
-
-" leader and local leader keys {{{2
-" make sure SPC is not mapped to anything
-nnoremap <SPACE> <Nop>
-let g:mapleader = " "                  " set leader key
-let maplocalleader = ';'
-" }}}2
 " }}}1
 lua require('plugins')
 lua require('ac-telescope')
@@ -73,10 +66,6 @@ lua require('ac-lightspeed')
 lua require('keymappings')
 lua require('ac-which-key')
 
-" Define Shortcut:
-" nnoremap <leader>st :SwapThemes<CR>
-" }}}2
-" }}}1
 lua require('settings')
 lua require('colorscheme')
 
