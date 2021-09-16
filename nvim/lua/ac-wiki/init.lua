@@ -1,4 +1,4 @@
-vim.g.wiki_root = os.getenv('ZEN_WIKI_DIR')
+vim.g.wiki_root = os.getenv('AB_WIKI_DIR')
 vim.g.wiki_filetypes = {'md'}
 vim.g.wiki_link_target_type = 'md'
 vim.g.wiki_link_extension = '.md'
