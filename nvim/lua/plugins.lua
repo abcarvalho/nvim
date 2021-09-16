@@ -80,8 +80,7 @@ return require('packer').startup(
     use "kyazdani42/nvim-web-devicons"
 
     -- ColorScheme
-    use {'folke/tokyonight.nvim', opt=true}
-    use {'ajmwagar/vim-deus', opt=true}
+    use 'folke/tokyonight.nvim'
     use 'shaunsingh/moonlight.nvim'
 
     -- BufferLine
