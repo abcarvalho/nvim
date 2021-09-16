@@ -95,8 +95,7 @@ return require('packer').startup(
     use {'junegunn/vim-easy-align', opt=true}
     use {"lukas-reineke/indent-blankline.nvim"}
 
-  end)
     -- Jupyter & QtConsole
     use 'jupyter-vim/jupyter-vim'
     use 'untitled-ai/jupyter_ascending.vim'
-
+end)
