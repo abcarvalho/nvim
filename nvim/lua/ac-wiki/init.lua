@@ -10,3 +10,4 @@ vim.g.wiki_link_toggle_on_follow = 0
 -- let g:wiki_mappings_global = {
 --         \ '<plug>(wiki-link-follow)' : '<TAB>',
 --         \}
+vim.cmd [[let g:wiki_mappings_local = {'<plug>(wiki-link-follow)' : '<M-cr>', '<plug>(wiki-link-return)' : '<M-bs>',}]]
