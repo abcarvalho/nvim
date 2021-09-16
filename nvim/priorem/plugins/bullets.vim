@@ -2,6 +2,7 @@
 let g:bullets_enabled_file_types = [
     \ 'markdown',
     \ 'text',
+    \ 'org',
     \]
 
 " Disable the plugin for empty buffers
