@@ -37,7 +37,7 @@ set wrap linebreak nolist               " Soft wrap
 lua require('plugins')
 lua require('ac-telescope')
 
-" Appearance: {{{2
+" Appearance: {{{1
 " Ensure transparency
 au ColorScheme * hi Normal ctermbg=none guibg=none
 au ColorScheme * hi NonText ctermbg=none guibg=none
@@ -45,7 +45,6 @@ au ColorScheme * hi NonText ctermbg=none guibg=none
 if (has("termguicolors"))
     set termguicolors
 endif
-" }}}2
 " }}}1
 source ${AB_DOTFILES_DIR}/nvim/lua/ac-ipy/init.vim
 source ${AB_DOTFILES_DIR}/nvim/lua/ac-netrw/init.vim
