@@ -463,6 +463,27 @@ source $HOME/.config/nvim/plugins/bullets.vim
 source $HOME/.config/nvim/plugins/wiki.vim
 " }}}1
 " Config  {{{1
+" Sneak and Quickscope {{{2
+let g:sneak#label = 1
+
+" case insensitive sneak
+let g:sneak#use_ic_scs = 1
+
+" immediately move to the next instance of search, if you move the cursor sneak is back to default behavior
+let g:sneak#s_next = 1
+
+" remap so I can use , and ; with f and t
+map gS <Plug>Sneak_,
+map gs <Plug>Sneak_;
+
+" Trigger a highlight in the appropriate direction when pressing these keys:
+let g:qs_highlight_on_keys = ['f', 'F', 't', 'T']
+
+highlight QuickScopePrimary guifg='#00C7DF' gui=underline ctermfg=155 cterm=underline
+highlight QuickScopeSecondary guifg='#afff5f' gui=underline ctermfg=81 cterm=underline
+
+let g:qs_max_chars=150
+" }}}2
 " Note Taking {{{2
 " Bullets {{{3
 let g:bullets_enabled_file_types = [
