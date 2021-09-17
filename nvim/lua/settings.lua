@@ -19,7 +19,7 @@ o.backup = false          -- This is recommended by coc
 o.writebackup = false     -- This is recommended by coc
 -- }}}2
 -- Timings {{{2
-o.updatetime = 300        -- Faster completion
+o.updatetime = 100        -- Faster completion
 o.timeoutlen = 300        -- By default timeoutlen is 1000 ms
 -- }}}2
 -- Appearance {{{2
