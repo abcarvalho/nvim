@@ -68,10 +68,14 @@ local leader_mappings = {
 -- g is for git {{{2
   g = {
     name = 'git',
-    c = {'<cmd>Telescope git_bcommits<CR>', 'git-buffer-commits'},
-    C = {'<cmd>Telescope git_commits<CR>', 'git-commits'},
-    f = {'<cmd>Telescope git_files<CR>', 'git-files'},
-    s = {'<cmd>Telescope git_status<CR>', 'git-status'},
+    t = {
+      name = "+telescope",
+      c = {'<cmd>Telescope git_bcommits<CR>', 'git-buffer-commits'},
+      C = {'<cmd>Telescope git_commits<CR>', 'git-commits'},
+      f = {'<cmd>Telescope git_files<CR>', 'git-files'},
+      s = {'<cmd>Telescope git_status<CR>', 'git-status'},
+      },
+    s = {'<cmd>G<CR>', 'status'},
   },
 -- }}}2
 -- j is for jupyter {{{2
