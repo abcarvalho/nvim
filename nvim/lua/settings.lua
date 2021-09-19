@@ -1,5 +1,5 @@
 -- vim:fdm=marker
-local cmd = vim.cmd
+-- local cmd = vim.cmd
 local o, wo, bo = vim.o, vim.wo, vim.bo
 local g = vim.g
 
