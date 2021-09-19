@@ -9,9 +9,9 @@ local opts = {noremap = true, silent = true}
 -- make sure SPC is not mapped to anything
 vim.cmd([[
 nnoremap <SPACE> <Nop>
-let g:mapleader = " "
-let maplocalleader = ';'
 ]])
+vim.g.mapleader = " "
+vim.g.maplocalleader = ";"
 -- }}}1
 -- Which Key {{{1
 -- <leader> {{{2
