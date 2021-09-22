@@ -37,6 +37,12 @@ local leader_mappings = {
     C = {"<cmd>%bd|e#<cr>", 'close-all-but-current'},
   },
 -- }}}2
+-- c is for config {{{2
+  c = {
+    name = "+config",
+    s = {'<cmd>source ${AB_DOTFILES_DIR}/nvim/init.vim<CR>', 'source config'},
+  },
+-- }}}2
 -- d is for directory {{{2
   d = {
     name = '+directory',
@@ -61,6 +67,7 @@ local leader_mappings = {
     r = {'AB REPOS'},
     s = {'<cmd>w<cr>', 'save-file'},
     p = {'<cmd>edit ${AB_REPOS_DIR}/dissertation/paper/abcarvalho_paper.tex<cr>', 'paper-thesis'},
+    u = {'AB UCHICAGO'},
     v = {'AB WIKI'},
     w = {'AB WORK'},
   },
@@ -75,7 +82,10 @@ local leader_mappings = {
       f = {'<cmd>Telescope git_files<CR>', 'git-files'},
       s = {'<cmd>Telescope git_status<CR>', 'git-status'},
       },
+    c = {'<cmd>G<CR>', 'commit'},
     s = {'<cmd>G<CR>', 'status'},
+    w = {'<cmd>Gwrite<CR>', 'write: save + stage'},
+    W = {'<cmd>Gwq<CR>', 'write + exit'},
   },
 -- }}}2
 -- j is for jupyter {{{2
