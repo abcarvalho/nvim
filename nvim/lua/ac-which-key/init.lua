@@ -84,7 +84,7 @@ local leader_mappings = {
       },
     c = {'<cmd>Git commit<CR>', 'commit'},
     p = {'<cmd>G pull<CR>', 'pull'},
-    P = {'<cmd>G push<CR>', 'pull'},
+    P = {'<cmd>G push<CR>', 'push'},
     s = {'<cmd>G<CR>', 'status'},
     w = {'<cmd>Gwrite<CR>', 'write: save + stage'},
     W = {'<cmd>Gwq<CR>', 'write + exit'},
