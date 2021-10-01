@@ -40,9 +40,12 @@ kmap('n', '<leader>fo',
      ':lua require("ac-telescope").search_dir("AB_ORG_DIR")<CR>',
      {noremap = true})
 
-
 kmap('n', '<leader>fr',
      ':lua require("ac-telescope").search_dir("AB_REPOS_DIR")<CR>',
+     {noremap = true})
+
+kmap('n', '<leader>fu',
+     ':lua require("ac-telescope").search_dir("AB_BOX_UCHICAGO")<CR>',
      {noremap = true})
 
 kmap('n', '<leader>fv',
@@ -52,7 +55,6 @@ kmap('n', '<leader>fv',
 kmap('n', '<leader>fw',
      ':lua require("ac-telescope").search_dir("AB_WORK_DIR")<CR>',
      {noremap = true})
-
 -- kmap('i', '<leader>fs',
      -- '<C-O>:w<cr>', {noremap = true})
 -- }}}3
