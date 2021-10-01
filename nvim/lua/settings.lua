@@ -24,7 +24,7 @@ o.timeoutlen = 300        -- By default timeoutlen is 1000 ms
 -- }}}2
 -- Appearance {{{2
 -- Colors
-o.t_Co = "256"          -- Support 256 colors
+-- o.t_Co = "256"          -- Support 256 colors
 o.termguicolors = true  -- set term gui colors most terminals support this
 
 o.showtabline = 2       -- Always show tabs
