@@ -41,7 +41,7 @@ function config.telescope()
 end
 
 -- require M({ attach_mappings = function(_, map)
---   map('n', '<leader>fd', search_dir('ZEN_DOTFILES_DIR'))
+--   map('n', '<leader>fd', search_dir('AB_DOTFILES_DIR'))
 --   return true
 -- end})
 return config
