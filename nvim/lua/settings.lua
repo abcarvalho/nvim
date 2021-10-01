@@ -51,11 +51,15 @@ o.splitright = true     -- Vertical splits will automatically be to the right
 -- bo.syntax = true         -- syntax higlighting
 
 -- Indentation
-vim.cmd('set expandtab') -- Converts tabs to spaces
--- bo.expandtab = true      -- Converts tabs to spaces
-bo.smartindent = true    -- Makes indenting smart
-vim.cmd('set ts=2') -- Insert 2 spaces for a tab
-vim.cmd('set sw=2') -- Change the number of space characters inserted for indentation
+opt.expandtab = true      -- Converts tabs to spaces
+opt.smartindent = true
+opt.shiftwidth = 2
+opt.softtabstop = 2
+opt.tabstop = 2
+vim.wo.breakindent = true
+
+-- vim.cmd('set ts=2') -- Insert 2 spaces for a tab
+-- vim.cmd('set sw=2') -- Change the number of space characters inserted for indentation
 -- bo.tabstop = 4           -- Insert 2 spaces for a tab
 -- bo.softtabstop = 4
 -- bo.shiftwidth = 4        -- Change the number of space characters inserted for indentation
@@ -65,24 +69,24 @@ wo.number = true           -- set numbered lines
 wo.foldmethod = "syntax"
 wo.relativenumber = true   -- set relative number
 wo.cursorline = true       -- Enable highlighting of the current line
-wo.conceallevel = 2        -- Concealed text is completely hidden unless 
+wo.conceallevel = 2        -- Concealed text is completely hidden unless
 -- }}}1
 -- OS options {{{1
 -- The operating system is assigned to a global variable that
 -- that can be used elsewhere for conditional system based logic
 local uname = vim.loop.os_uname().sysname
 if uname == "Darwin" then
-    vim.g.open_command = "open"
-    vim.g.system_name = "macOS"
-    vim.g.is_mac = true
+    g.open_command = "open"
+    g.system_name = "macOS"
+    g.is_mac = true
 
     -- install pynvim: conda install pynvim
     -- check health:  :checkhealth
-    vim.g.python3_host_prog = '/usr/local/Caskroom/miniconda/base/bin/python'
+    g.python3_host_prog = '/usr/local/Caskroom/miniconda/base/bin/python'
 elseif uname == "Linux" then
-    vim.g.open_command = "xdg-open"
-    vim.g.system_name = "Linux"
-    vim.g.is_linux = true
+    g.open_command = "xdg-open"
+    g.system_name = "Linux"
+    g.is_linux = true
 end
 -- }}}1
 -- Autocommands {{{1
@@ -90,7 +94,7 @@ end
 -- }}}1
 
 -- vim.cmd('set iskeyword+=-') -- treat dash separated words as a word text object"
--- vim.cmd('set shortmess+=c') -- Don't pass messages to |ins-completion-menu|.
+vim.cmd [[set shortmess+=c]] -- Don't pass messages to |ins-completion-menu|.
 -- vim.cmd('set inccommand=split') -- Make substitution work in realtime
 -- o.title = true
 -- TERMINAL = vim.fn.expand('$TERMINAL')
@@ -98,7 +102,8 @@ end
 -- o.titlestring="%<%F%=%l/%L - nvim"
 -- vim.cmd('set whichwrap+=<,>,[,],h,l') -- move to next line with theses keys
 -- vim.cmd('set colorcolumn=99999') -- fix indentline for now
--- wo.signcolumn = "yes" -- Always show the signcolumn, otherwise it would shift the text each time
+-- wo.signcolumn = "yes" -- Always show the signcolumn, otherwise it would shift
+-- the text each time
 -- -- o.guifont = "JetBrainsMono\\ Nerd\\ Font\\ Mono:h18"
 -- -- o.guifont = "Hack\\ Nerd\\ Font\\ Mono"
 -- -- o.guifont = "SauceCodePro Nerd Font:h17"
