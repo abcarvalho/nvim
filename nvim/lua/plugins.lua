@@ -61,6 +61,7 @@ return require('packer').startup(
     use {"dkarter/bullets.vim", opt=true,
          ft={'md', 'markdown', 'pandoc', 'txt'}}
     use 'lervag/wiki.vim'
+    use {'kristijanhusak/orgmode.nvim'}
 
     -- Fuzzy Finder
     use {'nvim-telescope/telescope.nvim',
