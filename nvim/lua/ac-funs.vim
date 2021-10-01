@@ -5,7 +5,8 @@ function! Theme_Swapper()
         colorscheme shine "solarized8
     else
         set background=dark
-        colorscheme moonlight
+        colorscheme tokyonight
+        " lua require('colorscheme')
     endif
     silent !osascript -e 'tell app "System Events" to keystroke "s" using {shift down, option down, control down}'
 endfunction 
