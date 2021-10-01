@@ -25,7 +25,9 @@ return require('packer').startup(
     use 'vim-pandoc/vim-pandoc-syntax'
 
     -- Snippets (change)
-    use 'honza/vim-snippets'
+    use 'hrsh7th/nvim-compe'
+    use "hrsh7th/vim-vsnip"
+    use 'rafamadriz/friendly-snippets'
 
     -- which key
     use 'folke/which-key.nvim'
