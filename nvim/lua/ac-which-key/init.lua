@@ -123,6 +123,34 @@ local leader_mappings = {
     },
   },
 -- }}}2
+-- o is for org {{{2
+  o = {
+    name = '+org-mode',
+    a = {'agenda'},
+    A = {'archive-tag'},
+    ['$'] = {'archive-subtree'},
+    c = {'capture-prompt'},
+    r = {'capture-refile'},
+    k = {'capture-abort'},
+    w = {'capture-finalize'},
+    ['?'] = {'capture-help'},
+    o = {'open-link/date'},
+    t = {'tags'},
+    K = {'move-subtree-up'},
+    J = {'move-subtree-down'},
+    e = {'export'},
+    i = {
+      name = '+org-insert',
+      h = {'headline'},
+      t = {'TODO (after current headline and contents)'},
+      T = {'TODO (after current headline)'},
+    },
+    -- s = {
+    --   name = '+org-set',
+    --   t = {'call require("orgmode").action("org_mapping.todo_next_state")','TODO'},
+    --  },
+  },
+-- }}}2
 -- p is for packer {{{2
   p = {
     name = '+packer',

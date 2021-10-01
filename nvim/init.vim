@@ -61,6 +61,7 @@ lua require('ac-blankline')
 lua require('ac-wiki')
 lua require('ac-zen')
 lua require('ac-lightspeed')
+lua require('ac-orgmode')
 
 lua require('keymappings')
 lua require('ac-which-key')

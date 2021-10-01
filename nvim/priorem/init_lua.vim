@@ -47,52 +47,6 @@ let g:fzf_action = {
 
     require_plugin('arecarn/vim-fold-cycle')
 
-    use {'kristijanhusak/orgmode.nvim', config = function()
-            require('orgmode').setup({
-              org_agenda_files = {'$AB_ORG_DIR/*', },
-              org_default_notes_file = {'${AB_ORG_DIR}/refile.org'},
-              org_todo_keywords = {'TODO', 'NEXT', 'WAITING', '|', 'DONE', 'CANCELLED'},
-              org_archive_location = {'${AB_ORG_DIR}/archive.org'},
-              org_highlight_latex_and_related = 'entities',
-            --   mappings = {
-            --     capture = {
-            --       org_capture_finalize = '<Leader>oCw',
-            --       org_capture_refile = '<Leader>oCr',
-            --       org_capture_kill = '<Leader>oCk',
-            --       org_capture_show_help = '<Leader>oC?'
-            -- }
-          -- }
-        })
-      end
-      }
-
-
-
--- o is for org {{{2
-  o = {
-    name = '+org-mode',
-    a = {'agenda'},
-    A = {'archive-tag'},
-    ['$'] = {'archive-subtree'},
-    c = {'capture-prompt'},
-    r = {'capture-refile'},
-    k = {'capture-abort'},
-    w = {'capture-finalize'},
-    ['?'] = {'capture-help'},
-    o = {'open-link/date'},
-    t = {'tags'},
-    K = {'move-subtree-up'},
-    J = {'move-subtree-down'},
-    e = {'export'},
-    i = {
-      name = '+org-insert',
-      h = {'headline'},
-      t = {'TODO (after current headline and contents)'},
-      T = {'TODO (after current headline)'},
-    },
-   },
--- }}}2
-
 
 --- Check if a file or directory exists in this path
 local function require_plugin(plugin)
@@ -113,5 +67,24 @@ local function require_plugin(plugin)
     end
     return ok, err, code
 end
+
+use {'kristijanhusak/orgmode.nvim', config = function()
+       require('orgmode').setup({
+         org_agenda_files = {'$AB_ORG_DIR/*', },
+         org_default_notes_file = {'${AB_ORG_DIR}/refile.org'},
+         org_todo_keywords = {'TODO', 'NEXT', 'WAITING', '|', 'DONE', 'CANCELLED'},
+         org_archive_location = {'${AB_ORG_DIR}/archive.org'},
+         org_highlight_latex_and_related = 'entities',
+       --   mappings = {
+       --     capture = {
+       --       org_capture_finalize = '<Leader>oCw',
+       --       org_capture_refile = '<Leader>oCr',
+       --       org_capture_kill = '<Leader>oCk',
+       --       org_capture_show_help = '<Leader>oC?'
+       -- }
+     -- }
+   })
+ end
+ }
 
 
