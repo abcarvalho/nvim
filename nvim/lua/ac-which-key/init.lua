@@ -40,23 +40,23 @@ local leader_mappings = {
 -- c is for config {{{2
   c = {
     name = "+config",
-    s = {'<cmd>source ${AB_DOTFILES_DIR}/nvim/init.vim<CR>', 'source config'},
+    s = {'<cmd>source ${AB_DLZ_DOTFILES}/nvim/init.vim<CR>', 'source config'},
   },
 -- }}}2
 -- d is for directory {{{2
   d = {
     name = '+directory',
-    d = {'<cmd>cd $AB_DOTFILES_DIR<cr>', 'dotfiles'},
-    r = {'<cmd>cd $AB_REPOS_DIR<cr>', 'repos'},
-    k = {'<cmd>cd $AB_WORK_DIR<cr>', 'work'},
-    v = {'<cmd>cd $AB_WIKI_DIR<cr>', 'wiki'},
+    d = {'<cmd>cd $AB_DLZ_DOTFILES<cr>', 'dotfiles'},
+    r = {'<cmd>cd $AB_DIZ_REPOS<cr>', 'repos'},
+    k = {'<cmd>cd $AB_DLZ_WORK<cr>', 'work'},
+    v = {'<cmd>cd $AB_DLZ_WIKI<cr>', 'wiki'},
   },
 -- }}}2
 -- f is for file {{{2
   f = {
     name = '+file',
     n = {'<cmd>Lexplore<cr>', 'netrw'},
-    a = {'<cmd>edit ${AB_WIKI_DIR}/tasks.md', 'tasks'},
+    a = {'<cmd>edit ${AB_DLZ_WIKI}/tasks.md', 'tasks'},
     b = {'file-browser'},
     B = {'BOX Drive'},
     d = {'AB DOTFILES'},
@@ -66,7 +66,7 @@ local leader_mappings = {
     o = {'AB ORG'}, -- '<cmd>edit ${AB_ORG_DIR}/networking.org<cr>', 'networking-org'},
     r = {'AB REPOS'},
     s = {'<cmd>w<cr>', 'save-file'},
-    p = {'<cmd>edit ${AB_REPOS_DIR}/dissertation/paper/abcarvalho_paper.tex<cr>', 'paper-thesis'},
+    p = {'<cmd>edit ${AB_DIZ_REPOS}/dissertation/paper/abcarvalho_paper.tex<cr>', 'paper-thesis'},
     u = {'AB UCHICAGO'},
     v = {'AB WIKI'},
     w = {'AB WORK'},

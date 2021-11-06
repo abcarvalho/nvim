@@ -1,8 +1,8 @@
 require('orgmode').setup({
-      org_agenda_files = {'$AB_ORG_DIR/*', },
-      org_default_notes_file = {'${AB_ORG_DIR}/refile.org'},
+      org_agenda_files = {'$AB_DBZ_ORG/*', },
+      org_default_notes_file = {'${AB_DBZ_ORG}/refile.org'},
       org_todo_keywords = {'TODO', 'NEXT', 'WAITING', '|', 'DONE', 'CANCELLED'},
-      org_archive_location = {'${AB_ORG_DIR}/archive.org'},
+      org_archive_location = {'${AB_DBZ_ORG}/archive.org'},
       org_highlight_latex_and_related = 'entities',
     --   mappings = {
     --     capture = {
@@ -14,3 +14,6 @@ require('orgmode').setup({
   -- }
 })
 
+require("org-bullets").setup({
+    symbols = { "◉", "○", "✸", "✿" },
+})

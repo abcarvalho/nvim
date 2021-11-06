@@ -46,11 +46,11 @@ if (has("termguicolors"))
     set termguicolors
 endif
 " }}}1
-source ${AB_DOTFILES_DIR}/nvim/lua/ac-ipy/init.vim
-source ${AB_DOTFILES_DIR}/nvim/lua/ac-netrw/init.vim
-source ${AB_DOTFILES_DIR}/nvim/lua/ac-pandoc/init.vim
-source ${AB_DOTFILES_DIR}/nvim/lua/ac-julia/init.vim
-source ${AB_DOTFILES_DIR}/nvim/lua/ac-vimtex/init.vim
+source ${AB_DLZ_DOTFILES}/nvim/lua/ac-ipy/init.vim
+source ${AB_DLZ_DOTFILES}/nvim/lua/ac-netrw/init.vim
+source ${AB_DLZ_DOTFILES}/nvim/lua/ac-pandoc/init.vim
+source ${AB_DLZ_DOTFILES}/nvim/lua/ac-julia/init.vim
+source ${AB_DLZ_DOTFILES}/nvim/lua/ac-vimtex/init.vim
 lua require('ac-gitsigns')
 lua require('ac-lsp')
 lua require('ac-treesitter')
