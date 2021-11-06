@@ -67,6 +67,9 @@ lua require('keymappings')
 lua require('ac-which-key')
 
 lua require('settings')
+set completeopt=menu,menuone,noselect
+lua require('ac-cmp')
+
 lua require('colorscheme')
 
 " lua require('lsp.lua-ls')

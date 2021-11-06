@@ -182,24 +182,10 @@ autocmd FileType tex,latex inoremap \lth \huge
 -- }}}2
 -- }}}1
 -- Autocompletion {{{1
-kmap("i", "<Tab>", "v:lua.tab_complete()", {expr = true})
-kmap("s", "<Tab>", "v:lua.tab_complete()", {expr = true})
-kmap("i", "<S-Tab>", "v:lua.s_tab_complete()", {expr = true})
-kmap("s", "<S-Tab>", "v:lua.s_tab_complete()", {expr = true})
-
-vim.cmd([[
-inoremap <silent><expr> <C-Space> compe#complete()
-inoremap <silent><expr> <CR>      compe#confirm('<CR>')
-inoremap <silent><expr> <C-e>     compe#close('<C-e>')
-inoremap <silent><expr> <C-f>     compe#scroll({ 'delta': +4 })
-inoremap <silent><expr> <C-d>     compe#scroll({ 'delta': -4 })
-]])
-
--- kmap("i", "<C-Space>", "compe#complete()", {noremap = true, silent = true})
--- kmap("i", "<CR>", "compe#confirm('<CR>')", {noremap = true, silent = true})
--- kmap("i", "<C-e>", "compe#close('<C-e>')", {noremap = true, silent = true})
--- kmap("i", "<C-f>", "compe#scroll({ 'delta': +4 })", {noremap = true, silent = true})
--- kmap("i", "<C-d>", "compe#scroll({ 'delta': -4 })", {noremap = true, silent = true})
+-- kmap("i", "<Tab>", "v:lua.tab_complete()", {expr = true})
+-- kmap("s", "<Tab>", "v:lua.tab_complete()", {expr = true})
+-- kmap("i", "<S-Tab>", "v:lua.s_tab_complete()", {expr = true})
+-- kmap("s", "<S-Tab>", "v:lua.s_tab_complete()", {expr = true})
 -- }}}1
 -- Other Mappings {{{1
 -- better window movement {{{2

@@ -25,7 +25,16 @@ return require('packer').startup(
     use 'vim-pandoc/vim-pandoc-syntax'
 
     -- Snippets (change)
-    use 'hrsh7th/nvim-compe'
+    -- Plug 'hrsh7th/cmp-cmdline'
+    use {"hrsh7th/nvim-cmp", requires= {
+                              {'onsails/lspkind-nvim'},
+                              {'hrsh7th/cmp-vsnip'},
+                              {'neovim/nvim-lspconfig'},
+                              {'hrsh7th/cmp-nvim-lsp'},
+                              -- {'hrsh7th/cmp-buffer'},
+                              -- {'hrsh7th/cmp-path'}}
+    }} --completion
+ 	  use {'tzachar/cmp-tabnine', run='./install.sh', requires = 'hrsh7th/nvim-cmp'}
     use "hrsh7th/vim-vsnip"
     use 'rafamadriz/friendly-snippets'
 
