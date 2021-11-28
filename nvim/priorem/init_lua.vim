@@ -118,3 +118,14 @@ use {'kristijanhusak/orgmode.nvim', config = function()
 use {'lukas-reineke/headlines.nvim'}
 lua require('ac-headlines')
 
+
+" get OS and computer name {{{1
+" " get operating system
+" let $os_name=split(system('uname -a'))[0]
+" " get computer name
+" let $computer_name=split(system('uname -a'))[1]
+" 
+" if $os_name == 'Darwin' && $computer_name == 'ac-osx'
+"   echom $os_name . " " . $computer_name
+" endif
+" }}}1
