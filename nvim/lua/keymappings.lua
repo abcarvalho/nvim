@@ -200,6 +200,9 @@ kmap('n', '<M-j>',
      [[:let save_a=@a<cr>"add"ap:let @a=save_a<cr>]],
      opts)
 -- }}}2
+-- moving text (visual mode) {{{2 
+kmap('v',  'J', ":m '>+1<CR>gv=gv", {noremap = true})
+kmap('v',  'K', ":m '<-2<CR>gv=gv", {noremap = true})
 -- }}}2
 -- toggle folding {{{2
 kmap('n', '<tab>', 'za', opts)
