@@ -204,6 +204,10 @@ kmap('n', '<M-j>',
 -- toggle folding {{{2
 kmap('n', '<tab>', 'za', opts)
 -- }}}2
+-- yanking {{{2
+-- yank the rest of the line (ignore white space at the end)
+kmap('n', 'Y', 'yg_', {noremap = true})
+-- }}}2
 -- undoing {{{2
 -- break points for undoing
 kmap('i',  ',', ',<c-g>u', {noremap = true})
