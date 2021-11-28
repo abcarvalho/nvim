@@ -62,26 +62,43 @@ kmap('n', '<leader>rg',
      {noremap = true})
 
 kmap('n', '<leader>rd',
-     ':lua require("ac-telescope").rgrep_dir("AB_DLZ_DOTFILES")<CR>',
+     ':lua require("ab-telescope").rgrep_dir("DOTFILESDIR")<CR>',
      {noremap = true})
 
 kmap('n', '<leader>rr',
-     ':lua require("ac-telescope").rgrep_dir("AB_DIZ_REPOS")<CR>',
-     {noremap = true})
-
-kmap('n', '<leader>rv',
-     ':lua require("ac-telescope").rgrep_dir("AB_DLZ_WIKI")<CR>',
-     {noremap = true})
-
-kmap('n', '<leader>rw',
-     ':lua require("ac-telescope").rgrep_dir("AB_DLZ_WORK")<CR>',
+     ':lua require("ab-telescope").rgrep_dir("REPOSDIR")<CR>',
      {noremap = true})
 -- }}}3
--- S is for sessions {{{3
+-- y is for yanking {{{3 
+-- format and yank paragraph
 vim.cmd([[
-nnoremap <leader>Ss :mksession! .quicksave.vim<CR>:echo "Session saved."<CR>
-nnoremap <leader>Sl :source .quicksave.vim<CR>:echo "Session loaded."<CR>
+  command ExpandTextWidth let oldtw=&textwidth | set textwidth=10000
+  command RestoreTextWidth let &textwidth=oldtw | set textwidth?
+
+  function! YankFormattedPars(...)
+    let pnum = get(a:, 1, 1)
+
+    silent ExpandTextWidth
+    silent execute "norm! v" . pnum . "apgqgvy"
+|   silent RestoreTextWidth
+    silent execute "norm! u"
+  endfunction 
 ]])
+-- format and yank whole file
+kmap('n', '<leader>yf',
+     [[:ExpandTextWidth <cr>  | ggVGgqgvy  |
+       :RestoreTextWidth <cr> | u]],
+     {noremap = true})
+-- TRASH:
+-- command -nargs=1 YankFormatPar call YankFormattedPars(<args>)
+-- command -nargs=1 YankFormatPar :ExpandTextWidth | normal! v<args>apgqgvy | :RestoreTextWidth | u
+-- kmap('n', '<leader>yp', [[:call YankFormattedPars(1) <cr>]],
+--      {noremap = true})
+-- -- format and yank visual selection
+-- kmap('v', '<leader>yv',
+--      [[:<C-U>ExpandTextWidth <cr> | gvgqy |
+--        :<C-U>RestoreTextWidth <cr> | u]],
+--      {noremap = true})
 -- }}}3
 -- }}}2
 -- comma-l {{{2
