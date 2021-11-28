@@ -176,10 +176,6 @@ kmap('n', '<C-l>', '<C-w>l', {silent = true})
 kmap('n', ']b', ':bnext<cr>', opts)
 kmap('n', '[b', ':bprev<cr>', opts)
 
--- kmap('n', ']b', ':BufferNext<CR>', opts)
--- kmap('n', '[b', ':BufferPrevious<CR>', opts)
--- kmap('n', '<leader>bc', ':BufferPrevious<CR>', opts)
-
 -- Tabs
 kmap('n', ']<tab>', ':tabn<cr>', opts)
 kmap('n', '[<tab>', ':tabp<cr>', opts)
