@@ -208,6 +208,12 @@ kmap('n', '<tab>', 'za', opts)
 -- yank the rest of the line (ignore white space at the end)
 kmap('n', 'Y', 'yg_', {noremap = true})
 -- }}}2
+-- cursor {{{2
+-- keeping it centered
+kmap('n', 'n', 'nzzzv', {noremap = true})
+kmap('n', 'N', 'Nzzzv', {noremap = true})
+kmap('n', 'J', 'mzJ`z', {noremap = true})
+-- }}}2
 -- undoing {{{2
 -- break points for undoing
 kmap('i',  ',', ',<c-g>u', {noremap = true})
