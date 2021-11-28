@@ -22,6 +22,18 @@ vim.cmd([[
                                        " alternatively, run :source $MYVIMRC
 ]])
 -- }}}1
+
+local opt =
+    setmetatable(
+    {},
+    {
+        __newindex = function(_, key, value)
+            vim.o[key] = value
+            vim.bo[key] = value
+        end
+    }
+)
+
 -- Global Options {{{1
 -- Some basics {{{2
 o.autochdir = true        -- Automatically change the current directory
