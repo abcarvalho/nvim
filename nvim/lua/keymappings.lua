@@ -179,6 +179,13 @@ autocmd FileType tex,latex inoremap \lth \huge
 -- kmap("s", "<S-Tab>", "v:lua.s_tab_complete()", {expr = true})
 -- }}}1
 -- Other Mappings {{{1
+-- navigation {{{2 
+-- Move normally between wrapped lines
+kmap('n', 'j', 'gj', opts)
+kmap('n', 'k', 'gk', opts)
+kmap('n', '0', 'g0', opts)
+kmap('n', '$', 'g$', opts)
+-- }}}2
 -- better window movement {{{2
 kmap('n', '<C-h>', '<C-w>h', {silent = true})
 kmap('n', '<C-j>', '<C-w>j', {silent = true})
