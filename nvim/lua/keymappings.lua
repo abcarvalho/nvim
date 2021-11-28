@@ -20,24 +20,10 @@ kmap('n', '<leader>fb',
      ':Telescope file_browser<CR>',
      {noremap = true})
 
-kmap('n', '<leader>fB',
-     ':lua require("ac-telescope").search_dir("AB_DCP_BOX")<CR>',
-     {noremap = true})
-
 kmap('n', '<leader>fd',
      ':lua require("ac-telescope").search_dir("AB_DLZ_DOTFILES")<CR>',
      {noremap = true})
 
-kmap('n', '<leader>fg',
-     ':lua require("ac-telescope").search_dir("AB_DLZ_GRAPHENE")<CR>',
-     {noremap = true})
-
-kmap('n', '<leader>fm',
-     ':lua require("ac-telescope").search_dir("AB_DLZ_ML")<CR>',
-     {noremap = true})
-
-kmap('n', '<leader>fo',
-     ':lua require("ac-telescope").search_dir("AB_DBZ_ORG")<CR>',
      {noremap = true})
 
 kmap('n', '<leader>fr',
@@ -48,17 +34,8 @@ kmap('n', '<leader>fr',
 --      ':lua require("ac-telescope").search_dir("AB_DBZ_TODO")<CR>',
 --      {noremap = true})
 
--- kmap('n', '<leader>fu',
---      ':lua require("ac-telescope").search_dir("AB_DBP_UCHICAGO")<CR>',
---      {noremap = true})
-
-kmap('n', '<leader>fv',
-     ':lua require("ac-telescope").search_dir("AB_DLZ_WIKI")<CR>',
      {noremap = true})
 
-kmap('n', '<leader>fw',
-     ':lua require("ac-telescope").search_dir("AB_DLZ_WORK")<CR>',
-     {noremap = true})
 -- kmap('i', '<leader>fs',
      -- '<C-O>:w<cr>', {noremap = true})
 -- }}}3
