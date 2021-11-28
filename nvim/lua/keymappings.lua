@@ -18,15 +18,11 @@ kmap('n', '<leader>fb',
      {noremap = true})
 
 kmap('n', '<leader>fd',
-     ':lua require("ac-telescope").search_dir("AB_DLZ_DOTFILES")<CR>',
-     {noremap = true})
-
+     ':lua require("ab-telescope").search_dir("DOTFILESDIR")<CR>',
      {noremap = true})
 
 kmap('n', '<leader>fr',
-     ':lua require("ac-telescope").search_dir("AB_DIZ_REPOS")<CR>',
-     {noremap = true})
-
+     ':lua require("ab-telescope").search_dir("REPOSDIR")<CR>',
      {noremap = true})
 
 -- kmap('i', '<leader>fs',
