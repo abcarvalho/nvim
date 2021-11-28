@@ -2,6 +2,26 @@
 local o, bo, wo = vim.o, vim.bo, vim.wo
 local g = vim.g
 
+-- vimscript commands {{{1
+vim.cmd([[
+  set debug=msg
+  filetype plugin indent on
+  syntax enable
+  set spell
+
+  set iskeyword+=-            " treat dash separated words as a word text object
+  set formatoptions-=cro      " Stop newline continuation of comments
+  set shortmess+=c            " Don't pass messages to |ins-completion-menu|.
+  set nohlsearch              " disable highlight after search
+
+  " Enable autocompletion:
+  set wildmode=longest,list,full
+  set completeopt=menu,menuone,noselect
+
+  au! BufWritePost $MYVIMRC source %   " auto source when writing to init.vim
+                                       " alternatively, run :source $MYVIMRC
+]])
+-- }}}1
 -- Global Options {{{1
 -- Some basics {{{2
 o.autochdir = true        -- Automatically change the current directory
