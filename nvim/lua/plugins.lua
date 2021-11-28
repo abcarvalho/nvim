@@ -93,6 +93,8 @@ return require('packer').startup(
     -- ColorScheme
     use 'folke/tokyonight.nvim'
     use 'shaunsingh/moonlight.nvim'
+    use 'EdenEast/nightfox.nvim'
+    use 'marko-cerovac/material.nvim'
 
     -- BufferLine
     use "romgrk/barbar.nvim"
