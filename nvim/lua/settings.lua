@@ -1,6 +1,5 @@
 -- vim:fdm=marker
--- local cmd = vim.cmd
-local o, wo, bo = vim.o, vim.wo, vim.bo
+local o, bo, wo = vim.o, vim.bo, vim.wo
 local g = vim.g
 
 -- Global Options {{{1
@@ -9,42 +8,44 @@ o.autochdir = true        -- Automatically change the current directory
 o.fileencoding = "utf-8"  -- The encoding written to file
 o.mouse = "a"             -- Enable your mouse
 
--- o.backspace = 2           -- make backspace work like most other programs
-
 -- Clipboard
 o.clipboard = "unnamedplus" -- Copy paste between vim and everything else
 -- }}}2
--- Files {{{2
-o.backup = false          -- This is recommended by coc
-o.writebackup = false     -- This is recommended by coc
--- }}}2
--- Timings {{{2
-o.updatetime = 100        -- Faster completion
-o.timeoutlen = 300        -- By default timeoutlen is 1000 ms
--- }}}2
--- Appearance {{{2
--- Colors
--- o.t_Co = "256"          -- Support 256 colors
-o.termguicolors = true  -- set term gui colors most terminals support this
-
-o.showtabline = 2       -- Always show tabs
-
--- Fold
-o.foldlevelstart=1
-
+-- appearance {{{2
 o.showmode = false      -- We don't need to see things like -- INSERT -- anymore
 o.pumheight = 10        -- Makes popup menu smaller
 o.cmdheight = 2         -- More space for displaying messages
 -- }}}2
--- Text Width {{{2
+-- colors {{{2
+-- o.t_Co = "256"          -- Support 256 colors
+o.termguicolors = true  -- set term gui colors most terminals support this
+-- }}}2
+-- files {{{2
+o.backup = false          -- This is recommended by coc
+o.writebackup = false     -- This is recommended by coc
+-- }}}2
+-- folds {{{2
+o.foldlevelstart=1
+-- }}}2
+-- text editing {{{2
+o.backspace = "2"   -- make backspace work like in most other programs
+                    -- equivalent to set backspace=indent,eol,start
+-- }}}2
+-- text width {{{2
 o.wrap = false          -- Display long lines as just one line
 o.textwidth = 80        -- set textwidth
 -- }}}2
--- Window splitting and buffers {{{2
-o.hidden = true           -- Required to keep multiple buffers open multiple buffers
-
+-- timings {{{2
+o.updatetime = 100        -- Faster completion
+o.timeoutlen = 300        -- By default timeoutlen is 1000 ms
+-- }}}2
+-- window splitting and buffers {{{2
+o.hidden = true         -- Required to keep multiple buffers open multiple buffers
 o.splitbelow = true     -- Horizontal splits will automatically be below
 o.splitright = true     -- Vertical splits will automatically be to the right
+-- }}}2
+-- tabs {{{2
+o.showtabline = 2       -- Always show tabs
 -- }}}2
 -- }}}1
 -- Buffer Options {{{1
@@ -53,11 +54,11 @@ o.splitright = true     -- Vertical splits will automatically be to the right
 -- Indentation
 opt.expandtab = true      -- Converts tabs to spaces
 opt.smartindent = true
-opt.shiftwidth = 2
+opt.shiftwidth = 2        -- Change the number of space characters inserted for
+                          -- indentation
 opt.softtabstop = 2
-opt.tabstop = 2
-vim.wo.breakindent = true
-
+opt.tabstop = 2           -- Insert 2 spaces for a tab
+wo.breakindent = true
 -- }}}1
 -- Window Options {{{1
 wo.number = true           -- set numbered lines
@@ -85,7 +86,6 @@ end
 -- }}}1
 -- Autocommands {{{1
 
--- }}}1
 -- Ensure Transparency 
 vim.cmd([[
   au ColorScheme * hi Normal ctermbg=none guibg=none
