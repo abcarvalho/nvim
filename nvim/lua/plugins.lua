@@ -17,12 +17,7 @@ return require('packer').startup(
     -- Packer can manage itself
     use 'wbthomason/packer.nvim'
 
-    -- Git (change)
-    use 'tpope/vim-fugitive'
-
-    -- Language: Markdown (change)
-    use 'vim-pandoc/vim-pandoc'
-    use 'vim-pandoc/vim-pandoc-syntax'
+    use("nathom/filetype.nvim")
 
     -- Snippets (change)
     -- Plug 'hrsh7th/cmp-cmdline'
@@ -36,7 +31,7 @@ return require('packer').startup(
     }} --completion
  	  use {'tzachar/cmp-tabnine', run='./install.sh', requires = 'hrsh7th/nvim-cmp'}
     use "hrsh7th/vim-vsnip"
-    use 'rafamadriz/friendly-snippets'
+    -- use 'rafamadriz/friendly-snippets'
 
     -- which key
     use 'folke/which-key.nvim'
@@ -55,27 +50,29 @@ return require('packer').startup(
     use 'ggandor/lightspeed.nvim'
 
     -- Git
+    use 'tpope/vim-fugitive'
     use {'lewis6991/gitsigns.nvim',
          requires = {
           'nvim-lua/plenary.nvim'
         }
       }
 
-    -- Julia
+    -- Language: Julia
     use 'JuliaEditorSupport/julia-vim'
 
-    -- Markdown
+    -- Language: Markdown
+    use 'vim-pandoc/vim-pandoc'
+    use 'vim-pandoc/vim-pandoc-syntax'
     use {'dhruvasagar/vim-table-mode', opt=true,
           ft={'md', 'markdown', 'pandoc'}}
 
-    -- LaTeX:
+    -- Language: LaTeX
     use 'lervag/vimtex'
 
     -- Note Taking & Task Management:
     use {"dkarter/bullets.vim", opt=true,
          ft={'md', 'markdown', 'pandoc', 'txt'}}
     use 'lervag/wiki.vim'
-    use {'kristijanhusak/orgmode.nvim'}
 
     -- Fuzzy Finder
     use {'nvim-telescope/telescope.nvim',
@@ -85,7 +82,7 @@ return require('packer').startup(
         }
 
     -- Autocompletion
-    use 'windwp/nvim-autopairs'
+    use {'windwp/nvim-autopairs'}
 
     -- Icons
     use "kyazdani42/nvim-web-devicons"
