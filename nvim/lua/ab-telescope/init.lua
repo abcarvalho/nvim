@@ -4,6 +4,7 @@ local actions = require('telescope.actions')
 config.search_dir = function(x)
   require('telescope.builtin').find_files({
 		-- shorten_path = true,
+    hidden = true,
     prompt_title = x,
 		cwd = os.getenv(x),
 	})
