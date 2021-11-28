@@ -58,11 +58,6 @@ opt.softtabstop = 2
 opt.tabstop = 2
 vim.wo.breakindent = true
 
--- vim.cmd('set ts=2') -- Insert 2 spaces for a tab
--- vim.cmd('set sw=2') -- Change the number of space characters inserted for indentation
--- bo.tabstop = 4           -- Insert 2 spaces for a tab
--- bo.softtabstop = 4
--- bo.shiftwidth = 4        -- Change the number of space characters inserted for indentation
 -- }}}1
 -- Window Options {{{1
 wo.number = true           -- set numbered lines
@@ -93,19 +88,3 @@ end
 
 -- }}}1
 
--- vim.cmd('set iskeyword+=-') -- treat dash separated words as a word text object"
-vim.cmd [[set shortmess+=c]] -- Don't pass messages to |ins-completion-menu|.
--- vim.cmd('set inccommand=split') -- Make substitution work in realtime
--- o.title = true
--- TERMINAL = vim.fn.expand('$TERMINAL')
--- vim.cmd('let &titleold="'..TERMINAL..'"')
--- o.titlestring="%<%F%=%l/%L - nvim"
--- vim.cmd('set whichwrap+=<,>,[,],h,l') -- move to next line with theses keys
--- vim.cmd('set colorcolumn=99999') -- fix indentline for now
--- wo.signcolumn = "yes" -- Always show the signcolumn, otherwise it would shift
--- the text each time
--- -- o.guifont = "JetBrainsMono\\ Nerd\\ Font\\ Mono:h18"
--- -- o.guifont = "Hack\\ Nerd\\ Font\\ Mono"
--- -- o.guifont = "SauceCodePro Nerd Font:h17"
--- o.guifont = "FiraCode Nerd Font:h17"
--- o.guifont = "JetBrains\\ Mono\\ Regular\\ Nerd\\ Font\\ Complete"
