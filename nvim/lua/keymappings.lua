@@ -48,6 +48,13 @@ autocmd FileType markdown,pandoc nmap <leader>mid i[<C-R>=strftime("%Y-%m-%d")<C
 " Markdown DateTime
 autocmd FileType markdown,pandoc nmap <leader>mit i<C-R>=strftime("%Y-%m-%d %a %I:%M %p")<CR><Esc>
 ]])
+-- Adjust section depth of the visual selection
+kmap('v', '<leader>mD', [[:s/^#/##/g <cr>]],
+     {noremap = true})
+
+kmap('v', '<leader>md', [[:s/^##/#/g <cr>]],
+     {noremap = true})
+
 -- }}}3
 -- r is for rgrep {{{3
 kmap('n', '<leader>rg',
