@@ -69,16 +69,15 @@ wo.conceallevel = 2        -- Concealed text is completely hidden unless
 -- OS options {{{1
 -- The operating system is assigned to a global variable that
 -- that can be used elsewhere for conditional system based logic
-local uname = vim.loop.os_uname().sysname
-if uname == "Darwin" then
-    g.open_command = "open"
-    g.system_name = "macOS"
-    g.is_mac = true
+if require('utils').is_darwin() then
+  g.open_command = "open"
+  g.system_name = "macOS"
+  g.is_mac = true
 
-    -- install pynvim: conda install pynvim
-    -- check health:  :checkhealth
-    g.python3_host_prog = '/usr/local/Caskroom/miniconda/base/bin/python'
-elseif uname == "Linux" then
+  -- install pynvim: conda install pynvim
+  -- check health:  :checkhealth
+  g.python3_host_prog = '/usr/local/Caskroom/miniconda/base/bin/python'
+elseif require('utils').is_linux() then
     g.open_command = "xdg-open"
     g.system_name = "Linux"
     g.is_linux = true
