@@ -1,9 +1,9 @@
 -- vim: fdm=marker
-
+local kmap = vim.api.nvim_set_keymap
 local wk = require("which-key")
 
--- leader {{{1
-local lopts = {
+-- leader - normal mode {{{1
+local lnopts = {
     mode = "n", -- NORMAL mode
     prefix = "<leader>",
     buffer = nil, -- Global mappings. Specify a buffer number for buffer local mappings
@@ -14,18 +14,11 @@ local lopts = {
 
 local leader_mappings = {
 -- single mappings {{{2
-   j = { '<C-W>s', 'split below'},
+   -- j = { '<C-W>s', 'split below'},  -- [ADJUST]
    l = {'<C-W>v', 'split right'},
 -- List default and user-defined commands
-   C = {'<cmd>Commands<cr>', 'list commands'},
+   C = {'<cmd>Telescope commands<cr>', 'list commands'}, -- [ADJUST]
    z = {'<cmd>ZenMode<cr>', 'zen-mode'},
--- }}}2
--- a is for acropolis {{{2
-  a = {
-    name = '+acropolis-server',
-    d = {'<cmd>e scp://artur@acropolis.uchicago.edu:22//home/artur/BondPricing/bond-data/<cr>', 'bond-data'},
-    m = {'<cmd>e scp://artur@acropolis.uchicago.edu:22//home/artur/BondPricing/bond-model/<cr>', 'bond-model'},
-  },
 -- }}}2
 -- b is for buffers {{{2
   b = {
@@ -40,36 +33,31 @@ local leader_mappings = {
 -- c is for config {{{2
   c = {
     name = "+config",
-    s = {'<cmd>source ${AB_DLZ_DOTFILES}/nvim/init.vim<CR>', 'source config'},
+    s = {'<cmd>source $MYVIMRC<CR>', 'source config'},
   },
 -- }}}2
 -- d is for directory {{{2
   d = {
     name = '+directory',
-    d = {'<cmd>cd $AB_DLZ_DOTFILES<cr>', 'dotfiles'},
-    r = {'<cmd>cd $AB_DIZ_REPOS<cr>', 'repos'},
-    k = {'<cmd>cd $AB_DLZ_WORK<cr>', 'work'},
-    v = {'<cmd>cd $AB_DLZ_WIKI<cr>', 'wiki'},
+    d = {'<cmd>cd $DOTFILESDIR<cr>', 'dotfiles'},
+    r = {'<cmd>cd $REPOSDIR<cr>', 'repos'},
   },
 -- }}}2
 -- f is for file {{{2
   f = {
     name = '+file',
     n = {'<cmd>Lexplore<cr>', 'netrw'},
-    a = {'<cmd>edit ${AB_DLZ_WIKI}/tasks.md', 'tasks'},
     b = {'file-browser'},
-    B = {'BOX Drive'},
-    d = {'AB DOTFILES'},
+    d = {'DOTFILES'},
     f = { "<cmd>Telescope find_files<cr>", "Find File" }, -- create a binding with label
-    g = {'AB GRAPHENE'},
-    m = {'AB MACHINE LEARNING'},
-    o = {'AB ORG'}, -- '<cmd>edit ${AB_ORG_DIR}/networking.org<cr>', 'networking-org'},
-    r = {'AB REPOS'},
+    r = {'REPOS'},
     s = {'<cmd>w<cr>', 'save-file'},
-    p = {'<cmd>edit ${AB_DIZ_REPOS}/dissertation/paper/abcarvalho_paper.tex<cr>', 'paper-thesis'},
-    u = {'AB UCHICAGO'},
-    v = {'AB WIKI'},
-    w = {'AB WORK'},
+  },
+-- }}}2
+-- F is for functions {{{2
+  F = {
+    name = '+functions',
+    t = {':call ThemeSwapper() <cr>', 'swap-theme (light/dark)'},
   },
 -- }}}2
 -- g is for git {{{2
@@ -123,34 +111,6 @@ local leader_mappings = {
     },
   },
 -- }}}2
--- o is for org {{{2
-  o = {
-    name = '+org-mode',
-    a = {'agenda'},
-    A = {'archive-tag'},
-    ['$'] = {'archive-subtree'},
-    c = {'capture-prompt'},
-    r = {'capture-refile'},
-    k = {'capture-abort'},
-    w = {'capture-finalize'},
-    ['?'] = {'capture-help'},
-    o = {'open-link/date'},
-    t = {'tags'},
-    K = {'move-subtree-up'},
-    J = {'move-subtree-down'},
-    e = {'export'},
-    i = {
-      name = '+org-insert',
-      h = {'headline'},
-      t = {'TODO (after current headline and contents)'},
-      T = {'TODO (after current headline)'},
-    },
-    -- s = {
-    --   name = '+org-set',
-    --   t = {'call require("orgmode").action("org_mapping.todo_next_state")','TODO'},
-    --  },
-  },
--- }}}2
 -- p is for packer {{{2
   p = {
     name = '+packer',
@@ -173,8 +133,6 @@ local leader_mappings = {
     g = {'rgrep-dir'},
     d = {'rgrep-dotfiles-dir'},
     r = {'rgrep-repos-dir'},
-    v = {'rgrep-wiki-dir'},
-    w = {'rgrep-work-dir'},
    },
 -- }}}2
 -- s is for search {{{2
@@ -199,8 +157,10 @@ local leader_mappings = {
 -- S is for sessions {{{2
   S = {
     name = '+sessions',
-    s = {'save'},
-    l = {'load'},
+    s = {'<cmd>mks! $SESSIONSDIR/session.vim <cr>', 'save'},
+    l = {'<cmd>source $SESSIONSDIR/session.vim <cr>', 'load'},
+    T = {'<cmd>mks! $SESSIONSDIR/tasks.vim <cr>', 'save-tasks-session'},
+    t = {'<cmd>source $SESSIONSDIR/tasks.vim <cr>', 'load-tasks-session'},
   },
 -- }}}2
 -- <tab> is for tabs {{{2
@@ -250,8 +210,43 @@ local leader_mappings = {
     o = {"<cmd>only<cr>", 'close-all-windows-except-current'},
       },
 -- }}}2
+-- y is for yanking {{{2
+    y = {
+      name = '+yank',
+      p = {
+        name = '+yank-formatted-paragraph(s)',
+        ['1'] = {':call YankFormattedPars(1) <cr>', '1 par'},
+        ['2'] = {':call YankFormattedPars(2) <cr>', '2 pars'},
+        ['3'] = {':call YankFormattedPars(3) <cr>', '3 pars'},
+        ['4'] = {':call YankFormattedPars(4) <cr>', '4 pars'},
+        ['5'] = {':call YankFormattedPars(5) <cr>', '5 pars'},
+      },
+      f = {'yank-formatted-file'},
+    },
+-- }}}2
 }
-wk.register(leader_mappings, lopts)
+wk.register(leader_mappings, lnopts)
+-- }}}1
+-- leader - visual mode {{{1
+local lvopts = {
+    mode = "v", -- NORMAL mode
+    prefix = "<leader>",
+    buffer = nil, -- Global mappings. Specify a buffer number for buffer local mappings
+    silent = true, -- use `silent` when creating keymaps
+    noremap = true, -- use `noremap` when creating keymaps
+    nowait = false -- use `nowait` when creating keymaps
+}
+
+local leader_v_mappings = {
+-- m is for markdown {{{2
+  m = {
+    name = 'markdown',
+    d = {'depth decrease'},  -- visual
+    D = {'depth increase'},  -- visual
+    },
+-- }}}2
+}
+wk.register(leader_v_mappings, lvopts)
 -- }}}1
 -- localleader {{{1
 local ll_mappings = {
@@ -266,8 +261,100 @@ local llopts = {
     buffer = nil, -- Global mappings. Specify a buffer number for buffer local mappings
     silent = true, -- use `silent` when creating keymaps
     noremap = true, -- use `noremap` when creating keymaps
-    nowait = false -- use `nowait` when creating keymaps
+    nowait = false, -- use `nowait` when creating keymaps
 }
 
 wk.register(ll_mappings, llopts)
+-- }}}1
+-- HOME COMPUTER COMMANDS {{{1
+if require('utils').is_home_computer() then
+-- leader - normal mode {{{2
+-- telescope fzf keymappings {{{3
+  kmap('n', '<leader>fB',
+       ':lua require("ab-telescope").search_dir("AB_DCP_BOX")<CR>',
+       {noremap = true})
+
+  kmap('n', '<leader>fg',
+       ':lua require("ab-telescope").search_dir("AB_DLZ_GRAPHENE")<CR>',
+       {noremap = true})
+
+  kmap('n', '<leader>fm',
+       ':lua require("ab-telescope").search_dir("AB_DLZ_ML")<CR>',
+       {noremap = true})
+
+  kmap('n', '<leader>fo',
+       ':lua require("ab-telescope").search_dir("AB_DLZ_ORG")<CR>',
+       {noremap = true})
+
+  -- kmap('n', '<leader>fu',
+  --      ':lua require("ab-telescope").search_dir("AB_DBP_UCHICAGO")<CR>',
+  --      {noremap = true})
+
+  kmap('n', '<leader>fv',
+       ':lua require("ab-telescope").search_dir("AB_DLZ_WIKI")<CR>',
+       {noremap = true})
+
+  kmap('n', '<leader>fw',
+       ':lua require("ab-telescope").search_dir("AB_DLZ_WORK")<CR>',
+       {noremap = true})
+--- }}}3
+-- telescope rgrep keymappings {{{3
+  kmap('n', '<leader>rv',
+       ':lua require("ab-telescope").rgrep_dir("AB_DLZ_WIKI")<CR>',
+       {noremap = true})
+
+  kmap('n', '<leader>rw',
+       ':lua require("ab-telescope").rgrep_dir("AB_DLZ_WORK")<CR>',
+       {noremap = true})
+--- }}}3
+
+  local osx_leader_mappings = {
+-- d is for directory {{{3
+    d = {
+      name = '+directory',
+      k = {'<cmd>cd $AB_DLZ_WORK<cr>', 'work'},
+      v = {'<cmd>cd $AB_DLZ_WIKI<cr>', 'wiki'},
+    },
+-- }}}3
+-- f is for file {{{3
+    f = {
+      name = '+file',
+      g = {'AB GRAPHENE'},
+      m = {'AB MACHINE LEARNING'},
+      a = {'<cmd>edit ${AB_DLZ_WIKI}/tasks.md', 'tasks'},
+      B = {'BOX Drive'},
+      o = {'AB ORG'}, -- '<cmd>edit ${AB_ORG_DIR}/networking.org<cr>', 'networking-org'},
+      p = {'<cmd>edit ${REPOSDIR}/dissertation/paper/abcarvalho_paper.tex<cr>', 'paper-thesis'},
+      u = {'AB UCHICAGO'},
+      v = {'AB WIKI'},
+      w = {'AB WORK'},
+    },
+-- }}}3
+-- r is for rgrep {{{3
+    r = {
+      name = '+rgrep',
+      v = {'rgrep-wiki-dir'},
+      w = {'rgrep-work-dir'},
+     },
+-- }}}3
+  }
+  wk.register(osx_leader_mappings, lnopts)
+-- }}}2
+end
+-- }}}1
+-- PRIVATE COMMANDS {{{1
+if require('utils').has_private_settings() then
+  vim.cmd([[source $LUADIR/ab-privatus.vim]])
+
+  local privatus_leader_mappings = {
+-- a is for acropolis {{{2
+    a = {
+      name = '+acropolis-server',
+      d = {'<cmd> AcropolisBondData <cr>', 'bond-data'},
+      m = {'<cmd> AcropolisBondModel <cr>', 'bond-model'},
+    },
+  }
+-- }}}2
+  wk.register(privatus_leader_mappings, lnopts)
+  end
 -- }}}1
