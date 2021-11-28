@@ -83,6 +83,7 @@ wo.breakindent = true
 -- Window Options {{{1
 wo.number = true           -- set numbered lines
 wo.foldmethod = "syntax"
+wo.foldenable = false
 wo.relativenumber = true   -- set relative number
 wo.cursorline = true       -- Enable highlighting of the current line
 wo.conceallevel = 2        -- Concealed text is completely hidden unless
