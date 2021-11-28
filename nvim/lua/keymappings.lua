@@ -1,4 +1,5 @@
 -- vim:fdm=marker
+local g = vim.g
 local kmap = vim.api.nvim_set_keymap
 local opts = {noremap = true, silent = true}
 
@@ -7,8 +8,8 @@ local opts = {noremap = true, silent = true}
 vim.cmd([[
   nnoremap <SPACE> <Nop>
 ]])
-vim.g.mapleader = " "
-vim.g.maplocalleader = ";"
+g.mapleader = " "
+g.maplocalleader = ";"
 -- }}}1
 -- Which Key {{{1
 -- <leader> {{{2
