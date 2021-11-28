@@ -87,4 +87,9 @@ end
 -- Autocommands {{{1
 
 -- }}}1
+-- Ensure Transparency 
+vim.cmd([[
+  au ColorScheme * hi Normal ctermbg=none guibg=none
+  au ColorScheme * hi NonText ctermbg=none guibg=none
+]])
 
