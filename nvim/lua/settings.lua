@@ -105,6 +105,10 @@ elseif require('utils').is_linux() then
 end
 -- }}}1
 -- Autocommands {{{1
+-- Disables automatic commenting on newline:
+vim.cmd([[
+  autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
+]])
 
 -- Ensure Transparency 
 vim.cmd([[
@@ -112,3 +116,11 @@ vim.cmd([[
   au ColorScheme * hi NonText ctermbg=none guibg=none
 ]])
 
+-- Highligth text on yank
+vim.cmd([[
+  augroup highlight_yank
+      autocmd!
+      autocmd TextYankPost * silent! lua require'vim.highlight'.on_yank({timeout = 40})
+  augroup END
+]])
+-- }}}1
