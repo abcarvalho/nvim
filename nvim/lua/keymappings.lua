@@ -204,20 +204,12 @@ kmap('n', '[b', ':bprev<cr>', opts)
 -- kmap('n', '<leader>bc', ':BufferPrevious<CR>', opts)
 
 -- Tabs
--- kmap('n', ']<tab>', ':tabn<cr>', opts)
--- kmap('n', ']<tab>', ':tabp<cr>', opts)
-vim.cmd([[
-nnoremap ]<tab> :tabn<cr>
-nnoremap [<tab> :tabp<cr>
-]])
+kmap('n', ']<tab>', ':tabn<cr>', opts)
+kmap('n', '[<tab>', ':tabp<cr>', opts)
 
 -- Windows
--- kmap('n', ']w', '<c-w>w', opts)
--- kmap('n', ']w', '<c-w>W', opts)
-vim.cmd([[
-nnoremap ]w <c-w>w
-nnoremap [w <c-w>W
-]])
+kmap('n', ']w', '<c-w>w', opts)
+kmap('n', '[w', '<c-w>W', opts)
 -- }}}2
 -- indenting text {{{2
 -- better indenting
@@ -225,22 +217,16 @@ kmap('v', '<', '<gv', opts)
 kmap('v', '>', '>gv', opts)
 -- }}}2
 -- replace all {{{2
--- kmap('n', 'R', [[:%s//gc<Left><Left><Left>]], opts)
-vim.cmd([[
-nnoremap R :%s//gc<Left><Left><Left>
-]])
+kmap('n', 'R', [[:%s//gc<Left><Left><Left>]], {noremap=true})
 -- }}}2
 -- Reordering Lines {{{2
--- kmap('n', '<M-k>',
---      [[let save_a=@a<cr><Up>"add"ap<Up>:let @a=save_a<cr>]],
---      opts)
--- kmap('n', '<M-j>',
---      [[:let save_a=@a<cr>"add"ap:let @a=save_a<cr>]],
---      opts)
-vim.cmd([[
-:nnoremap <silent><M-k> :let save_a=@a<Cr><Up>"add"ap<Up>:let @a=save_a<Cr>
-:nnoremap <silent><M-j> :let save_a=@a<Cr>"add"ap:let @a=save_a<Cr>
-]])
+kmap('n', '<M-k>',
+     [[:let save_a=@a<cr><Up>"add"ap<Up>:let @a=save_a<cr>]],
+     opts)
+kmap('n', '<M-j>',
+     [[:let save_a=@a<cr>"add"ap:let @a=save_a<cr>]],
+     opts)
+-- }}}2
 -- }}}2
 -- toggle folding {{{2
 kmap('n', '<tab>', 'za', opts)
