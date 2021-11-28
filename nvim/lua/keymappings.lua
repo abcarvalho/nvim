@@ -204,6 +204,15 @@ kmap('n', '<M-j>',
 -- toggle folding {{{2
 kmap('n', '<tab>', 'za', opts)
 -- }}}2
+-- undoing {{{2
+-- break points for undoing
+kmap('i',  ',', ',<c-g>u', {noremap = true})
+kmap('i',  '.', '.<c-g>u', {noremap = true})
+kmap('i',  '!', '!<c-g>u', {noremap = true})
+kmap('i',  '?', '?<c-g>u', {noremap = true})
+kmap('i',  '[', '[<c-g>u', {noremap = true})
+kmap('i',  '(', '(<c-g>u', {noremap = true})
+-- }}}2
 -- clear highlighting on escape in normal mode {{{2 
 kmap('n', '<esc>', ':noh<return><esc>', {noremap = true})
 -- }}}2
