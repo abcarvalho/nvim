@@ -2,9 +2,6 @@
 local kmap = vim.api.nvim_set_keymap
 local opts = {noremap = true, silent = true}
 
--- local g = vim.g
--- g.maplocalleader = ';'
-
 -- leader and local leader keys {{{1
 -- make sure SPC is not mapped to anything
 vim.cmd([[
@@ -29,10 +26,6 @@ kmap('n', '<leader>fd',
 kmap('n', '<leader>fr',
      ':lua require("ac-telescope").search_dir("AB_DIZ_REPOS")<CR>',
      {noremap = true})
-
--- kmap('n', '<leader>ft',
---      ':lua require("ac-telescope").search_dir("AB_DBZ_TODO")<CR>',
---      {noremap = true})
 
      {noremap = true})
 
