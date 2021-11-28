@@ -115,4 +115,6 @@ use {'kristijanhusak/orgmode.nvim', config = function()
   },
 -- }}}2
 
+use {'lukas-reineke/headlines.nvim'}
+lua require('ac-headlines')
 
