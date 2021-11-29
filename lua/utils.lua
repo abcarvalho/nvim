@@ -34,7 +34,7 @@ function M.file_exists(name)
 end
 
 function M.has_private_settings()
-  return require('utils').file_exists(os.getenv("LUADIR") .. "" .."/ab-privatus.vim")
+  return M.file_exists(os.getenv("LUADIR") .. "" .."/ab-privatus.vim")
 end
 
 return M
