@@ -18,8 +18,8 @@ kmap('n', '<leader>fb',
      ':Telescope file_browser<CR>',
      {noremap = true})
 
-kmap('n', '<leader>fd',
-     ':lua require("ab-telescope").search_dir("DOTFILESDIR")<CR>',
+kmap('n', '<leader>fc',
+     ':lua require("ab-telescope").search_dir("CONFIGDIR")<CR>',
      {noremap = true})
 
 kmap('n', '<leader>fr',
@@ -59,8 +59,8 @@ kmap('n', '<leader>rg',
      ':Telescope live_grep<CR>',
      {noremap = true})
 
-kmap('n', '<leader>rd',
-     ':lua require("ab-telescope").rgrep_dir("DOTFILESDIR")<CR>',
+kmap('n', '<leader>rc',
+     ':lua require("ab-telescope").rgrep_dir("CONFIGDIR")<CR>',
      {noremap = true})
 
 kmap('n', '<leader>rr',

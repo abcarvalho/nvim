@@ -1,8 +1,8 @@
 -- vim: set fdm=marker :
 -- set paths {{{1
 vim.cmd([[
-  let $DOTFILESDIR=$AB_DLZ_DOTFILES
-  let $LUADIR=$DOTFILESDIR ."/nvim/lua"
+  let $CONFIGDIR=$AB_DLZ_CONFIG
+  let $LUADIR=$AB_DLZ_CONFIG ."/nvim/lua"
 ]])
 
 if require('utils').is_home_computer() then
