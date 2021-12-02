@@ -344,7 +344,7 @@ end
 -- }}}1
 -- PRIVATE COMMANDS {{{1
 if require('utils').has_private_settings() then
-  vim.cmd([[source $LUADIR/ab-privatus.vim]])
+  vim.cmd([[source $LUADIR/private-config.lua]])
 
   local privatus_leader_mappings = {
 -- a is for acropolis {{{2
