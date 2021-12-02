@@ -37,8 +37,17 @@ function M.has_private_settings()
   return M.file_exists(os.getenv("LUADIR") .. "" .."/private-config.lua")
 end
 
-return M
+function M.scp_repo(repo_name)
+ local tmp =string.format('%s%s%s%s',
+                          'e ',
+                          require('private-config').remote_scp_prefix,
+                          require('private-config').remote_dir .. "/" ,
+                          repo_name .. "/")
+ vim.api.nvim_command(tmp)
+end
 
+
+return M
 
 -- local os_name = vim.loop.os_uname().sysname
 -- local computer_name = vim.loop.os_gethostname()
