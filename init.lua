@@ -45,4 +45,6 @@ require('ab-treesitter')
 
 -- autocompletion
 require('ab-cmp')
+
+require('ab-magma-nvim')
 -- }}}1

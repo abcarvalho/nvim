@@ -112,4 +112,6 @@ return require('packer').startup(
     -- Jupyter & QtConsole
     use 'jupyter-vim/jupyter-vim'
     use 'untitled-ai/jupyter_ascending.vim'
+
+    use { 'dccsillag/magma-nvim', run = ':UpdateRemotePlugins' }
 end)
