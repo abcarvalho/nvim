@@ -350,6 +350,7 @@ if require('utils').has_private_settings() then
 -- a is for acropolis {{{2
     a = {
       name = '+acropolis-server',
+      a = {"<cmd> lua require('utils').sync_with_server() <cr>", 'sync-file-with-server'},
       d = {"<cmd> lua require('utils').scp_repo('bond-data') <cr>", 'bond-data'},
       m = {"<cmd> lua require('utils').scp_repo('bond-model') <cr>", 'bond-model'},
     },
