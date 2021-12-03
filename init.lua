@@ -27,7 +27,6 @@ vim.cmd([[source $LUADIR/ab-ipy/init.vim]])
 vim.cmd([[source $LUADIR/ab-netrw/init.vim]])
 vim.cmd([[source $LUADIR/ab-pandoc/init.vim]])
 vim.cmd([[source $LUADIR/ab-julia/init.vim]])
-vim.cmd([[source $LUADIR/ab-vimtex/init.vim]])
 
 require('ab-gitsigns')
 require('ab-autopairs')
@@ -37,6 +36,7 @@ require('ab-blankline')
 require('ab-wiki')
 require('ab-zen')
 require('ab-lightspeed')
+require('ab-wiki')
 
 require('ab-which-key')
 
