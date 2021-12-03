@@ -22,7 +22,6 @@ require('keymappings')
 require('ab-filetype')
 require('ab-telescope')
 
-vim.cmd([[source $LUADIR/ab-funs.vim]])
 vim.cmd([[source $LUADIR/ab-ipy/init.vim]])
 vim.cmd([[source $LUADIR/ab-netrw/init.vim]])
 vim.cmd([[source $LUADIR/ab-pandoc/init.vim]])
