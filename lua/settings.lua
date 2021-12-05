@@ -1,47 +1,33 @@
 -- vim:fdm=marker
-local o, bo, wo = vim.o, vim.bo, vim.wo
-local g = vim.g
+local o,g, cmd = vim.o, vim.g, vim.cmd
 
 -- vimscript commands {{{1
 vim.cmd([[
   set debug=msg
   filetype plugin indent on
   syntax enable
-  set spell
 
-  set iskeyword+=-            " treat dash separated words as a word text object
+  " set iskeyword+=-          " treat dash separated words as a word text object
   set formatoptions-=cro      " Stop newline continuation of comments
   set shortmess+=c            " Don't pass messages to |ins-completion-menu|.
   set nohlsearch              " disable highlight after search
-
-  " Enable autocompletion:
-  set wildmode=longest,list,full
-  set completeopt=menu,menuone,noselect
-
-  au! BufWritePost $MYVIMRC source %   " auto source when writing to init.vim
-                                       " alternatively, run :source $MYVIMRC
 ]])
 -- }}}1
-
-local opt =
-    setmetatable(
-    {},
-    {
-        __newindex = function(_, key, value)
-            vim.o[key] = value
-            vim.bo[key] = value
-        end
-    }
-)
+-- o.syntax = true        -- syntax highlighting
 
 -- Global Options {{{1
 -- Some basics {{{2
+o.spell = true
 o.autochdir = true        -- Automatically change the current directory
 o.fileencoding = "utf-8"  -- The encoding written to file
 o.mouse = "a"             -- Enable your mouse
 
 -- Clipboard
 o.clipboard = "unnamedplus" -- Copy paste between vim and everything else
+-- }}}2
+-- autocompletion {{{2 
+o.wildmode = "longest:full,full"         -- Command-line completion mode
+o.completeopt = "menu,menuone,noselect"
 -- }}}2
 -- appearance {{{2
 o.showmode = false      -- We don't need to see things like -- INSERT -- anymore
@@ -81,24 +67,22 @@ o.showtabline = 2       -- Always show tabs
 -- }}}2
 -- }}}1
 -- Buffer Options {{{1
--- bo.syntax = true         -- syntax higlighting
-
 -- Indentation
-opt.expandtab = true      -- Converts tabs to spaces
-opt.smartindent = true
-opt.shiftwidth = 2        -- Change the number of space characters inserted for
+o.expandtab = true        -- Converts tabs to spaces
+o.smartindent = true
+o.shiftwidth = 2          -- Change the number of space characters inserted for
                           -- indentation
-opt.softtabstop = 2
-opt.tabstop = 2           -- Insert 2 spaces for a tab
-wo.breakindent = true
+o.softtabstop = 2
+o.tabstop = 2             -- Insert 2 spaces for a tab
+o.breakindent = true
 -- }}}1
 -- Window Options {{{1
-wo.number = true           -- set numbered lines
-wo.foldmethod = "syntax"
-wo.foldenable = false
-wo.relativenumber = true   -- set relative number
-wo.cursorline = true       -- Enable highlighting of the current line
-wo.conceallevel = 2        -- Concealed text is completely hidden unless
+o.number = true           -- set numbered lines
+o.foldmethod = "syntax"
+o.foldenable = false
+o.relativenumber = true   -- set relative number
+o.cursorline = true       -- Enable highlighting of the current line
+o.conceallevel = 2        -- Concealed text is completely hidden unless
 -- }}}1
 -- OS options {{{1
 -- The operating system is assigned to a global variable that
@@ -134,19 +118,25 @@ g.netrow_altv = 1
 g.netrw_liststyle = 3
 -- }}}1
 -- Autocommands {{{1
+-- auto source when writing to init.vim
+-- alternatively, run :source $MYVIMRC
+cmd([[
+  au! BufWritePost $MYVIMRC source %  
+]])
+
 -- Disables automatic commenting on newline:
-vim.cmd([[
+cmd([[
   autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
 ]])
 
--- Ensure Transparency 
-vim.cmd([[
+-- Ensure Transparency
+cmd([[
   au ColorScheme * hi Normal ctermbg=none guibg=none
   au ColorScheme * hi NonText ctermbg=none guibg=none
 ]])
 
 -- Highligth text on yank
-vim.cmd([[
+cmd([[
   augroup highlight_yank
       autocmd!
       autocmd TextYankPost * silent! lua require'vim.highlight'.on_yank({timeout = 40})
@@ -154,5 +144,5 @@ vim.cmd([[
 ]])
 
 -- netrw: open file, but keep focus in Explorer
-vim.cmd([[autocmd filetype netrw nmap <c-a> <cr>:wincmd W<cr>]])
+cmd([[autocmd filetype netrw nmap <c-a> <cr>:wincmd W<cr>]])
 -- }}}1
