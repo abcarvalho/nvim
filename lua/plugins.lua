@@ -87,11 +87,6 @@ return require('packer').startup(
     -- Icons
     use "kyazdani42/nvim-web-devicons"
 
-    -- ColorScheme
-    use 'folke/tokyonight.nvim'
-    use 'shaunsingh/moonlight.nvim'
-    use 'EdenEast/nightfox.nvim'
-    use 'marko-cerovac/material.nvim'
 
     -- BufferLine
     use "romgrk/barbar.nvim"
@@ -104,6 +99,8 @@ return require('packer').startup(
 
     -- Commenting
     use "terrortylor/nvim-comment"
+    -- ColorScheme
+    use 'folke/tokyonight.nvim'
 
     -- Text Alignment
     use {'junegunn/vim-easy-align', opt=true}
