@@ -8,7 +8,7 @@ let g:pandoc#modules#enable = ["formatting", "folding", 'command', "toc"]
 " let g:pandoc#folding#mode = 'stacked'
 let g:pandoc#folding#mode = "syntax"
 
-" augroup pandoc_syntax
-"     au! BufNewFile,BufFilePre,BufRead *.md set filetype=markdown.pandoc
-" augroup END
+augroup pandoc_syntax
+    au! BufNewFile,BufFilePre,BufRead *.md set filetype=markdown.pandoc
+augroup END
 
