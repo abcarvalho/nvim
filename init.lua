@@ -15,35 +15,54 @@ end
 
 require('plugins')
 require('settings')
-require('colorscheme')
-require('keymappings')
 
 -- plugins {{{1
 require('ab-filetype')
-require('ab-telescope')
 
-vim.cmd([[source $LUADIR/ab-ipy/init.vim]])
-vim.cmd([[source $LUADIR/ab-netrw/init.vim]])
-vim.cmd([[source $LUADIR/ab-pandoc/init.vim]])
-vim.cmd([[source $LUADIR/ab-julia/init.vim]])
-
+-- essentials {{{2
 require('ab-gitsigns')
-require('ab-autopairs')
-require('ab-bullets')
-require('ab-comment')
-require('ab-blankline')
-require('ab-wiki')
-require('ab-zen')
+require('ab-treesitter')
+require('ab-telescope')
+-- }}}2
+-- code editing {{{2
 require('ab-lightspeed')
+require('ab-autopairs')
+require('ab-comment')
+-- }}}2
+-- languages {{{2
+vim.cmd([[source $LUADIR/ab-julia/init.vim]])
+vim.cmd([[source $LUADIR/ab-pandoc/init.vim]])
+require('ab-vimtex')
+-- }}}2
+-- UI {{{2
+require('ab-blankline')
+require('ab-zen')
+-- }}}2
+-- note taking {{{2
+require('ab-bullets')
 require('ab-wiki')
+-- }}}2
 
-require('ab-which-key')
 
 require('ab-lsp')
-require('ab-treesitter')
 
 -- autocompletion
 require('ab-cmp')
 
+-- Jupyter & QtConsole
+require('ab-ipy')
 require('ab-magma-nvim')
+
+-- appearance {{{2
+require('colorscheme')
+-- }}}2
+
+
+require('keymappings')
+require('ab-which-key')
 -- }}}1
+
+-- missing:
+-- essentials: vim-fugitive
+-- UI: barbar, lualine
+-- appearance: nvim-web-icons

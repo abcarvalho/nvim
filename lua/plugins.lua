@@ -57,22 +57,8 @@ return require('packer').startup(
         }
       }
 
-    -- Language: Julia
-    use 'JuliaEditorSupport/julia-vim'
-
-    -- Language: Markdown
-    use 'vim-pandoc/vim-pandoc'
-    use 'vim-pandoc/vim-pandoc-syntax'
-    use {'dhruvasagar/vim-table-mode', opt=true,
-          ft={'md', 'markdown', 'pandoc'}}
-
-    -- Language: LaTeX
-    use 'lervag/vimtex'
-
-    -- Note Taking & Task Management:
-    use {"dkarter/bullets.vim", opt=true,
-         ft={'md', 'markdown', 'pandoc', 'txt'}}
-    use 'lervag/wiki.vim'
+    -- Treesitter
+    use {"nvim-treesitter/nvim-treesitter", run = ":TSUpdate"}
 
     -- Fuzzy Finder
     use {'nvim-telescope/telescope.nvim',
