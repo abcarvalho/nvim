@@ -209,10 +209,10 @@ kmap('v', '>', '>gv', opts)
 kmap('n', 'R', [[:%s//gc<Left><Left><Left>]], {noremap=true})
 -- }}}2
 -- Reordering Lines {{{2
-kmap('n', '<M-k>',
+kmap('n', '<C-k>',
      [[:let save_a=@a<cr><Up>"add"ap<Up>:let @a=save_a<cr>]],
      opts)
-kmap('n', '<M-j>',
+kmap('n', '<C-j>',
      [[:let save_a=@a<cr>"add"ap:let @a=save_a<cr>]],
      opts)
 -- }}}2
@@ -242,7 +242,7 @@ kmap('i',  '?', '?<c-g>u', {noremap = true})
 kmap('i',  '[', '[<c-g>u', {noremap = true})
 kmap('i',  '(', '(<c-g>u', {noremap = true})
 -- }}}2
--- clear highlighting on escape in normal mode {{{2 
+-- clear highlighting on escape in normal mode {{{2
 kmap('n', '<esc>', ':noh<return><esc>', {noremap = true})
 -- }}}2
 -- }}}1
