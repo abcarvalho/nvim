@@ -15,7 +15,6 @@ local lnopts = {
 local leader_mappings = {
 -- single mappings {{{2
    -- j = { '<C-W>s', 'split below'},  -- [ADJUST]
-   l = {'<C-W>v', 'split right'},
 -- List default and user-defined commands
    C = {'<cmd>Telescope commands<cr>', 'list commands'}, -- [ADJUST]
    z = {'<cmd>ZenMode<cr>', 'zen-mode'},
@@ -204,8 +203,8 @@ local leader_mappings = {
     J = {'<cmd>resize -2<cr>','expand-window-below'},
     L = {'<cmd>vertical resize -2<cr>', 'expand-window-right'},
     K = {'<cmd>resize +2<cr>'     ,'expand-window-up'   },
-    ['-'] = {'<cmd>split<cr>' , 'split-window-below'},
-    ['|'] = {'<cmd>vs<cr>' , 'split-window-right'},
+    ['0'] = {'<cmd>split<cr>' , 'split-window-below'},
+    ['-'] = {'<cmd>vs<cr>' , 'split-window-right'},
     ['='] ={"<C-w>=", 'balance-window'},
     o = {"<cmd>only<cr>", 'close-all-windows-except-current'},
       },
