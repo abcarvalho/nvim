@@ -30,7 +30,7 @@ require('ab-autopairs')
 require('ab-comment')
 -- }}}2
 -- languages {{{2
-vim.cmd([[source $LUADIR/ab-julia/init.vim]])
+require('ab-julia')
 vim.cmd([[source $LUADIR/ab-pandoc/init.vim]])
 require('ab-vimtex')
 -- }}}2
