@@ -57,7 +57,7 @@ local leader_mappings = {
 -- F is for functions {{{2
   F = {
     name = '+functions',
-    t = {':call ThemeSwapper() <cr>', 'swap-theme (light/dark)'},
+    t = {"<cmd> lua require('utils').theme_swapper() <cr>", 'swap-theme (light/dark)'},
   },
 -- }}}2
 -- g is for git {{{2
