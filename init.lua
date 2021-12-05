@@ -20,9 +20,10 @@ require('settings')
 require('ab-filetype')
 
 -- essentials {{{2
-require('ab-gitsigns')
-require('ab-treesitter')
 require('ab-telescope')
+require('ab-lsp')
+require('ab-treesitter')
+require('ab-gitsigns')
 -- }}}2
 -- code editing {{{2
 require('ab-lightspeed')
@@ -42,9 +43,6 @@ require('ab-zen')
 require('ab-bullets')
 require('ab-wiki')
 -- }}}2
-
-
-require('ab-lsp')
 
 -- autocompletion
 require('ab-cmp')
