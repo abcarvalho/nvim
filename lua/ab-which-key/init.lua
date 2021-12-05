@@ -79,7 +79,7 @@ local leader_mappings = {
     W = {'<cmd>Gwq<CR>', 'write + exit'},
   },
 -- }}}2
--- j is for jupyter {{{2
+--- j is for jupyter {{{2
   j = {
     name = '+jupyter',
     c = {'<cmd>IPython --existing --no-window<cr>', 'connect-qtconsole'},
@@ -88,6 +88,28 @@ local leader_mappings = {
     ['?'] = {'<Plug>(IPy-WordObjInfo)', 'inspect-var-under-cursor'},
     i = {'<Plug>(IPy-Interrupt)', 'interrupt-kernel'},
     t = {'<Plug>(IPy-Terminate)', 'terminate-kernel'},
+  },
+-- }}}2
+-- l is for lsp {{{2
+  l = {
+    name = '+lsp',
+    D = {'declaration'},
+    d = {'definition'},
+    K = {'hover'},
+    i = {'implementation'},
+    w = {
+      name = '+workspace',
+      a = {'add workspace folder'},
+      r = {'remove workspace folder'},
+      l = {'list workspace folders'},
+    },
+    t = {'type definition'},
+    r = {'rename'},
+    A = {'code action'},
+    R = {'references'},
+    e = {'open float'},
+    q = {'set loc list'},
+    f = {'formatting'},
   },
 -- }}}2
 -- m is for markdown {{{2
