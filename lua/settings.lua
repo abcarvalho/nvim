@@ -27,7 +27,9 @@ o.clipboard = "unnamedplus" -- Copy paste between vim and everything else
 -- }}}2
 -- autocompletion {{{2 
 o.wildmode = "longest:full,full"         -- Command-line completion mode
-o.completeopt = "menu,menuone,noselect"
+
+-- Set completeopt to have a better completion experience
+vim.o.completeopt = 'menuone,noselect'
 -- }}}2
 -- appearance {{{2
 o.showmode = false      -- We don't need to see things like -- INSERT -- anymore
