@@ -117,6 +117,22 @@ elseif require('utils').is_linux() then
     g.is_linux = true
 end
 -- }}}1
+-- netrw {{{1
+-- Open up netrw File Explorer
+-- Remove directory banner. Access it by pressing: I
+g.netrw_banner = 0
+
+-- Window Size
+g.netrw_winsize = 20
+
+-- Hit enter in the file browser to open the selected
+-- file with :vsplit to the right of browser
+g.netrw_browse_split = 2
+g.netrow_altv = 1
+
+-- Default to tree mode
+g.netrw_liststyle = 3
+-- }}}1
 -- Autocommands {{{1
 -- Disables automatic commenting on newline:
 vim.cmd([[
@@ -136,4 +152,7 @@ vim.cmd([[
       autocmd TextYankPost * silent! lua require'vim.highlight'.on_yank({timeout = 40})
   augroup END
 ]])
+
+-- netrw: open file, but keep focus in Explorer
+vim.cmd([[autocmd filetype netrw nmap <c-a> <cr>:wincmd W<cr>]])
 -- }}}1
