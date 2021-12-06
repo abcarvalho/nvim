@@ -21,6 +21,7 @@ return require('packer').startup(
     use("nathom/filetype.nvim")
 
     -- lsp
+    -- Collection of configurations for built-in LSP client
     use {'neovim/nvim-lspconfig',
          'williamboman/nvim-lsp-installer'}
 

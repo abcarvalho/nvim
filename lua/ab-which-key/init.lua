@@ -79,7 +79,7 @@ local leader_mappings = {
     W = {'<cmd>Gwq<CR>', 'write + exit'},
   },
 -- }}}2
---- j is for jupyter {{{2
+-- j is for jupyter {{{2
   j = {
     name = '+jupyter',
     c = {'<cmd>IPython --existing --no-window<cr>', 'connect-qtconsole'},

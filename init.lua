@@ -21,6 +21,10 @@ require('ab-filetype')
 
 -- essentials {{{2
 require('ab-telescope')
+
+-- autocompletion
+require('ab-cmp')
+
 require('ab-lsp')
 require('ab-treesitter')
 require('ab-gitsigns')
@@ -44,9 +48,6 @@ require('ab-bullets')
 require('ab-wiki')
 -- }}}2
 
--- autocompletion
-require('ab-cmp')
-
 -- Jupyter & QtConsole
 require('ab-ipy')
 require('ab-magma-nvim')
@@ -54,7 +55,6 @@ require('ab-magma-nvim')
 -- appearance {{{2
 require('colorscheme')
 -- }}}2
-
 
 require('keymappings')
 require('ab-which-key')
