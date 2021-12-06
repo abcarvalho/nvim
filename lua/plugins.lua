@@ -25,17 +25,18 @@ return require('packer').startup(
          'williamboman/nvim-lsp-installer'}
 
     -- Snippets (change)
-    -- Plug 'hrsh7th/cmp-cmdline'
+    -- Autocompletion plugin
     use {"hrsh7th/nvim-cmp", requires= {
-                              {'onsails/lspkind-nvim'},
-                              {'hrsh7th/cmp-vsnip'},
-                              {'neovim/nvim-lspconfig'},
-                              {'hrsh7th/cmp-nvim-lsp'},
+                {'onsails/lspkind-nvim'},
+                {'hrsh7th/cmp-buffer'},
+                {'neovim/nvim-lspconfig'},
+                {'hrsh7th/cmp-nvim-lsp'},   -- LSP source for nvim-cmp
+                {'L3MON4D3/LuaSnip'},       -- Snippets plugin
+                {'saadparwaiz1/cmp_luasnip'},
     }}
     --completion
  	  use {'tzachar/cmp-tabnine', run='./install.sh',
          requires = 'hrsh7th/nvim-cmp'}
-    use "hrsh7th/vim-vsnip"
 
 -- essentials {{{2
     -- which key
