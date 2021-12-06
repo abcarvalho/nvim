@@ -30,7 +30,7 @@ require('ab-treesitter')
 require('ab-gitsigns')
 -- }}}2
 -- code editing {{{2
-require('ab-lightspeed')
+require('ab-hop')
 require('ab-autopairs')
 require('ab-comment')
 -- }}}2
