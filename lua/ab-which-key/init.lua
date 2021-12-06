@@ -110,7 +110,31 @@ local leader_mappings = {
     e = {'open float'},
     q = {'set loc list'},
     f = {'formatting'},
+-- h is for GitSigns {
+  h = {
+    name = '+gitsigns',
   },
+-- -- l is for lsp {{{2
+--   l = {
+--     name = '+lsp',
+--     D = {'declaration'},
+--     d = {'definition'},
+--     K = {'hover'},
+--     i = {'implementation'},
+--     w = {
+--       name = '+workspace',
+--       a = {'add workspace folder'},
+--       r = {'remove workspace folder'},
+--       l = {'list workspace folders'},
+--     },
+--     t = {'type definition'},
+--     r = {'rename'},
+--     A = {'code action'},
+--     R = {'references'},
+--     e = {'open float'},
+--     q = {'set loc list'},
+--     f = {'formatting'},
+--   },
 -- }}}2
 -- m is for markdown {{{2
   m = {
