@@ -50,8 +50,9 @@ local cmp = require'cmp'
     },
     sources = cmp.config.sources({
       { name = 'nvim_lsp' },
-      { name = 'cmp_tabnine' },
+      -- { name = 'cmp_tabnine' },
       { name = 'luasnip' }, -- For luasnip users.
+      { name = 'omni' },  -- required by vimtex
       { name = 'buffer' },
     }),
    formatting = {
