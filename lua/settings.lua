@@ -1,8 +1,8 @@
 -- vim:fdm=marker
-local o,g, cmd = vim.o, vim.g, vim.cmd
+local o, g, cmd = vim.o, vim.g, vim.cmd
 
 -- vimscript commands {{{1
-vim.cmd([[
+cmd([[
   set debug=msg
   filetype plugin indent on
   syntax enable
