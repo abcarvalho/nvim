@@ -37,8 +37,8 @@ return require('packer').startup(
               {'hrsh7th/cmp-omni'},
     }}
     --completion
- 	  use {'tzachar/cmp-tabnine', run='./install.sh',
-         requires = 'hrsh7th/nvim-cmp'}
+ 	  -- use {'tzachar/cmp-tabnine', run='./install.sh',
+ 	  --          requires = 'hrsh7th/nvim-cmp'}
 
 -- essentials {{{2
     -- which key
