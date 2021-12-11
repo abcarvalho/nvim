@@ -117,8 +117,8 @@ return require('packer').startup(
 -- }}}2
 
     -- Note Taking & Task Management:
-    use {"dkarter/bullets.vim", opt=true,
-         ft={'md', 'markdown', 'pandoc', 'txt'}}
+    use {"dkarter/bullets.vim", -- opt=true,
+         ft={'md', 'markdown', 'pandoc', 'txt', 'markdown.pandoc'}}
     use 'lervag/wiki.vim'
 
     -- Jupyter & QtConsole
