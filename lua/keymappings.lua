@@ -1,11 +1,11 @@
 -- vim:fdm=marker
-local g = vim.g
+local g, cmd = vim.g, vim.cmd
 local kmap = vim.api.nvim_set_keymap
 local opts = {noremap = true, silent = true}
 
 -- leader and local leader keys {{{1
 -- make sure SPC is not mapped to anything
-vim.cmd([[
+cmd([[
   nnoremap <SPACE> <Nop>
 ]])
 g.mapleader = " "
@@ -30,7 +30,6 @@ kmap('n', '<leader>fr',
      -- '<C-O>:w<cr>', {noremap = true})
 -- }}}3
 -- m is for markdown {{{3
-vim.cmd([[
   autocmd FileType markdown,pandoc nmap <leader>m1 i#<Space><CR><CR><++><Esc>2k<S-a>
   autocmd FileType markdown,pandoc nmap <leader>m2 i##<Space><CR><CR><++><Esc>2k<S-a>
   autocmd FileType markdown,pandoc nmap <leader>m3 i###<Space><CR><CR><++><Esc>2k<S-a>
@@ -38,6 +37,7 @@ vim.cmd([[
   autocmd FileType markdown,pandoc nmap <leader>m5 i#####<Space><CR><CR><++><Esc>2k<S-a>
 
   autocmd FileType markdown,pandoc nmap <leader>ms i```sh<CR><CR>```<CR><ESC>kki<Tab>
+cmd([[
 
   " Markdown Dates
   autocmd FileType markdown,pandoc nmap <leader>mid i[<C-R>=strftime("%Y-%m-%d")<CR>]<Esc>
@@ -69,7 +69,7 @@ kmap('n', '<leader>rr',
 -- }}}3
 -- y is for yanking {{{3 
 -- format and yank paragraph
-vim.cmd([[
+cmd([[
   command ExpandTextWidth let oldtw=&textwidth | set textwidth=10000
   command RestoreTextWidth let &textwidth=oldtw | set textwidth?
 
@@ -101,13 +101,13 @@ kmap('n', '<leader>yf',
 -- }}}2
 -- comma-l {{{2
 -- latex autocmds {{{3
-vim.cmd([[
-" emphasize
-autocmd FileType tex,latex inoremap \le ~\emph{}<Esc>i 
-" citation
-autocmd FileType tex,latex inoremap \lc ~\cite{}<Esc>a
-" reference
-autocmd FileType tex,latex inoremap \lr ~\ref{}<Esc>a
+cmd([[
+  " emphasize
+  autocmd FileType tex,latex inoremap \le ~\emph{}<Esc>i 
+  " citation
+  autocmd FileType tex,latex inoremap \lc ~\cite{}<Esc>a
+  " reference
+  autocmd FileType tex,latex inoremap \lr ~\ref{}<Esc>a
 ]])
 -- math {{{4
 vim.cmd([[
