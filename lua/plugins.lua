@@ -28,12 +28,13 @@ return require('packer').startup(
     -- Snippets (change)
     -- Autocompletion plugin
     use {"hrsh7th/nvim-cmp", requires= {
-                {'onsails/lspkind-nvim'},
-                {'hrsh7th/cmp-buffer'},
-                {'neovim/nvim-lspconfig'},
-                {'hrsh7th/cmp-nvim-lsp'},   -- LSP source for nvim-cmp
-                {'L3MON4D3/LuaSnip'},       -- Snippets plugin
-                {'saadparwaiz1/cmp_luasnip'},
+              {'onsails/lspkind-nvim'},
+              {'hrsh7th/cmp-buffer'},
+              {'neovim/nvim-lspconfig'},
+              {'hrsh7th/cmp-nvim-lsp'},   -- LSP source for nvim-cmp
+              {'L3MON4D3/LuaSnip'},       -- Snippets plugin
+              {'saadparwaiz1/cmp_luasnip'},
+              {'hrsh7th/cmp-omni'},
     }}
     --completion
  	  use {'tzachar/cmp-tabnine', run='./install.sh',

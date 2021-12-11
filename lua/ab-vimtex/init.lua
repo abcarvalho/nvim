@@ -19,3 +19,21 @@ vim.cmd([[
 -- g.tex_conceal='abdmg'
 -- set conceal level to zero in latex files
 g.tex_conceal=""
+
+-- vim.cmd([[
+--   augroup VimTeX
+--     autocmd!
+--     autocmd FileType tex
+--           \ lua require('cmp').setup.buffer { sources = { { name = 'omni' } } }
+--   augroup END
+-- ]])
+
+-- include other plugins as well, not just omni if you want them to work.
+vim.cmd(string.gsub([[
+autocmd FileType tex lua require('cmp').setup.buffer{
+sources = {
+{ name = 'omni' },
+}
+}
+]], '\n', ' '))
+
