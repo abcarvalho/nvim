@@ -30,14 +30,14 @@ kmap('n', '<leader>fr',
      -- '<C-O>:w<cr>', {noremap = true})
 -- }}}3
 -- m is for markdown {{{3
-  autocmd FileType markdown,pandoc nmap <leader>ms i```sh<CR><CR>```<CR><ESC>kki<Tab>
 cmd([[
+  autocmd FileType markdown,pandoc,markdown.pandoc nmap <leader>ms i```sh<CR><CR>```<CR><ESC>kki<Tab>
 
   " Markdown Dates
-  autocmd FileType markdown,pandoc nmap <leader>mid i[<C-R>=strftime("%Y-%m-%d")<CR>]<Esc>
+  autocmd FileType markdown,pandoc,markdown.pandoc nmap <leader>mid i[<C-R>=strftime("%Y-%m-%d")<CR>]<Esc>
 
   " Markdown DateTime
-  autocmd FileType markdown,pandoc nmap <leader>mit i<C-R>=strftime("%Y-%m-%d %a %I:%M %p")<CR><Esc>
+  autocmd FileType markdown,pandoc,markdown.pandoc nmap <leader>mit i<C-R>=strftime("%Y-%m-%d %a %I:%M %p")<CR><Esc>
 ]])
 
 -- Adjust section depth of the visual selection
