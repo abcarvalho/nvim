@@ -50,7 +50,7 @@ function M.file_exists(name)
 end
 
 function M.has_private_settings()
-  return M.file_exists(os.getenv("LUADIR") .. "" .."/private-config.lua")
+  return M.file_exists(os.getenv("LUADIR") .. "" .."/ab-private/private-config.lua")
 end
 
 function M.scp_repo(repo_name)

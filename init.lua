@@ -58,6 +58,10 @@ require('colorscheme')
 
 require('keymappings')
 require('ab-which-key')
+
+if require('utils').is_home_computer() then
+  require('ab-private')
+end
 -- }}}1
 
 -- missing:
