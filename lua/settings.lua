@@ -16,6 +16,9 @@ cmd([[
 -- o.syntax = true        -- syntax highlighting
 
 -- Global Options {{{1
+-- ignore files
+o.wildignore = o.wildignore .. '**/.git/*'
+
 -- Some basics {{{2
 o.spell = true
 o.autochdir = true        -- Automatically change the current directory
