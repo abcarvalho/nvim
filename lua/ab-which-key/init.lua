@@ -228,16 +228,6 @@ local leader_mappings = {
     o = {'<cmd>tabonly<cr>', 'close-all-tabs-except-current'},
       },
 -- }}}2
--- v is for wiki {{{2
-  v = {
-    name = '+wikivim',
-    v = {'<plug>(wiki-index)', 'wiki-index'},
-    j = {'<plug>(wiki-link-next)', 'wiki-link-next'},
-    k = {'<plug>(wiki-link-prev)', 'wiki-link-prev'},
-    -- f = {'<plug>(wiki-link-follow)', 'wiki-link-follow'},
-    -- b = {'<plug>(wiki-link-return)', 'wiki-link-return'},
-  },
--- }}}2
 -- w is for window {{{2
   w = {
     name = '+window' ,
