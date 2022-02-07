@@ -87,9 +87,6 @@ return require('packer').startup(
     -- Language: Julia
     use 'JuliaEditorSupport/julia-vim'
 
-    -- Language: Markdown
-    use 'vim-pandoc/vim-pandoc'
-    use 'vim-pandoc/vim-pandoc-syntax'
     use {'dhruvasagar/vim-table-mode', opt=true,
           ft={'md', 'markdown', 'pandoc'}}
 
@@ -120,10 +117,5 @@ return require('packer').startup(
     -- Note Taking & Task Management:
     use {"dkarter/bullets.vim", -- opt=true,
          ft={'md', 'markdown', 'pandoc', 'txt', 'markdown.pandoc'}}
-    use 'lervag/wiki.vim'
 
-    -- Jupyter & QtConsole
-    use 'jupyter-vim/jupyter-vim'
-    use 'untitled-ai/jupyter_ascending.vim'
-    use { 'dccsillag/magma-nvim', run = ':UpdateRemotePlugins' }
 end)
