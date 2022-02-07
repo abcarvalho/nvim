@@ -36,7 +36,7 @@ function M.is_home_computer()
   local os_name = M.get_os_name()
   local computer_name = M.get_computer_name()
 
-  return os_name == "Darwin" and computer_name == "ab-osx"
+  return os_name == "Darwin" and computer_name == "ab-osx.local"
 end
 
 function M.file_exists(name)
@@ -105,7 +105,7 @@ function M.sync_source_target(paths)
   print("Saving and syncing with Acropolis server...")
   print(string.format("%s%s", 'source: ', local_source))
   print(string.format("%s%s", 'target: ', remote_target))
-  local vimscript_cmd=string.format('%s%s%s%s', 
+  local vimscript_cmd=string.format('%s%s%s%s',
                                     ':w | !rsync -avhP ',
                                     local_source, " ",
                                     remote_target)

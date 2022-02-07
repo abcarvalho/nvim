@@ -96,7 +96,7 @@ if require('utils').is_darwin() then
 
   -- install pynvim: conda install pynvim
   -- check health:  :checkhealth
-  g.python3_host_prog = '/usr/local/Caskroom/miniconda/base/bin/python'
+  g.python3_host_prog = '/opt/homebrew/Caskroom/miniconda/base/bin/python'
 elseif require('utils').is_linux() then
     g.open_command = "xdg-open"
     g.system_name = "Linux"
